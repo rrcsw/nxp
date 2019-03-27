@@ -1,95 +1,95 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËĞÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ğ´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 ================================================
-±àÂëÆ÷½ÓÏß£º
-G13--AÏà
-F14--BÏà
-M14--IË÷Òı
+ç¼–ç å™¨æ¥çº¿ï¼š
+G13--Aç›¸
+F14--Bç›¸
+M14--Iç´¢å¼•
 
-H2--AÏà
-J2--BÏà
-//J1--IË÷Òı
+H2--Aç›¸
+J2--Bç›¸
+//J1--Iç´¢å¼•
 
-J3    AÏà
-K1 BÏà»òÕß·½Ïò
-J4 ZÏà
+J3    Aç›¸
+K1 Bç›¸æˆ–è€…æ–¹å‘
+J4 Zç›¸
 
-C11   AÏà
-B11   BÏà»òÕß·½Ïò
-//C10   ZÏà
+C11   Aç›¸
+B11   Bç›¸æˆ–è€…æ–¹å‘
+//C10   Zç›¸
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"	
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿Âö³åÕı½»½âÂë¹¦ÄÜÒı½Å³õÊ¼»¯
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘è„‰å†²æ­£äº¤è§£ç åŠŸèƒ½å¼•è„šåˆå§‹åŒ–
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LQ_ENC_InitPin(uint8_t enc_num)
 {
-    CLOCK_EnableClock(kCLOCK_Iomuxc);          /* ´ò¿ªioÊ±ÖÓ */
+    CLOCK_EnableClock(kCLOCK_Iomuxc);          /* æ‰“å¼€ioæ—¶é’Ÿ */
     
-    switch(enc_num)//Ñ¡ÔñENCÄ£¿é
+    switch(enc_num)//é€‰æ‹©ENCæ¨¡å—
     {
-        case 1:    //ENC1Ä£¿é
+        case 1:    //ENC1æ¨¡å—
         {
             
-            IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_10_XBAR1_IN22,1U); //GPIO_AD_B0_10 ÅäÖÃÎª XBAR1_IN22        G13   
-            IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_09_XBAR1_IN21,1U); //GPIO_AD_B0_09 ÅäÖÃÎª XBAR1_IN21        F14                                         
-            IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_00_XBAR1_INOUT14,1U); //GPIO_AD_B0_00 ÅäÖÃÎª XBAR1_INOUT14  M14     
+            IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_10_XBAR1_IN22,1U); //GPIO_AD_B0_10 é…ç½®ä¸º XBAR1_IN22        G13   
+            IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_09_XBAR1_IN21,1U); //GPIO_AD_B0_09 é…ç½®ä¸º XBAR1_IN21        F14                                         
+            IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_00_XBAR1_INOUT14,1U); //GPIO_AD_B0_00 é…ç½®ä¸º XBAR1_INOUT14  M14     
             IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_10_XBAR1_IN22,0x10B0u);  
             IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_09_XBAR1_IN21,0x10B0u);                               
             IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_00_XBAR1_INOUT14,0x10B0u);   
             break;
         }
-        case 2:    //ENC2Ä£¿é
+        case 2:    //ENC2æ¨¡å—
         {
-//            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_02_XBAR1_INOUT06,1U); //GPIO_AD_B0_02 ÅäÖÃÎª XBAR1_INOUT06   J1
-            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_04_XBAR1_INOUT08,1U); //GPIO_AD_B0_04 ÅäÖÃÎª XBAR1_INOUT08   H2                                         
-            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_05_XBAR1_INOUT09,1U); //GPIO_AD_B0_05 ÅäÖÃÎª XBAR1_INOUT09   J2
+//            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_02_XBAR1_INOUT06,1U); //GPIO_AD_B0_02 é…ç½®ä¸º XBAR1_INOUT06   J1
+            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_04_XBAR1_INOUT08,1U); //GPIO_AD_B0_04 é…ç½®ä¸º XBAR1_INOUT08   H2                                         
+            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_05_XBAR1_INOUT09,1U); //GPIO_AD_B0_05 é…ç½®ä¸º XBAR1_INOUT09   J2
 //            IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B0_02_XBAR1_INOUT06,0x10B0u);   /* GPIO_AD_B0_09 PAD functional properties : */                                                
             IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B0_04_XBAR1_INOUT08,0x10B0u);                               
             IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B0_05_XBAR1_INOUT09,0x10B0u);
             break;
         }
-        case 3:    //ENC3Ä£¿é
+        case 3:    //ENC3æ¨¡å—
         {
-            /*ÓÃ»§¿É×ÔĞĞÅäÖÃ£¬½«Òı½Å¸´ÓÃÎªXBARÄ£Ê½*/
-//            IOMUXC_SetPinMux(IOMUXC_GPIO_B0_13_XBAR1_INOUT11,1U);    //  D10ÓÃÖ®Ç°È·±£Ã»ÓĞµ±×÷±ğµÄÓÃÍ¾
-            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_01_XBAR1_INOUT05,1U); //  J3  ÓÃÖ®Ç°È·±£Ã»ÓĞµ±×÷±ğµÄÓÃÍ¾  
-            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_00_XBAR1_INOUT04,1U); //  J4  ÓÃÖ®Ç°È·±£Ã»ÓĞµ±×÷±ğµÄÓÃÍ¾ 
-            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_03_XBAR1_INOUT07,1U); //  K1   ÓÃÖ®Ç°È·±£Ã»ÓĞµ±×÷±ğµÄÓÃÍ¾ 
+            /*ç”¨æˆ·å¯è‡ªè¡Œé…ç½®ï¼Œå°†å¼•è„šå¤ç”¨ä¸ºXBARæ¨¡å¼*/
+//            IOMUXC_SetPinMux(IOMUXC_GPIO_B0_13_XBAR1_INOUT11,1U);    //  D10ç”¨ä¹‹å‰ç¡®ä¿æ²¡æœ‰å½“ä½œåˆ«çš„ç”¨é€”
+            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_01_XBAR1_INOUT05,1U); //  J3  ç”¨ä¹‹å‰ç¡®ä¿æ²¡æœ‰å½“ä½œåˆ«çš„ç”¨é€”  
+            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_00_XBAR1_INOUT04,1U); //  J4  ç”¨ä¹‹å‰ç¡®ä¿æ²¡æœ‰å½“ä½œåˆ«çš„ç”¨é€” 
+            IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_03_XBAR1_INOUT07,1U); //  K1   ç”¨ä¹‹å‰ç¡®ä¿æ²¡æœ‰å½“ä½œåˆ«çš„ç”¨é€” 
 //            IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_13_XBAR1_INOUT11,0x10B0u);  
             IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B0_01_XBAR1_INOUT05,0x10B0u);
             IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B0_00_XBAR1_INOUT04,0x10B0u);
             IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B0_03_XBAR1_INOUT07,0x10B0u);  
             break;
         }
-        case 4:    //ENC4Ä£¿é
+        case 4:    //ENC4æ¨¡å—
         {
-            /*ÓÃ»§¿É×ÔĞĞÅäÖÃ£¬½«Òı½Å¸´ÓÃÎªXBARÄ£Ê½*/
-//            IOMUXC_SetPinMux(IOMUXC_GPIO_B0_12_XBAR1_INOUT10,1U); //        C10  ÓÃÖ®Ç°È·±£Ã»ÓĞµ±×÷±ğµÄÓÃÍ¾
-            IOMUXC_SetPinMux(IOMUXC_GPIO_B1_02_XBAR1_INOUT16,1U); //        C11  ÓÃÖ®Ç°È·±£Ã»ÓĞµ±×÷±ğµÄÓÃÍ¾                                       
-            IOMUXC_SetPinMux(IOMUXC_GPIO_B1_01_XBAR1_INOUT15,1U); //        B11   ÓÃÖ®Ç°È·±£Ã»ÓĞµ±×÷±ğµÄÓÃÍ¾ 
+            /*ç”¨æˆ·å¯è‡ªè¡Œé…ç½®ï¼Œå°†å¼•è„šå¤ç”¨ä¸ºXBARæ¨¡å¼*/
+//            IOMUXC_SetPinMux(IOMUXC_GPIO_B0_12_XBAR1_INOUT10,1U); //        C10  ç”¨ä¹‹å‰ç¡®ä¿æ²¡æœ‰å½“ä½œåˆ«çš„ç”¨é€”
+            IOMUXC_SetPinMux(IOMUXC_GPIO_B1_02_XBAR1_INOUT16,1U); //        C11  ç”¨ä¹‹å‰ç¡®ä¿æ²¡æœ‰å½“ä½œåˆ«çš„ç”¨é€”                                       
+            IOMUXC_SetPinMux(IOMUXC_GPIO_B1_01_XBAR1_INOUT15,1U); //        B11   ç”¨ä¹‹å‰ç¡®ä¿æ²¡æœ‰å½“ä½œåˆ«çš„ç”¨é€” 
 //            IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_12_XBAR1_INOUT10,0x10B0u);  
             IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_02_XBAR1_INOUT16,0x10B0u);                               
             IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_01_XBAR1_INOUT15,0x10B0u);
@@ -101,66 +101,66 @@ void LQ_ENC_InitPin(uint8_t enc_num)
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿Âö³åÕı½»½âÂë¹¦ÄÜ³õÊ¼»¯
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ LQ_ENC_Init(ENC1)  //³õÊ¼»¯ENC1Ä£¿é
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘è„‰å†²æ­£äº¤è§£ç åŠŸèƒ½åˆå§‹åŒ–
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ LQ_ENC_Init(ENC1)  //åˆå§‹åŒ–ENC1æ¨¡å—
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LQ_ENC_Init(ENC_Type *base)
 {
     if(base == ENC1)   //ECR 
     {
-        LQ_ENC_InitPin(1); //¹Ü½Å¸´ÓÃÑ¡Ôñ
-        XBARA_Init(XBARA1);    //³õÊ¼»¯XBARA1Ä£¿é
+        LQ_ENC_InitPin(1); //ç®¡è„šå¤ç”¨é€‰æ‹©
+        XBARA_Init(XBARA1);    //åˆå§‹åŒ–XBARA1æ¨¡å—
         
-        /*½«µ¥Æ¬»úÒı½ÅÁ¬½Óµ½ENC1µÄÄÚ²¿´¥·¢ĞÅºÅÉÏ*/
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarIn22, kXBARA1_OutputEnc1PhaseAInput);//G13   AÏà
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarIn21, kXBARA1_OutputEnc1PhaseBInput);//F14   BÏà»òÕß·½Ïò
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout14, kXBARA1_OutputEnc1Index);   //M14   ZÏà
+        /*å°†å•ç‰‡æœºå¼•è„šè¿æ¥åˆ°ENC1çš„å†…éƒ¨è§¦å‘ä¿¡å·ä¸Š*/
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarIn22, kXBARA1_OutputEnc1PhaseAInput);//G13   Aç›¸
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarIn21, kXBARA1_OutputEnc1PhaseBInput);//F14   Bç›¸æˆ–è€…æ–¹å‘
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout14, kXBARA1_OutputEnc1Index);   //M14   Zç›¸
     }
     else if(base == ENC2) //ECL
     {
-        LQ_ENC_InitPin(2); //¹Ü½Å¸´ÓÃÑ¡Ôñ
-        XBARA_Init(XBARA1);    //³õÊ¼»¯XBARA1Ä£¿é
+        LQ_ENC_InitPin(2); //ç®¡è„šå¤ç”¨é€‰æ‹©
+        XBARA_Init(XBARA1);    //åˆå§‹åŒ–XBARA1æ¨¡å—
         
-        /*½«µ¥Æ¬»úÒı½ÅÁ¬½Óµ½ENC2µÄÄÚ²¿´¥·¢ĞÅºÅÉÏ*/
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout08, kXBARA1_OutputEnc2PhaseAInput);//H2  AÏà
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout09, kXBARA1_OutputEnc2PhaseBInput);//J2  BÏà»òÕß·½Ïò
-//        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout06, kXBARA1_OutputEnc2Index);      //J1  ZÏà
+        /*å°†å•ç‰‡æœºå¼•è„šè¿æ¥åˆ°ENC2çš„å†…éƒ¨è§¦å‘ä¿¡å·ä¸Š*/
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout08, kXBARA1_OutputEnc2PhaseAInput);//H2  Aç›¸
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout09, kXBARA1_OutputEnc2PhaseBInput);//J2  Bç›¸æˆ–è€…æ–¹å‘
+//        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout06, kXBARA1_OutputEnc2Index);      //J1  Zç›¸
     }
     else if(base == ENC3)
     {
-        LQ_ENC_InitPin(3); //¹Ü½Å¸´ÓÃÑ¡Ôñ
-        /*ÓÃ»§¿É×ÔĞĞĞŞ¸Ä*/
-        XBARA_Init(XBARA1);    //³õÊ¼»¯XBARA£¿Ä£¿é  ¿ÉÑ¡²ÎÊıXBARA1
+        LQ_ENC_InitPin(3); //ç®¡è„šå¤ç”¨é€‰æ‹©
+        /*ç”¨æˆ·å¯è‡ªè¡Œä¿®æ”¹*/
+        XBARA_Init(XBARA1);    //åˆå§‹åŒ–XBARAï¼Ÿæ¨¡å—  å¯é€‰å‚æ•°XBARA1
         
-        /*½«µ¥Æ¬»úÒı½ÅÁ¬½Óµ½ENC2µÄÄÚ²¿´¥·¢ĞÅºÅÉÏ*/
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout05, kXBARA1_OutputEnc3PhaseAInput);//J3    AÏà
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout07, kXBARA1_OutputEnc3PhaseBInput);//K1 BÏà»òÕß·½Ïò
-//        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout11, kXBARA1_OutputEnc3Index);      //D10    ZÏà
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout04, kXBARA1_OutputEnc3Index);      //J4 ZÏà
+        /*å°†å•ç‰‡æœºå¼•è„šè¿æ¥åˆ°ENC2çš„å†…éƒ¨è§¦å‘ä¿¡å·ä¸Š*/
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout05, kXBARA1_OutputEnc3PhaseAInput);//J3    Aç›¸
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout07, kXBARA1_OutputEnc3PhaseBInput);//K1 Bç›¸æˆ–è€…æ–¹å‘
+//        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout11, kXBARA1_OutputEnc3Index);      //D10    Zç›¸
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout04, kXBARA1_OutputEnc3Index);      //J4 Zç›¸
     }
     else if(base == ENC4)
     {
-        LQ_ENC_InitPin(4); //¹Ü½Å¸´ÓÃÑ¡Ôñ
-        /*ÓÃ»§¿É×ÔĞĞĞŞ¸Ä*/
-        XBARA_Init(XBARA1);    //³õÊ¼»¯XBARA£¿Ä£¿é  ¿ÉÑ¡²ÎÊıXBARA1
+        LQ_ENC_InitPin(4); //ç®¡è„šå¤ç”¨é€‰æ‹©
+        /*ç”¨æˆ·å¯è‡ªè¡Œä¿®æ”¹*/
+        XBARA_Init(XBARA1);    //åˆå§‹åŒ–XBARAï¼Ÿæ¨¡å—  å¯é€‰å‚æ•°XBARA1
         
-        /*½«µ¥Æ¬»úÒı½ÅÁ¬½Óµ½ENC2µÄÄÚ²¿´¥·¢ĞÅºÅÉÏ*/
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout16, kXBARA1_OutputEnc4PhaseAInput);//C11   AÏà
-        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout15, kXBARA1_OutputEnc4PhaseBInput);//B11   BÏà»òÕß·½Ïò
-//        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout10, kXBARA1_OutputEnc4Index);      //C10   ZÏà
+        /*å°†å•ç‰‡æœºå¼•è„šè¿æ¥åˆ°ENC2çš„å†…éƒ¨è§¦å‘ä¿¡å·ä¸Š*/
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout16, kXBARA1_OutputEnc4PhaseAInput);//C11   Aç›¸
+        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout15, kXBARA1_OutputEnc4PhaseBInput);//B11   Bç›¸æˆ–è€…æ–¹å‘
+//        XBARA_SetSignalsConnection(XBARA1, kXBARA1_InputIomuxXbarInout10, kXBARA1_OutputEnc4Index);      //C10   Zç›¸
     }
 
-    enc_config_t mEncConfigStruct;  //ENC³õÊ¼»¯½á¹¹Ìå
-    ENC_GetDefaultConfig(&mEncConfigStruct);  //µÃµ½Ä¬ÈÏ²ÎÊı
-    /* mEncConfigStructÄ¬ÈÏ²ÎÊı
+    enc_config_t mEncConfigStruct;  //ENCåˆå§‹åŒ–ç»“æ„ä½“
+    ENC_GetDefaultConfig(&mEncConfigStruct);  //å¾—åˆ°é»˜è®¤å‚æ•°
+    /* mEncConfigStructé»˜è®¤å‚æ•°
     config->enableReverseDirection = false;  
-    config->decoderWorkMode = kENC_DecoderWorkAsNormalMode;  //A BÁ½ÏàÄ£Ê½
+    config->decoderWorkMode = kENC_DecoderWorkAsNormalMode;  //A Bä¸¤ç›¸æ¨¡å¼
     config->HOMETriggerMode = kENC_HOMETriggerDisabled;
     config->INDEXTriggerMode = kENC_INDEXTriggerDisabled;
     config->enableTRIGGERClearPositionCounter = false;
@@ -177,59 +177,59 @@ void LQ_ENC_Init(ENC_Type *base)
     config->positionInitialValue = 0U;*/
     if(base == ENC2 || base == ENC4)  
     {
-        mEncConfigStruct.enableReverseDirection = true;  //·´·½Ïò
+        mEncConfigStruct.enableReverseDirection = true;  //åæ–¹å‘
     }
     
-    mEncConfigStruct.decoderWorkMode = kENC_DecoderWorkAsSignalPhaseCountMode;  //LSB+DirÄ£Ê½   kENC_DecoderWorkAsNormalMode£º ÆÕÍ¨Õı½»½âÂë
-    ENC_Init(base, &mEncConfigStruct);     //³õÊ¼»¯Õı½»½âÂëÄ£¿é
-    ENC_DoSoftwareLoadInitialPositionValue(base); /* Î»ÖÃ¼ÆÊıÆ÷³õÊ¼Öµ¸üĞÂ³É0. */  
+    mEncConfigStruct.decoderWorkMode = kENC_DecoderWorkAsSignalPhaseCountMode;  //LSB+Diræ¨¡å¼   kENC_DecoderWorkAsNormalModeï¼š æ™®é€šæ­£äº¤è§£ç 
+    ENC_Init(base, &mEncConfigStruct);     //åˆå§‹åŒ–æ­£äº¤è§£ç æ¨¡å—
+    ENC_DoSoftwareLoadInitialPositionValue(base); /* ä½ç½®è®¡æ•°å™¨åˆå§‹å€¼æ›´æ–°æˆ0. */  
     
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔÂö³åÕı½»½âÂë¹¦ÄÜ
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜ã€‘æµ‹è¯•è„‰å†²æ­£äº¤è§£ç åŠŸèƒ½
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_ENCoder(void)
 {   
-    TFTSPI_Init();               //TFT1.8³õÊ¼»¯ 
-    TFTSPI_CLS(u16BLUE);        //ÇåÆÁ
-    LQ_ENC_Init(ENC1);   //Õı½»½âÂë³õÊ¼»¯
+    TFTSPI_Init();               //TFT1.8åˆå§‹åŒ– 
+    TFTSPI_CLS(u16BLUE);        //æ¸…å±
+    LQ_ENC_Init(ENC1);   //æ­£äº¤è§£ç åˆå§‹åŒ–
     LQ_ENC_Init(ENC2);
     LQ_ENC_Init(ENC3);
     LQ_ENC_Init(ENC4);
     short velocity1, velocity2, velocity3, velocity4;
     char txt[16];
-    printf("\r\n±àÂëÆ÷Õı½»½âÂë²âÊÔ:\r\n");    
+    printf("\r\nç¼–ç å™¨æ­£äº¤è§£ç æµ‹è¯•:\r\n");    
     while (1)
     { 
         
-        delayms(100);        //ÑÓÊ±100ºÁÃë
-        velocity1 = (int16_t)ENC_GetPositionDifferenceValue(ENC1);  //µÃµ½±àÂëÆ÷Î¢·ÖÖµ
+        delayms(100);        //å»¶æ—¶100æ¯«ç§’
+        velocity1 = (int16_t)ENC_GetPositionDifferenceValue(ENC1);  //å¾—åˆ°ç¼–ç å™¨å¾®åˆ†å€¼
         sprintf(txt,"ENC1:  %5d ",velocity1); 
         TFTSPI_P8X16Str(0,0,(uint8_t*)txt,u16RED,u16BLUE);
         printf("ENC1:  %5d \n",velocity1);
-        velocity2 = (int16_t)ENC_GetPositionDifferenceValue(ENC2);  //µÃµ½±àÂëÆ÷Î¢·ÖÖµ
+        velocity2 = (int16_t)ENC_GetPositionDifferenceValue(ENC2);  //å¾—åˆ°ç¼–ç å™¨å¾®åˆ†å€¼
         sprintf(txt,"ENC2:  %5d ",velocity2); 
         TFTSPI_P8X16Str(0,1,(uint8_t*)txt,u16RED,u16BLUE);
         printf("ENC2:  %5d \n",velocity2);
-        velocity3 = (int16_t)ENC_GetPositionDifferenceValue(ENC3);  //µÃµ½±àÂëÆ÷Î¢·ÖÖµ
+        velocity3 = (int16_t)ENC_GetPositionDifferenceValue(ENC3);  //å¾—åˆ°ç¼–ç å™¨å¾®åˆ†å€¼
         sprintf(txt,"ENC3:  %5d ",velocity3); 
         TFTSPI_P8X16Str(0,2,(uint8_t*)txt,u16RED,u16BLUE);
         printf("ENC3:  %5d \n",velocity3);
-        velocity4 = (int16_t)ENC_GetPositionDifferenceValue(ENC4);  //µÃµ½±àÂëÆ÷Î¢·ÖÖµ
+        velocity4 = (int16_t)ENC_GetPositionDifferenceValue(ENC4);  //å¾—åˆ°ç¼–ç å™¨å¾®åˆ†å€¼
         sprintf(txt,"ENC4:  %5d ",velocity4); 
         TFTSPI_P8X16Str(0,3,(uint8_t*)txt,u16RED,u16BLUE);
         printf("ENC4:  %5d \n",velocity4);
         printf("\n####################################\n");
         
         LED_Ctrl(LED_R, RVS); 
-        delayms(100);       //ÑÓÊ±0.1Ãë
+        delayms(100);       //å»¶æ—¶0.1ç§’
     }
 }
 

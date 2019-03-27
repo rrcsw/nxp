@@ -2,35 +2,35 @@
 #define __LQ_CSI_H
 
 
-#define LQMT9V034    //Ñ¡ÔñÊ¹ÓÃÉñÑÛÉãÏñÍ·Ä£¿é
-//#define LQOV7725   //Á½ÕßÑ¡ÆäÒ»
+#define LQMT9V034    //é€‰æ‹©ä½¿ç”¨ç¥çœ¼æ‘„åƒå¤´æ¨¡å—
+//#define LQOV7725   //ä¸¤è€…é€‰å…¶ä¸€
 
-#ifdef LQMT9V034 //LQMT9V034Ä£¿é
+#ifdef LQMT9V034 //LQMT9V034æ¨¡å—
 #define APP_CAMERA_WIDTH  (IMAGEW)
-#define APP_CAMERA_HEIGHT (IMAGEH/2)  //Ò»¸öuint16_tÀïÃæ×°ÁËÁ½¸öÏñËØ£¬ Ò»ĞĞIMAGEW ÀïÃæÆäÊµ×°ÁËÁ½ĞĞµÄÏñËØµã£¬ËùÒÔ¸ß¶È/2
-#define APP_BPP 2 //ÏñËØ¸ñÊ½£¬
-#define  Use_ROWS  60    //Ê¹ÓÃÍ¼Ïñ¸ß¶È
-#define  Use_Line  94   //Ê¹ÓÃÍ¼Ïñ¿í¶È
-#else            //LQOV7725Ä£¿é
-//#define LQOV7725RGB   //Ê¹ÓÃ7725RGB   Ê¹ÓÃÉÏÎ»»ú¿´Í¼Ê±£¬Ñ¡ÔñRGB»¹ÊÇ»Ò¶È
-#define LQOV7725YUV   //Ê¹ÓÃ7725»Ò¶È  Ê¹ÓÃÉÏÎ»»ú¿´Í¼Ê±£¬Ñ¡ÔñRGB»¹ÊÇ»Ò¶È
+#define APP_CAMERA_HEIGHT (IMAGEH/2)  //ä¸€ä¸ªuint16_té‡Œé¢è£…äº†ä¸¤ä¸ªåƒç´ ï¼Œ ä¸€è¡ŒIMAGEW é‡Œé¢å…¶å®è£…äº†ä¸¤è¡Œçš„åƒç´ ç‚¹ï¼Œæ‰€ä»¥é«˜åº¦/2
+#define APP_BPP 2 //åƒç´ æ ¼å¼ï¼Œ
+#define  Use_ROWS  60    //ä½¿ç”¨å›¾åƒé«˜åº¦
+#define  Use_Line  94   //ä½¿ç”¨å›¾åƒå®½åº¦
+#else            //LQOV7725æ¨¡å—
+//#define LQOV7725RGB   //ä½¿ç”¨7725RGB   ä½¿ç”¨ä¸Šä½æœºçœ‹å›¾æ—¶ï¼Œé€‰æ‹©RGBè¿˜æ˜¯ç°åº¦
+#define LQOV7725YUV   //ä½¿ç”¨7725ç°åº¦  ä½¿ç”¨ä¸Šä½æœºçœ‹å›¾æ—¶ï¼Œé€‰æ‹©RGBè¿˜æ˜¯ç°åº¦
 #define APP_CAMERA_WIDTH  320
 #define APP_CAMERA_HEIGHT 240
 /* Pixel format YUV422, bytesPerPixel is 2. */
-#define APP_BPP 2 //ÏñËØ¸ñÊ½
-#define  Use_ROWS  60    //Ê¹ÓÃÍ¼Ïñ¸ß¶È
-#define  Use_Line  80    //Ê¹ÓÃÍ¼Ïñ¿í¶È
+#define APP_BPP 2 //åƒç´ æ ¼å¼
+#define  Use_ROWS  60    //ä½¿ç”¨å›¾åƒé«˜åº¦
+#define  Use_Line  80    //ä½¿ç”¨å›¾åƒå®½åº¦
 #endif
 
 #define APP_CAMERA_FRAME_BUFFER_COUNT 4 
-#define FRAME_BUFFER_ALIGN 64  //¶ÔÆë 
+#define FRAME_BUFFER_ALIGN 64  //å¯¹é½ 
 
 
-#define APP_CAMERA_CONTROL_FLAGS (kCAMERA_HrefActiveHigh | kCAMERA_DataLatchOnRisingEdge) //Ê¹ÓÃÉãÏñÍ·µÄÉÏÉıÑØ
+#define APP_CAMERA_CONTROL_FLAGS (kCAMERA_HrefActiveHigh | kCAMERA_DataLatchOnRisingEdge) //ä½¿ç”¨æ‘„åƒå¤´çš„ä¸Šå‡æ²¿
 extern void LQ_Camera_Init(void);
 extern camera_device_handle_t cameraDevice;    
 extern camera_receiver_handle_t cameraReceiver;
 extern uint16_t csiFrameBuf[APP_CAMERA_FRAME_BUFFER_COUNT][APP_CAMERA_HEIGHT][APP_CAMERA_WIDTH];
 extern void Test_Camera_Reprot(void);
-extern camera_config_t cameraConfig;   //ÉãÏñÍ·ÅäÖÃ½á¹¹Ìå
+extern camera_config_t cameraConfig;   //æ‘„åƒå¤´é…ç½®ç»“æ„ä½“
 #endif

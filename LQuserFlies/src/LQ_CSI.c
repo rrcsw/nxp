@@ -1,25 +1,25 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼RT1052ºËĞÄ°å
-¡¾±à    Ğ´¡¿Z
-¡¾±¸    ×¢¡¿
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ27ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
-¡¾½»Á÷ÓÊÏä¡¿chiusir@163.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€RT1052æ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘Z
+ã€å¤‡    æ³¨ã€‘
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ27æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
+ã€äº¤æµé‚®ç®±ã€‘chiusir@163.com
 ----------------------------------------------------------------
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #include "include.h"
 
 /*******************************************************************************
-*  SDKÌá¹©ÁËÁ½ÖÖÔÚNoncacheableÇø¶¨Òå»º³åÇøºÍ±äÁ¿µÄ·½·¨£º
+*  SDKæä¾›äº†ä¸¤ç§åœ¨NoncacheableåŒºå®šä¹‰ç¼“å†²åŒºå’Œå˜é‡çš„æ–¹æ³•ï¼š
 *  AT_NONCACHEABLE_SECTION_ALIGN(var, alignbytes)
 *  AT_NONCACHEABLE_SECTION(var)
 ******************************************************************************/
-AT_NONCACHEABLE_SECTION_ALIGN(uint16_t csiFrameBuf[APP_CAMERA_FRAME_BUFFER_COUNT][APP_CAMERA_HEIGHT][APP_CAMERA_WIDTH], FRAME_BUFFER_ALIGN); //¶¨ÒåÉãÏñÍ·Êı¾İ»º´æÇø
-static void BOARD_PullCameraPowerDownPin(bool pullUp)  //ÉÁ¹âµÆ
+AT_NONCACHEABLE_SECTION_ALIGN(uint16_t csiFrameBuf[APP_CAMERA_FRAME_BUFFER_COUNT][APP_CAMERA_HEIGHT][APP_CAMERA_WIDTH], FRAME_BUFFER_ALIGN); //å®šä¹‰æ‘„åƒå¤´æ•°æ®ç¼“å­˜åŒº
+static void BOARD_PullCameraPowerDownPin(bool pullUp)  //é—ªå…‰ç¯
 {
 //    if (pullUp)
 //    {
@@ -30,44 +30,44 @@ static void BOARD_PullCameraPowerDownPin(bool pullUp)  //ÉÁ¹âµÆ
 //        GPIO_PinWrite(GPIO1, 4, 0);
 //    }
 }
-static void BOARD_PullCameraResetPin(bool pullUp)  //ÉãÏñÍ·¸´Î»Òı½Å
+static void BOARD_PullCameraResetPin(bool pullUp)  //æ‘„åƒå¤´å¤ä½å¼•è„š
 {
     /* Reset pin is connected to DCDC_3V3. */
     return;
 }
 
-#ifdef LQMT9V034 //LQMT9V034Ä£¿é
-static LQMT9V034_resource_t LQMT9V034Resource = {   //ÉãÏñÍ·³õÊ¼»¯½á¹¹Ìå
+#ifdef LQMT9V034 //LQMT9V034æ¨¡å—
+static LQMT9V034_resource_t LQMT9V034Resource = {   //æ‘„åƒå¤´åˆå§‹åŒ–ç»“æ„ä½“
     .sccbI2C = LPI2C1,
  
     .inputClockFreq_Hz = 27000000,
 };
 
-camera_device_handle_t cameraDevice = {           //ÉãÏñÍ·Çı¶¯ÅäÖÃ½á¹¹Ìå
+camera_device_handle_t cameraDevice = {           //æ‘„åƒå¤´é©±åŠ¨é…ç½®ç»“æ„ä½“
     .resource = &LQMT9V034Resource,
     .ops = &LQMT9V034_ops,
 };
-#else //LQOV7725Ä£¿é
-static ov7725_resource_t ov7725Resource = {       //ÉãÏñÍ·³õÊ¼»¯½á¹¹Ìå
+#else //LQOV7725æ¨¡å—
+static ov7725_resource_t ov7725Resource = {       //æ‘„åƒå¤´åˆå§‹åŒ–ç»“æ„ä½“
     .sccbI2C = LPI2C1,
     .pullResetPin = BOARD_PullCameraResetPin,
     .pullPowerDownPin = BOARD_PullCameraPowerDownPin,
-    .inputClockFreq_Hz = 24000000,                 //ĞŞ¸ÄÕâÀï¿ÉÒÔĞŞ¸ÄÖ¡ÂÊ ¾ßÌå¿´static const ov7725_clock_config_t ov7725ClockConfigs[]
+    .inputClockFreq_Hz = 24000000,                 //ä¿®æ”¹è¿™é‡Œå¯ä»¥ä¿®æ”¹å¸§ç‡ å…·ä½“çœ‹static const ov7725_clock_config_t ov7725ClockConfigs[]
 };
-camera_device_handle_t cameraDevice = {            //ÉãÏñÍ·Çı¶¯ÅäÖÃ½á¹¹Ìå
+camera_device_handle_t cameraDevice = {            //æ‘„åƒå¤´é©±åŠ¨é…ç½®ç»“æ„ä½“
     .resource = &ov7725Resource,
     .ops = &ov7725_ops,
 };
 #endif
 
 /* connect to CSI. */
-static csi_resource_t csiResource = {   //Ö¸Ïòcsi»ùµØÖ·
+static csi_resource_t csiResource = {   //æŒ‡å‘csiåŸºåœ°å€
     .csiBase = CSI,
 };
 
-static csi_private_data_t csiPrivateData;  //csiË½ÓĞÊı¾İ
+static csi_private_data_t csiPrivateData;  //csiç§æœ‰æ•°æ®
 
-camera_receiver_handle_t cameraReceiver = {//ÉãÏñÍ·½ÓÊÕÅäÖÃ½á¹¹Ìå
+camera_receiver_handle_t cameraReceiver = {//æ‘„åƒå¤´æ¥æ”¶é…ç½®ç»“æ„ä½“
     .resource = &csiResource, 
     .ops = &csi_ops, 
     .privateData = &csiPrivateData,
@@ -83,14 +83,14 @@ void CSI_IRQHandler(void)
 
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿ÉãÏñÍ·CSI½Ó¿ÚºÍI2C½Ó¿ÚÊ±ÖÓÅäÖÃ
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ 
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘æ‘„åƒå¤´CSIæ¥å£å’ŒI2Cæ¥å£æ—¶é’Ÿé…ç½®
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void BOARD_InitCameraResource(void)
 {
@@ -132,72 +132,72 @@ void BOARD_InitCameraResource(void)
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿ÉãÏñÍ·³õÊ¼»¯
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ 
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘æ‘„åƒå¤´åˆå§‹åŒ–
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
-camera_config_t cameraConfig;   //ÉãÏñÍ·ÅäÖÃ½á¹¹Ìå
-#ifdef LQMT9V034 //LQMT9V034Ä£¿é
+camera_config_t cameraConfig;   //æ‘„åƒå¤´é…ç½®ç»“æ„ä½“
+#ifdef LQMT9V034 //LQMT9V034æ¨¡å—
     // Configure camera device and receiver.
     camera_config_t cameraConfig = {
         .pixelFormat   = kVIDEO_PixelFormatYUYV,//kVIDEO_PixelFormatYUYV,//kVIDEO_PixelFormatBGR565,
-        .bytesPerPixel = APP_BPP,//   Ã¿¸öÏñËØµã¼¸¸öÊı¾İ
-        .resolution = FSL_VIDEO_RESOLUTION(APP_CAMERA_WIDTH, APP_CAMERA_HEIGHT), //·Ö±æÂÊ
-        .frameBufferLinePitch_Bytes = APP_CAMERA_WIDTH * APP_BPP,                //ĞĞ¼ä¸ô
-        .interface     = kCAMERA_InterfaceGatedClock,                            //ÉãÏñ»ú½Ó¿ÚÀàĞÍ
+        .bytesPerPixel = APP_BPP,//   æ¯ä¸ªåƒç´ ç‚¹å‡ ä¸ªæ•°æ®
+        .resolution = FSL_VIDEO_RESOLUTION(APP_CAMERA_WIDTH, APP_CAMERA_HEIGHT), //åˆ†è¾¨ç‡
+        .frameBufferLinePitch_Bytes = APP_CAMERA_WIDTH * APP_BPP,                //è¡Œé—´éš”
+        .interface     = kCAMERA_InterfaceGatedClock,                            //æ‘„åƒæœºæ¥å£ç±»å‹
         .controlFlags = APP_CAMERA_CONTROL_FLAGS,
-        .framePerSec   = 60,                                                     //fps ĞŞ¸ÄĞèÒªĞŞ¸ÄÆØ¹âÊ±¼ä ºÍ ·Ö±æÂÊ ÅäºÏ
+        .framePerSec   = 60,                                                     //fps ä¿®æ”¹éœ€è¦ä¿®æ”¹æ›å…‰æ—¶é—´ å’Œ åˆ†è¾¨ç‡ é…åˆ
     };
-#else            //LQOV7725Ä£¿é
+#else            //LQOV7725æ¨¡å—
     camera_config_t cameraConfig = {
         .pixelFormat = kVIDEO_PixelFormatRGB565,//kVIDEO_PixelFormatRGB565,//kVIDEO_PixelFormatYUYV,
         .bytesPerPixel = APP_BPP,
-        .resolution = FSL_VIDEO_RESOLUTION(APP_CAMERA_WIDTH, APP_CAMERA_HEIGHT),  //·Ö±æÂÊ
-        .frameBufferLinePitch_Bytes = APP_CAMERA_WIDTH * APP_BPP,                 //ĞĞ¼ä¸ô
-        .interface =  kCAMERA_InterfaceCCIR656,                                   //ÉãÏñ»ú½Ó¿ÚÀàĞÍ
+        .resolution = FSL_VIDEO_RESOLUTION(APP_CAMERA_WIDTH, APP_CAMERA_HEIGHT),  //åˆ†è¾¨ç‡
+        .frameBufferLinePitch_Bytes = APP_CAMERA_WIDTH * APP_BPP,                 //è¡Œé—´éš”
+        .interface =  kCAMERA_InterfaceCCIR656,                                   //æ‘„åƒæœºæ¥å£ç±»å‹
         .controlFlags = APP_CAMERA_CONTROL_FLAGS,
-        .framePerSec = 75,                                                        //fps ĞŞ¸ÄĞèÒªĞŞ¸Äplck ºÍ ·Ö±æÂÊ ÅäºÏ
+        .framePerSec = 75,                                                        //fps ä¿®æ”¹éœ€è¦ä¿®æ”¹plck å’Œ åˆ†è¾¨ç‡ é…åˆ
     };
 #endif
 void LQ_Camera_Init(void)  
 {
-    BOARD_InitCSIPins();      //ÉãÏñÍ·CSI¹Ü½Å¸´ÓÃ  
-    BOARD_InitLPI2C1Pins();   //ÉãÏñÍ· I2C1¹Ü½Å¸´ÓÃ  
+    BOARD_InitCSIPins();      //æ‘„åƒå¤´CSIç®¡è„šå¤ç”¨  
+    BOARD_InitLPI2C1Pins();   //æ‘„åƒå¤´ I2C1ç®¡è„šå¤ç”¨  
     BOARD_InitCameraResource();//csi and I2C clock config   
     
      /*
     * Configure the camera.
     */
-    CAMERA_RECEIVER_Init(&cameraReceiver, &cameraConfig, NULL, NULL);  //³õÊ¼»¯csi
+    CAMERA_RECEIVER_Init(&cameraReceiver, &cameraConfig, NULL, NULL);  //åˆå§‹åŒ–csi
     
-    CAMERA_DEVICE_Init(&cameraDevice, &cameraConfig);                  //³õÊ¼»¯Ïà»úÅäÖÃ
+    CAMERA_DEVICE_Init(&cameraDevice, &cameraConfig);                  //åˆå§‹åŒ–ç›¸æœºé…ç½®
     
-    CAMERA_DEVICE_Start(&cameraDevice);                                //Æô¶¯Ïà»ú
+    CAMERA_DEVICE_Start(&cameraDevice);                                //å¯åŠ¨ç›¸æœº
     
     /* Submit the empty frame buffers to buffer queue. */
-    for (uint32_t i = 0; i < APP_CAMERA_FRAME_BUFFER_COUNT; i++) //½«¿ÕÖ¡»º³åÇøÌá½»µ½»º³åÇø¶ÓÁĞ
+    for (uint32_t i = 0; i < APP_CAMERA_FRAME_BUFFER_COUNT; i++) //å°†ç©ºå¸§ç¼“å†²åŒºæäº¤åˆ°ç¼“å†²åŒºé˜Ÿåˆ—
     {
         CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, (uint32_t)(csiFrameBuf[i]));
     }
     
-    CAMERA_RECEIVER_Start(&cameraReceiver);   // Æô¶¯½ÓÊÕcameraÊı¾İ
-    delayms(200);        //ÑÓÊ±200ºÁÃë  ÉãÏñÍ·²»ÊÇÖØĞÂÉÏµç ¿ÉÒÔ²»ÒªÑÓÊ±
+    CAMERA_RECEIVER_Start(&cameraReceiver);   // å¯åŠ¨æ¥æ”¶cameraæ•°æ®
+    delayms(200);        //å»¶æ—¶200æ¯«ç§’  æ‘„åƒå¤´ä¸æ˜¯é‡æ–°ä¸Šç”µ å¯ä»¥ä¸è¦å»¶æ—¶
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿ÉÏÎ»»ú¿´Í¼ ²»ÒªÓÃDAPlinkµÄ´®¿Ú£¬ÈİÒ×¿¨ËÀ Ê¹ÓÃÉ½ÍâÉÏÎ»»ú Ê¹ÓÃÉñÑÛÊ±ÉÏÎ»»úÉèÖÃÎª»Ò¶È 7725Ê±£¬ÉÏÎ»»úÉèÖÃÎªRGB565 Ğ¡¶ËÄ£Ê½
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ 
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘ä¸Šä½æœºçœ‹å›¾ ä¸è¦ç”¨DAPlinkçš„ä¸²å£ï¼Œå®¹æ˜“å¡æ­» ä½¿ç”¨å±±å¤–ä¸Šä½æœº ä½¿ç”¨ç¥çœ¼æ—¶ä¸Šä½æœºè®¾ç½®ä¸ºç°åº¦ 7725æ—¶ï¼Œä¸Šä½æœºè®¾ç½®ä¸ºRGB565 å°ç«¯æ¨¡å¼
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_Camera_Reprot(void)
 {
@@ -206,64 +206,64 @@ void Test_Camera_Reprot(void)
     cameraConfig.pixelFormat = kVIDEO_PixelFormatYUYV;
 #endif
     LQ_Camera_Init();
-    delayms(200);        //ÑÓÊ±200ºÁÃë   
+    delayms(200);        //å»¶æ—¶200æ¯«ç§’   
     uint8_t count = 0;
     /* Disable I cache and D cache */
 //    if (SCB_CCR_IC_Msk == (SCB_CCR_IC_Msk & SCB->CCR)) {   
 //        SCB_DisableICache();
 //    }
-    if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR)) {//×¢Òâ£¬Ê¹ÓÃcsiFrameBufÊı×éÊ±£¬×îºÃ¹Ø±ÕCache ²»È»ÉÏ´ÎÊı¾İ¿ÉÄÜ»á´æ·ÅÔÚcacheÀïÃæ£¬Ôì³ÉÊı¾İ´íÂÒ
+    if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR)) {//æ³¨æ„ï¼Œä½¿ç”¨csiFrameBufæ•°ç»„æ—¶ï¼Œæœ€å¥½å…³é—­Cache ä¸ç„¶ä¸Šæ¬¡æ•°æ®å¯èƒ½ä¼šå­˜æ”¾åœ¨cacheé‡Œé¢ï¼Œé€ æˆæ•°æ®é”™ä¹±
         SCB_DisableDCache();
     }
     while (1)
     {     
         // Wait to get the full frame buffer to show. 
-        while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &fullCameraBufferAddr))  //ÉãÏñÍ·CSI»º´æÇøÒÑÂú
+        while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &fullCameraBufferAddr))  //æ‘„åƒå¤´CSIç¼“å­˜åŒºå·²æ»¡
         {
         }       
-        CAMERA_RECEIVER_Stop(&cameraReceiver);//Í£Ö¹csi½ÓÊÕ
-        for(count = 0; count < 4; count++)    //»ñÈ¡µ±Ç°»º³åÂúµÄÊı×éË÷Òı
+        CAMERA_RECEIVER_Stop(&cameraReceiver);//åœæ­¢csiæ¥æ”¶
+        for(count = 0; count < 4; count++)    //è·å–å½“å‰ç¼“å†²æ»¡çš„æ•°ç»„ç´¢å¼•
         {
             if(fullCameraBufferAddr == (uint32_t )csiFrameBuf[count])
                 break;
         }
-        LQ_UART_PutChar(LPUART1, 0x01);  //Ö¡Í·
-        LQ_UART_PutChar(LPUART1, 0xfe);  //Ö¡Í·
-        for(int i = 0; i < APP_CAMERA_HEIGHT; i++)  //·Ö±æÂÊÔ½¸ß £¬³öÍ¼Ô½Âı
+        LQ_UART_PutChar(LPUART1, 0x01);  //å¸§å¤´
+        LQ_UART_PutChar(LPUART1, 0xfe);  //å¸§å¤´
+        for(int i = 0; i < APP_CAMERA_HEIGHT; i++)  //åˆ†è¾¨ç‡è¶Šé«˜ ï¼Œå‡ºå›¾è¶Šæ…¢
         {
-#if  (defined LQMT9V034) || (defined LQOV7725RGB)   //ÉÏÎ»»ú¿´ 7725 RGB565Í¼Ïñ ºÍ ÉñÑÛ»Ò¶ÈÍ¼Ïñ  7725Ê¹ÓÃRGB565¸ñÊ½ cameraConfig = { .pixelFormat = kVIDEO_PixelFormatRGB565 }
+#if  (defined LQMT9V034) || (defined LQOV7725RGB)   //ä¸Šä½æœºçœ‹ 7725 RGB565å›¾åƒ å’Œ ç¥çœ¼ç°åº¦å›¾åƒ  7725ä½¿ç”¨RGB565æ ¼å¼ cameraConfig = { .pixelFormat = kVIDEO_PixelFormatRGB565 }
             for(int j = 0; j < APP_CAMERA_WIDTH * 2; j++)
             {
-                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) == 0xfe )  //·ÀÖ¹´íÎó·¢ËÍÖ¡Î²
+                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) == 0xfe )  //é˜²æ­¢é”™è¯¯å‘é€å¸§å°¾
                 {
                     *((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) = 0xff;  
                 }
-                LQ_UART_PutChar(LPUART1, *((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j)); //·¢ËÍÊı¾İ
+                LQ_UART_PutChar(LPUART1, *((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j)); //å‘é€æ•°æ®
             }
-//            for(int j = 0; j < APP_CAMERA_WIDTH; j++)  //¾õµÃÉÏÃæµÄÖ¸Õë²»ºÃÀí½â£¬¿ÉÒÔÓÃÏÂÃæµÄ
+//            for(int j = 0; j < APP_CAMERA_WIDTH; j++)  //è§‰å¾—ä¸Šé¢çš„æŒ‡é’ˆä¸å¥½ç†è§£ï¼Œå¯ä»¥ç”¨ä¸‹é¢çš„
 //            {
-//                    LQ_UART_PutChar(LPUART1, (uint8_t)csiFrameBuf[count][i][j]); //·¢ËÍÊı¾İ
-//                    LQ_UART_PutChar(LPUART1, (csiFrameBuf[count][i][j]>>8)); //·¢ËÍÊı¾İ
+//                    LQ_UART_PutChar(LPUART1, (uint8_t)csiFrameBuf[count][i][j]); //å‘é€æ•°æ®
+//                    LQ_UART_PutChar(LPUART1, (csiFrameBuf[count][i][j]>>8)); //å‘é€æ•°æ®
 //                
 //            }
-#else     //ÉÏÎ»»ú¿´ 7725 µÄ»Ò¶ÈÍ¼Ïñ  ×¢Òâ£¬¿´»Ò¶ÈÍ¼ÏñÊ±£¬7725Ê¹ÓÃYUYV¸ñÊ½ cameraConfig = { .pixelFormat = kVIDEO_PixelFormatYUYV }
-            for(int j = 1; j < APP_CAMERA_WIDTH * 2; j+=2)  //UYVY ¸ñÊ½Í¼Ïñ £¬YÊÇ»Ò¶È£¬¿´»Ò¶ÈÍ¼ÏñÖ»Êä³öYÖµ
+#else     //ä¸Šä½æœºçœ‹ 7725 çš„ç°åº¦å›¾åƒ  æ³¨æ„ï¼Œçœ‹ç°åº¦å›¾åƒæ—¶ï¼Œ7725ä½¿ç”¨YUYVæ ¼å¼ cameraConfig = { .pixelFormat = kVIDEO_PixelFormatYUYV }
+            for(int j = 1; j < APP_CAMERA_WIDTH * 2; j+=2)  //UYVY æ ¼å¼å›¾åƒ ï¼ŒYæ˜¯ç°åº¦ï¼Œçœ‹ç°åº¦å›¾åƒåªè¾“å‡ºYå€¼
             {
-                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) == 0xfe )  //·ÀÖ¹´íÎó·¢ËÍÖ¡Î²
+                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) == 0xfe )  //é˜²æ­¢é”™è¯¯å‘é€å¸§å°¾
                 {
                     *((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) = 0xff;  
                 }
-                LQ_UART_PutChar(LPUART1, *((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j)); //·¢ËÍÊı¾İ
+                LQ_UART_PutChar(LPUART1, *((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j)); //å‘é€æ•°æ®
             }
 #endif
         }  
-        LQ_UART_PutChar(LPUART1, 0xfe);  //Ö¡Î²
-        LQ_UART_PutChar(LPUART1, 0x01);  //Ö¡Î²
+        LQ_UART_PutChar(LPUART1, 0xfe);  //å¸§å°¾
+        LQ_UART_PutChar(LPUART1, 0x01);  //å¸§å°¾
         
          // Return the camera buffer to camera queue. 
-        CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//½«ÕÕÏà»ú»º³åÇøÌá½»µ½»º³å¶ÓÁĞ
-        CAMERA_RECEIVER_Start(&cameraReceiver);   // Æô¶¯½ÓÊÕcameraÊı¾İ
-        LED_Ctrl(LED_R, RVS); //EVK LEDÉÁË¸  
+        CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//å°†ç…§ç›¸æœºç¼“å†²åŒºæäº¤åˆ°ç¼“å†²é˜Ÿåˆ—
+        CAMERA_RECEIVER_Start(&cameraReceiver);   // å¯åŠ¨æ¥æ”¶cameraæ•°æ®
+        LED_Ctrl(LED_R, RVS); //EVK LEDé—ªçƒ  
     }
 }
 

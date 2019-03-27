@@ -1,24 +1,24 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËÐÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ð´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #ifndef _GPIO_CFG_H_
 #define _GPIO_CFG_H_
 
-//¶¨ÒåPT1_µÄ¶Ë¿Ú  
+//å®šä¹‰PT1_çš„ç«¯å£  
 #define PT1_0     GPIO1_BASE_PTR->DRs.DR0
 #define PT1_1     GPIO1_BASE_PTR->DRs.DR1
 #define PT1_2     GPIO1_BASE_PTR->DRs.DR2
@@ -52,7 +52,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define PT1_30    GPIO1_BASE_PTR->DRs.DR30
 #define PT1_31    GPIO1_BASE_PTR->DRs.DR31
 
-//¶¨ÒåPT2_µÄ¶Ë¿Ú  
+//å®šä¹‰PT2_çš„ç«¯å£  
 #define PT2_0     GPIO2_BASE_PTR->DRs.DR0
 #define PT2_1     GPIO2_BASE_PTR->DRs.DR1
 #define PT2_2     GPIO2_BASE_PTR->DRs.DR2
@@ -86,7 +86,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define PT2_30    GPIO2_BASE_PTR->DRs.DR30
 #define PT2_31    GPIO2_BASE_PTR->DRs.DR31
 
-//¶¨ÒåPT3_µÄ¶Ë¿Ú  
+//å®šä¹‰PT3_çš„ç«¯å£  
 #define PT3_0     GPIO3_BASE_PTR->DRs.DR0
 #define PT3_1     GPIO3_BASE_PTR->DRs.DR1
 #define PT3_2     GPIO3_BASE_PTR->DRs.DR2
@@ -120,7 +120,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define PT3_30    GPIO3_BASE_PTR->DRs.DR30
 #define PT3_31    GPIO3_BASE_PTR->DRs.DR31
 
-//¶¨ÒåPT4_µÄ¶Ë¿Ú  
+//å®šä¹‰PT4_çš„ç«¯å£  
 #define PT4_0     GPIO4_BASE_PTR->DRs.DR0
 #define PT4_1     GPIO4_BASE_PTR->DRs.DR1
 #define PT4_2     GPIO4_BASE_PTR->DRs.DR2
@@ -154,7 +154,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define PT4_30    GPIO4_BASE_PTR->DRs.DR30
 #define PT4_31    GPIO4_BASE_PTR->DRs.DR31
 
-//¶¨ÒåPT5_µÄ¶Ë¿Ú  
+//å®šä¹‰PT5_çš„ç«¯å£  
 #define PT5_0     GPIO5_BASE_PTR->DRs.DR0
 #define PT5_1     GPIO5_BASE_PTR->DRs.DR1
 #define PT5_2     GPIO5_BASE_PTR->DRs.DR2
@@ -190,7 +190,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 
-//¶¨ÒåPT1_µÄÊä³öÊäÈë·½Ïò  
+//å®šä¹‰PT1_çš„è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR1_0       GPIO1_BASE_PTR->GDIRs.GDIR0
 #define DIR1_1       GPIO1_BASE_PTR->GDIRs.GDIR1
 #define DIR1_2       GPIO1_BASE_PTR->GDIRs.GDIR2
@@ -224,7 +224,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define DIR1_30      GPIO1_BASE_PTR->GDIRs.GDIR30
 #define DIR1_31      GPIO1_BASE_PTR->GDIRs.GDIR31
 
-//¶¨ÒåPT2_µÄÊä³öÊäÈë·½Ïò  
+//å®šä¹‰PT2_çš„è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR2_0       GPIO2_BASE_PTR->GDIRs.GDIR0
 #define DIR2_1       GPIO2_BASE_PTR->GDIRs.GDIR1
 #define DIR2_2       GPIO2_BASE_PTR->GDIRs.GDIR2
@@ -258,7 +258,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define DIR2_30      GPIO2_BASE_PTR->GDIRs.GDIR30
 #define DIR2_31      GPIO2_BASE_PTR->GDIRs.GDIR31
 
-//¶¨ÒåPT3_µÄÊä³öÊäÈë·½Ïò  
+//å®šä¹‰PT3_çš„è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR3_0       GPIO3_BASE_PTR->GDIRs.GDIR0
 #define DIR3_1       GPIO3_BASE_PTR->GDIRs.GDIR1
 #define DIR3_2       GPIO3_BASE_PTR->GDIRs.GDIR2
@@ -292,7 +292,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define DIR3_30      GPIO3_BASE_PTR->GDIRs.GDIR30
 #define DIR3_31      GPIO3_BASE_PTR->GDIRs.GDIR31
 
-//¶¨ÒåPT4_µÄÊä³öÊäÈë·½Ïò  
+//å®šä¹‰PT4_çš„è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR4_0       GPIO4_BASE_PTR->GDIRs.GDIR0
 #define DIR4_1       GPIO4_BASE_PTR->GDIRs.GDIR1
 #define DIR4_2       GPIO4_BASE_PTR->GDIRs.GDIR2
@@ -326,7 +326,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define DIR4_30      GPIO4_BASE_PTR->GDIRs.GDIR30
 #define DIR4_31      GPIO4_BASE_PTR->GDIRs.GDIR31
 
-//¶¨ÒåPT5_µÄÊä³öÊäÈë·½Ïò  
+//å®šä¹‰PT5_çš„è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR5_0       GPIO5_BASE_PTR->GDIRs.GDIR0
 #define DIR5_1       GPIO5_BASE_PTR->GDIRs.GDIR1
 #define DIR5_2       GPIO5_BASE_PTR->GDIRs.GDIR2
@@ -361,113 +361,113 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define DIR5_31      GPIO5_BASE_PTR->GDIRs.GDIR31
 
 
-//¶¨ÒåPT1_µÄ8Î»¶Ë¿Ú  
+//å®šä¹‰PT1_çš„8ä½ç«¯å£  
 #define PT1_BYTE0   GPIO1_BASE_PTR->DRByte.Byte0
 #define PT1_BYTE1   GPIO1_BASE_PTR->DRByte.Byte1
 #define PT1_BYTE2   GPIO1_BASE_PTR->DRByte.Byte2
 #define PT1_BYTE3   GPIO1_BASE_PTR->DRByte.Byte3
 
-//¶¨ÒåPT2_µÄ8Î»¶Ë¿Ú  
+//å®šä¹‰PT2_çš„8ä½ç«¯å£  
 #define PT2_BYTE0   GPIO2_BASE_PTR->DRByte.Byte0
 #define PT2_BYTE1   GPIO2_BASE_PTR->DRByte.Byte1
 #define PT2_BYTE2   GPIO2_BASE_PTR->DRByte.Byte2
 #define PT2_BYTE3   GPIO2_BASE_PTR->DRByte.Byte3
 
 
-//¶¨ÒåPT3_µÄ8Î»¶Ë¿Ú  
+//å®šä¹‰PT3_çš„8ä½ç«¯å£  
 #define PT3_BYTE0   GPIO3_BASE_PTR->DRByte.Byte0
 #define PT3_BYTE1   GPIO3_BASE_PTR->DRByte.Byte1
 #define PT3_BYTE2   GPIO3_BASE_PTR->DRByte.Byte2
 #define PT3_BYTE3   GPIO3_BASE_PTR->DRByte.Byte3
 
-//¶¨ÒåPT4_µÄ8Î»¶Ë¿Ú  
+//å®šä¹‰PT4_çš„8ä½ç«¯å£  
 #define PT4_BYTE0   GPIO4_BASE_PTR->DRByte.Byte0
 #define PT4_BYTE1   GPIO4_BASE_PTR->DRByte.Byte1
 #define PT4_BYTE2   GPIO4_BASE_PTR->DRByte.Byte2
 #define PT4_BYTE3   GPIO4_BASE_PTR->DRByte.Byte3
 
-//¶¨ÒåPT5_µÄ8Î»¶Ë¿Ú  
+//å®šä¹‰PT5_çš„8ä½ç«¯å£  
 #define PT5_BYTE0   GPIO5_BASE_PTR->DRByte.Byte0
 #define PT5_BYTE1   GPIO5_BASE_PTR->DRByte.Byte1
 #define PT5_BYTE2   GPIO5_BASE_PTR->DRByte.Byte2
 #define PT5_BYTE3   GPIO5_BASE_PTR->DRByte.Byte3
 
 
-//¶¨ÒåPT1_µÄ8Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT1_çš„8ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR1_BYTE0   GPIO1_BASE_PTR->DIR2_yte.Byte0
 #define DIR1_BYTE1   GPIO1_BASE_PTR->DIR2_yte.Byte1
 #define DIR1_BYTE2   GPIO1_BASE_PTR->DIR2_yte.Byte2
 #define DIR1_BYTE3   GPIO1_BASE_PTR->DIR2_yte.Byte3
 
-//¶¨ÒåPT2_µÄ8Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT2_çš„8ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR2_BYTE0   GPIO2_BASE_PTR->DIR2_yte.Byte0
 #define DIR2_BYTE1   GPIO2_BASE_PTR->DIR2_yte.Byte1
 #define DIR2_BYTE2   GPIO2_BASE_PTR->DIR2_yte.Byte2
 #define DIR2_BYTE3   GPIO2_BASE_PTR->DIR2_yte.Byte3
 
-//¶¨ÒåPT3_µÄ8Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT3_çš„8ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR3_BYTE0   GPIO3_BASE_PTR->DIR2_yte.Byte0
 #define DIR3_BYTE1   GPIO3_BASE_PTR->DIR2_yte.Byte1
 #define DIR3_BYTE2   GPIO3_BASE_PTR->DIR2_yte.Byte2
 #define DIR3_BYTE3   GPIO3_BASE_PTR->DIR2_yte.Byte3
 
-//¶¨ÒåPT4_µÄ8Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT4_çš„8ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR4_BYTE0   GPIO4_BASE_PTR->DIR2_yte.Byte0
 #define DIR4_BYTE1   GPIO4_BASE_PTR->DIR2_yte.Byte1
 #define DIR4_BYTE2   GPIO4_BASE_PTR->DIR2_yte.Byte2
 #define DIR4_BYTE3   GPIO4_BASE_PTR->DIR2_yte.Byte3
 
-//¶¨ÒåPT5_µÄ8Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT5_çš„8ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR5_BYTE0   GPIO5_BASE_PTR->DIR2_yte.Byte0
 #define DIR5_BYTE1   GPIO5_BASE_PTR->DIR2_yte.Byte1 
 #define DIR5_BYTE2   GPIO5_BASE_PTR->DIR2_yte.Byte2
 #define DIR5_BYTE3   GPIO5_BASE_PTR->DIR2_yte.Byte3
 
 
-//¶¨ÒåPT1_µÄ16Î»¶Ë¿Ú  
+//å®šä¹‰PT1_çš„16ä½ç«¯å£  
 #define PT1_WORD0   GPIO1_BASE_PTR->DRWord.Word0
 #define PT1_WORD1   GPIO1_BASE_PTR->DRWord.Word1
 
-//¶¨ÒåPT2_µÄ16Î»¶Ë¿Ú  
+//å®šä¹‰PT2_çš„16ä½ç«¯å£  
 #define PT2_WORD0   GPIO2_BASE_PTR->DRWord.Word0
 #define PT2_WORD1   GPIO2_BASE_PTR->DRWord.Word1
 
-//¶¨ÒåPT3_µÄ16Î»¶Ë¿Ú  
+//å®šä¹‰PT3_çš„16ä½ç«¯å£  
 #define PT3_WORD0   GPIO3_BASE_PTR->DRWord.Word0
 #define PT3_WORD1   GPIO3_BASE_PTR->DRWord.Word1
 
 
-//¶¨ÒåPT4_µÄ16Î»¶Ë¿Ú  
+//å®šä¹‰PT4_çš„16ä½ç«¯å£  
 #define PT4_WORD0   GPIO4_BASE_PTR->DRWord.Word0
 #define PT4_WORD1   GPIO4_BASE_PTR->DRWord.Word1
 
 
-//¶¨ÒåPT5_µÄ16Î»¶Ë¿Ú  
+//å®šä¹‰PT5_çš„16ä½ç«¯å£  
 #define PT5_WORD0   GPIO5_BASE_PTR->DRWord.Word0
 #define PT5_WORD1   GPIO5_BASE_PTR->DRWord.Word1
 
 
-//¶¨ÒåPT1_µÄ16Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT1_çš„16ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR1_WORD0   GPIO1_BASE_PTR->GDIRWord.Word0
 #define DIR1_WORD1   GPIO1_BASE_PTR->GDIRWord.Word1
 
 
-//¶¨ÒåPT2_µÄ16Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT2_çš„16ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR2_WORD0   GPIO2_BASE_PTR->GDIRWord.Word0
 #define DIR2_WORD1   GPIO2_BASE_PTR->GDIRWord.Word1
 
 
-//¶¨ÒåPT3_µÄ16Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT3_çš„16ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR3_WORD0   GPIO3_BASE_PTR->GDIRWord.Word0
 #define DIR3_WORD1   GPIO3_BASE_PTR->GDIRWord.Word1
 
 
-//¶¨ÒåPT4_µÄ16Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT4_çš„16ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR4_WORD0   GPIO4_BASE_PTR->GDIRWord.Word0
 #define DIR4_WORD1   GPIO4_BASE_PTR->GDIRWord.Word1
 
 
-//¶¨ÒåPT5_µÄ16Î»Êä³öÊäÈë·½Ïò  
+//å®šä¹‰PT5_çš„16ä½è¾“å‡ºè¾“å…¥æ–¹å‘  
 #define DIR5_WORD0   GPIO5_BASE_PTR->GDIRWord.Word0
 #define DIR5_WORD1   GPIO5_BASE_PTR->GDIRWord.Word1
 

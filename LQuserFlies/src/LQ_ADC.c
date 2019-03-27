@@ -1,23 +1,23 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËĞÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ğ´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2017Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2017å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
 
-/* //ADC×ÊÔ´ĞòºÅÓë¶ÔÓ¦µÄ¹Ü½Å£¬      ¹Ü½ÅÃû³Æ      BGA¹Ü½Å±àºÅ
+/* //ADCèµ„æºåºå·ä¸å¯¹åº”çš„ç®¡è„šï¼Œ      ç®¡è„šåç§°      BGAç®¡è„šç¼–å·
 ADC1_IN0  Analog channel 1 input0   GPIO_AD_B1_11   J13
 ADC1_IN1  Analog channel 1 input1   GPIO_AD_B0_12   K14 
 ADC1_IN2  Analog channel 1 input2   GPIO_AD_B0_13   L14
@@ -54,14 +54,14 @@ ADC2_IN15 Analog channel 1 input15  GPIO_AD_B1_10   L13
 */
 
 //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-//¡¾×÷  Õß¡¿CHIUSIR
-//¡¾¹¦ÄÜËµÃ÷¡¿³õÊ¼»¯ADC
-//¡¾Èí¼ş°æ±¾¡¿V1.0
-//¡¾×îºó¸üĞÂ¡¿2017Äê8ÔÂ4ÈÕ 
-//¡¾º¯ÊıÃû¡¿void LQADC_Init(ADC_Type *base)
-//¡¾²ÎÊıÖµ¡¿ADC1,ADC2
-//¡¾·µ»ØÖµ¡¿ÎŞ
-//¡¾¼ò  Àı¡¿ADC_init£¨ADC1£©³õÊ¼»¯ADC1Ä£¿é 
+//ã€ä½œ  è€…ã€‘CHIUSIR
+//ã€åŠŸèƒ½è¯´æ˜ã€‘åˆå§‹åŒ–ADC
+//ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+//ã€æœ€åæ›´æ–°ã€‘2017å¹´8æœˆ4æ—¥ 
+//ã€å‡½æ•°åã€‘void LQADC_Init(ADC_Type *base)
+//ã€å‚æ•°å€¼ã€‘ADC1,ADC2
+//ã€è¿”å›å€¼ã€‘æ— 
+//ã€ç®€  ä¾‹ã€‘ADC_initï¼ˆADC1ï¼‰åˆå§‹åŒ–ADC1æ¨¡å— 
 //QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
 void LQADC_Init(ADC_Type *base)
@@ -82,83 +82,83 @@ void LQADC_Init(ADC_Type *base)
        *  config->resolution =                    kADC_Resolution12Bit;
        */
     ADC_GetDefaultConfig(&adcConfigStrcut);
-    //adcConfigStrcut.resolution=kADC_Resolution12Bit;              //Ä¬ÈÏ¾ùÎª12Î»
-    ADC_Init(base, &adcConfigStrcut);                               //³õÊ¼»¯
+    //adcConfigStrcut.resolution=kADC_Resolution12Bit;              //é»˜è®¤å‡ä¸º12ä½
+    ADC_Init(base, &adcConfigStrcut);                               //åˆå§‹åŒ–
     
-    ADC_SetHardwareAverageConfig(base, kADC_HardwareAverageCount32);//Ó²¼şÆ½¾ùÖµ
+    ADC_SetHardwareAverageConfig(base, kADC_HardwareAverageCount32);//ç¡¬ä»¶å¹³å‡å€¼
     /* Do auto hardware calibration. */
-    ADC_DoAutoCalibration(base);                                    //Ó²¼şĞ£×¼
+    ADC_DoAutoCalibration(base);                                    //ç¡¬ä»¶æ ¡å‡†
     
  }
 //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-//¡¾×÷  Õß¡¿CHIUSIR
-//¡¾¹¦ÄÜËµÃ÷¡¿¶ÁÈ¡ADC µÚ Í¨µÀÊıÖµ
-//¡¾Èí¼ş°æ±¾¡¿V1.0
-//¡¾×îºó¸üĞÂ¡¿2017Äê8ÔÂ4ÈÕ 
-//¡¾º¯ÊıÃû¡¿uint16_t ReadADC(ADC_Type *base,ADCn_Ch_e CH)
-//¡¾²ÎÊıÖµ¡¿base£ºADC1,ADC2£»CH£º0~31
-//¡¾·µ»ØÖµ¡¿12Î»adcÖµ
-//¡¾¼ò  Àı¡¿batv=ReadADC(ADC1,ADC1_CH0)£¬¶ÁÈ¡ADC1µÚ0Í¨µÀÊıÖµ
+//ã€ä½œ  è€…ã€‘CHIUSIR
+//ã€åŠŸèƒ½è¯´æ˜ã€‘è¯»å–ADC ç¬¬ é€šé“æ•°å€¼
+//ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+//ã€æœ€åæ›´æ–°ã€‘2017å¹´8æœˆ4æ—¥ 
+//ã€å‡½æ•°åã€‘uint16_t ReadADC(ADC_Type *base,ADCn_Ch_e CH)
+//ã€å‚æ•°å€¼ã€‘baseï¼šADC1,ADC2ï¼›CHï¼š0~31
+//ã€è¿”å›å€¼ã€‘12ä½adcå€¼
+//ã€ç®€  ä¾‹ã€‘batv=ReadADC(ADC1,ADC1_CH0)ï¼Œè¯»å–ADC1ç¬¬0é€šé“æ•°å€¼
 //QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 uint16_t ReadADC(ADC_Type *base,ADCn_Ch_e CH)
 {     
-  adc_channel_config_t adcChannelConfigStruct;                          //ÅäÖÃ½á¹¹Ìå
+  adc_channel_config_t adcChannelConfigStruct;                          //é…ç½®ç»“æ„ä½“
   
   adcChannelConfigStruct.channelNumber = CH;
-  adcChannelConfigStruct.enableInterruptOnConversionCompleted = false;  //×ª»»Íê³ÉÖĞ¶Ï
-  ADC_SetChannelConfig(base, 0, &adcChannelConfigStruct);                //¿ªÆô×ª»»
-  while (0U == ADC_GetChannelStatusFlags(base,0)){;}                    //µÈ´ı×ª»»Íê³É
-  return (ADC_GetChannelConversionValue(base,0));                       //·µ»Ø×ª»»½á¹û
+  adcChannelConfigStruct.enableInterruptOnConversionCompleted = false;  //è½¬æ¢å®Œæˆä¸­æ–­
+  ADC_SetChannelConfig(base, 0, &adcChannelConfigStruct);                //å¼€å¯è½¬æ¢
+  while (0U == ADC_GetChannelStatusFlags(base,0)){;}                    //ç­‰å¾…è½¬æ¢å®Œæˆ
+  return (ADC_GetChannelConversionValue(base,0));                       //è¿”å›è½¬æ¢ç»“æœ
 }
 
 
 //LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-//¡¾×÷  Õß¡¿CHIUSIR
-//¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔ¶ÁÈ¡K12µçÑ¹Öµ£¬²¢×ª»»ÎªĞ¡ÊıÖµ£¬´®¿ÚºÍOLEDÊä³ö
-//¡¾Èí¼ş°æ±¾¡¿V1.0
-//¡¾×îºó¸üĞÂ¡¿2017Äê8ÔÂ4ÈÕ 
-//¡¾º¯ÊıÃû¡¿uint16_t ReadADC(ADC_Type *base,ADCn_Ch_e CH)
-//¡¾²ÎÊıÖµ¡¿ÎŞ
-//¡¾·µ»ØÖµ¡¿ÎŞ
-//¡¾¼ò  Àı¡¿Test_ADC()£¬
+//ã€ä½œ  è€…ã€‘CHIUSIR
+//ã€åŠŸèƒ½è¯´æ˜ã€‘æµ‹è¯•è¯»å–K12ç”µå‹å€¼ï¼Œå¹¶è½¬æ¢ä¸ºå°æ•°å€¼ï¼Œä¸²å£å’ŒOLEDè¾“å‡º
+//ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+//ã€æœ€åæ›´æ–°ã€‘2017å¹´8æœˆ4æ—¥ 
+//ã€å‡½æ•°åã€‘uint16_t ReadADC(ADC_Type *base,ADCn_Ch_e CH)
+//ã€å‚æ•°å€¼ã€‘æ— 
+//ã€è¿”å›å€¼ã€‘æ— 
+//ã€ç®€  ä¾‹ã€‘Test_ADC()ï¼Œ
 //QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 void Test_ADC(void)
 {
     char txt[16];
       
-    TFTSPI_Init();                  //LCD³õÊ¼»¯ 
-    TFTSPI_CLS(u16BLUE);           //ÇåÆÁ
+    TFTSPI_Init();                  //LCDåˆå§‹åŒ– 
+    TFTSPI_CLS(u16BLUE);           //æ¸…å±
     TFTSPI_P8X16Str(2,0,(uint8_t*)"LQ ADC Test Bat",u16RED,u16BLUE);
     printf("\r\nLQ ADC Test Bat");
 
-    LQADC_Init(ADC1);             //µçÔ´µÍÑ¹±¨¾¯ADC³õÊ¼»¯
-    uint16_t batv0=(uint16_t)(ReadADC(ADC1,ADC1_CH10)*0.46);  //»ñÈ¡ADCÖµ K12 µç³ØµçÑ¹ * 100
-    uint16_t batv1=(uint16_t)(ReadADC(ADC1,ADC1_CH4)*0.806);  //»ñÈ¡ADCÖµ L10
-    uint16_t batv2=(uint16_t)(ReadADC(ADC1,ADC1_CH7)*0.806);  //»ñÈ¡ADCÖµ L11
-    uint16_t batv3=(uint16_t)(ReadADC(ADC1,ADC1_CH8)*0.806);  //»ñÈ¡ADCÖµ M12
-    uint16_t batv4=(uint16_t)(ReadADC(ADC1,ADC1_CH3)*0.806);  //»ñÈ¡ADCÖµ H14
-    uint16_t batv5=(uint16_t)(ReadADC(ADC1,ADC1_CH1)*0.806);  //»ñÈ¡ADCÖµ K14
-    uint16_t batv6=(uint16_t)(ReadADC(ADC1,ADC1_CH2)*0.806);  //»ñÈ¡ADCÖµ L14
+    LQADC_Init(ADC1);             //ç”µæºä½å‹æŠ¥è­¦ADCåˆå§‹åŒ–
+    uint16_t batv0=(uint16_t)(ReadADC(ADC1,ADC1_CH10)*0.46);  //è·å–ADCå€¼ K12 ç”µæ± ç”µå‹ * 100
+    uint16_t batv1=(uint16_t)(ReadADC(ADC1,ADC1_CH4)*0.806);  //è·å–ADCå€¼ L10
+    uint16_t batv2=(uint16_t)(ReadADC(ADC1,ADC1_CH7)*0.806);  //è·å–ADCå€¼ L11
+    uint16_t batv3=(uint16_t)(ReadADC(ADC1,ADC1_CH8)*0.806);  //è·å–ADCå€¼ M12
+    uint16_t batv4=(uint16_t)(ReadADC(ADC1,ADC1_CH3)*0.806);  //è·å–ADCå€¼ H14
+    uint16_t batv5=(uint16_t)(ReadADC(ADC1,ADC1_CH1)*0.806);  //è·å–ADCå€¼ K14
+    uint16_t batv6=(uint16_t)(ReadADC(ADC1,ADC1_CH2)*0.806);  //è·å–ADCå€¼ L14
     while (1)
     {           
-        //²âÊÔADC×ª»»   ADCµÄ»ù×¼µçÑ¹ÊÇ3.3VµÄ£¬RT1052Ä¸°åÉÏ£¬K12Í¨¹ı1KºÍ4.7KµÄ·ÖÑ¹µç×è²âÁ¿µç³ØµçÑ¹ µç³ØµçÑ¹ =  £¨ReadADC / 4095£© * 3.3 * £¨1 + 4.7£©
-        batv0 = (uint16_t)(batv0*0.7 + 0.3*(uint16_t)(ReadADC(ADC1,ADC1_CH10)*0.46));//µçÑ¹²É¼¯ 
+        //æµ‹è¯•ADCè½¬æ¢   ADCçš„åŸºå‡†ç”µå‹æ˜¯3.3Vçš„ï¼ŒRT1052æ¯æ¿ä¸Šï¼ŒK12é€šè¿‡1Kå’Œ4.7Kçš„åˆ†å‹ç”µé˜»æµ‹é‡ç”µæ± ç”µå‹ ç”µæ± ç”µå‹ =  ï¼ˆReadADC / 4095ï¼‰ * 3.3 * ï¼ˆ1 + 4.7ï¼‰
+        batv0 = (uint16_t)(batv0*0.7 + 0.3*(uint16_t)(ReadADC(ADC1,ADC1_CH10)*0.46));//ç”µå‹é‡‡é›† 
         
-        batv1 = (uint16_t)(batv1*0.7 + 0.3*ReadADC(ADC1,ADC1_CH4)*0.806);             //»ñÈ¡ADCÖµ L10
-        batv2 = (uint16_t)(batv2*0.7 + 0.3*ReadADC(ADC1,ADC1_CH7)*0.806);             //»ñÈ¡ADCÖµ L11
-        batv3 = (uint16_t)(batv3*0.7 + 0.3*ReadADC(ADC1,ADC1_CH8)*0.806);             //»ñÈ¡ADCÖµ M12
-        batv4 = (uint16_t)(batv4*0.7 + 0.3*ReadADC(ADC1,ADC1_CH3)*0.806);             //»ñÈ¡ADCÖµ H14
-        batv5 = (uint16_t)(batv5*0.7 + 0.3*ReadADC(ADC1,ADC1_CH1)*0.806);             //»ñÈ¡ADCÖµ K14
+        batv1 = (uint16_t)(batv1*0.7 + 0.3*ReadADC(ADC1,ADC1_CH4)*0.806);             //è·å–ADCå€¼ L10
+        batv2 = (uint16_t)(batv2*0.7 + 0.3*ReadADC(ADC1,ADC1_CH7)*0.806);             //è·å–ADCå€¼ L11
+        batv3 = (uint16_t)(batv3*0.7 + 0.3*ReadADC(ADC1,ADC1_CH8)*0.806);             //è·å–ADCå€¼ M12
+        batv4 = (uint16_t)(batv4*0.7 + 0.3*ReadADC(ADC1,ADC1_CH3)*0.806);             //è·å–ADCå€¼ H14
+        batv5 = (uint16_t)(batv5*0.7 + 0.3*ReadADC(ADC1,ADC1_CH1)*0.806);             //è·å–ADCå€¼ K14
         batv6 = (uint16_t)(batv6*0.7 + 0.3*ReadADC(ADC1,ADC1_CH2)*0.806);  
         
         printf("\r\n/***********************%3.2fV\r\n ",batv0/100.0f);
         sprintf(txt,"BAT:%3.2fV ",batv0/100.0f);
         TFTSPI_P8X16Str(5,1,(uint8_t*)txt,u16RED,u16BLUE);
                            
-//        printf("\r\nADC2_IN10  :%d.%dV ",batv/100,batv%100);     //¸¡µãÊı¼ÆËãÁ¿±È½Ï´ó£¬¿ÉÒÔ²ÉÓÃÕâÖÖ·½·¨Êä³öĞ¡Êıµã
+//        printf("\r\nADC2_IN10  :%d.%dV ",batv/100,batv%100);     //æµ®ç‚¹æ•°è®¡ç®—é‡æ¯”è¾ƒå¤§ï¼Œå¯ä»¥é‡‡ç”¨è¿™ç§æ–¹æ³•è¾“å‡ºå°æ•°ç‚¹
 //        sprintf(txt,"BAT:%d.%dV ",batv/100,batv%100);
 //        LCD_P8x16Str(20,3,(uint8_t*)txt); 
-        //LEDÉÁË¸
+        //LEDé—ªçƒ
         
         printf("\r\n/***********************%3.2fV\r\n ",batv1/1000.0f);
         sprintf(txt,"L10:%3.2fV ",batv1/1000.0f);
@@ -184,7 +184,7 @@ void Test_ADC(void)
         sprintf(txt,"L14:%3.2fV ",batv6/1000.0f);
         TFTSPI_P8X16Str(5,7,(uint8_t*)txt,u16RED,u16BLUE);
         
-        LED_Color_Reverse(blue);    //À¶µÆ   
+        LED_Color_Reverse(blue);    //è“ç¯   
         delayms(100);
     }
 }

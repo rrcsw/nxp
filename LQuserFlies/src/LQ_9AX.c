@@ -10,31 +10,31 @@ extern fxos_handle_t g_fxosHandle;
 status_t FXOS_Init(fxos_handle_t *fxos_handle)
 {
     uint8_t tmp[1] = {0};
-    g_fxosHandle.xfer.slaveAddress = 0x1e;   //8700µØÖ·
-    if(FXOS_ReadReg(fxos_handle, WHO_AM_I_REG, tmp, 1) != kStatus_Success) //¶ÁÈ¡WHO_AM_I ¼Ä´æÆ÷
+    g_fxosHandle.xfer.slaveAddress = 0x1e;   //8700åœ°å€
+    if(FXOS_ReadReg(fxos_handle, WHO_AM_I_REG, tmp, 1) != kStatus_Success) //è¯»å–WHO_AM_I å¯„å­˜å™¨
     {
         return kStatus_Fail;
     }
 
-    if (tmp[0] != kFXOS_WHO_AM_I_Device_ID)    //ÅĞ¶Ï WHO_AM_I µÄÖµÊÇ·ñÕıÈ·
+    if (tmp[0] != kFXOS_WHO_AM_I_Device_ID)    //åˆ¤æ–­ WHO_AM_I çš„å€¼æ˜¯å¦æ­£ç¡®
     {
         return kStatus_Fail;
     }
 
     /* setup auto sleep with FFMT trigger */
     /* go to standby */
-    if(FXOS_ReadReg(fxos_handle, CTRL_REG1, tmp, 1) != kStatus_Success)  //¶ÁÈ¡CTRL_REG1¼Ä´æÆ÷
+    if(FXOS_ReadReg(fxos_handle, CTRL_REG1, tmp, 1) != kStatus_Success)  //è¯»å–CTRL_REG1å¯„å­˜å™¨
     {
         return kStatus_Fail;
     }
 
-    if(FXOS_WriteReg(fxos_handle, CTRL_REG1, tmp[0] & (uint8_t)~ACTIVE_MASK) != kStatus_Success)  //Ğ´CTRL_REG1¼Ä´æÆ÷£¬Ê¹FX8700´¦ÓÚ´ı»ú×´Ì¬ 
+    if(FXOS_WriteReg(fxos_handle, CTRL_REG1, tmp[0] & (uint8_t)~ACTIVE_MASK) != kStatus_Success)  //å†™CTRL_REG1å¯„å­˜å™¨ï¼Œä½¿FX8700å¤„äºå¾…æœºçŠ¶æ€ 
     {
         return kStatus_Fail;
     }
 
     /* Read again to make sure we are in standby mode. */
-    if(FXOS_ReadReg(fxos_handle, CTRL_REG1, tmp, 1) != kStatus_Success)  //ÔÙÒ»´Î¶Á£¬È·±£´¦ÓÚ´ı»ú×´Ì¬£¬ÒÔ±ãÏÂÃæÅäÖÃÆäËû¼Ä´æÆ÷
+    if(FXOS_ReadReg(fxos_handle, CTRL_REG1, tmp, 1) != kStatus_Success)  //å†ä¸€æ¬¡è¯»ï¼Œç¡®ä¿å¤„äºå¾…æœºçŠ¶æ€ï¼Œä»¥ä¾¿ä¸‹é¢é…ç½®å…¶ä»–å¯„å­˜å™¨
     {
         return kStatus_Fail;
     }
@@ -44,20 +44,20 @@ status_t FXOS_Init(fxos_handle_t *fxos_handle)
     }
 
     /* Disable the FIFO */
-    if(FXOS_WriteReg(fxos_handle, F_SETUP_REG, F_MODE_DISABLED) != kStatus_Success)  //½ûÓÃFIFO
+    if(FXOS_WriteReg(fxos_handle, F_SETUP_REG, F_MODE_DISABLED) != kStatus_Success)  //ç¦ç”¨FIFO
     {
         return kStatus_Fail;
     }
 
 #ifdef LPSLEEP_HIRES
     /* enable auto-sleep, low power in sleep, high res in wake */
-    if(FXOS_WriteReg(fxos_handle, CTRL_REG2, SLPE_MASK | SMOD_LOW_POWER | MOD_HIGH_RES) != kStatus_Success)  //Ê¹ÓÃµÍ¹¦ºÄ£¬×Ô¶¯Ë¯Ãß£¬¸ß·Ö±æ
+    if(FXOS_WriteReg(fxos_handle, CTRL_REG2, SLPE_MASK | SMOD_LOW_POWER | MOD_HIGH_RES) != kStatus_Success)  //ä½¿ç”¨ä½åŠŸè€—ï¼Œè‡ªåŠ¨ç¡çœ ï¼Œé«˜åˆ†è¾¨
     {
         return kStatus_Fail;
     }
 #else
     /* enable auto-sleep, low power in sleep, high res in wake */
-    if(FXOS_WriteReg(fxos_handle, CTRL_REG2, MOD_HIGH_RES) != kStatus_Success)  //Ê¹ÓÃ¸ß·Ö±æÂÊÄ£Ê½
+    if(FXOS_WriteReg(fxos_handle, CTRL_REG2, MOD_HIGH_RES) != kStatus_Success)  //ä½¿ç”¨é«˜åˆ†è¾¨ç‡æ¨¡å¼
     {
         return kStatus_Fail;
     }
@@ -65,20 +65,20 @@ status_t FXOS_Init(fxos_handle_t *fxos_handle)
 #endif
 
     /* set up Mag OSR and Hybrid mode using M_CTRL_REG1, use default for Acc */
-    if(FXOS_WriteReg(fxos_handle, M_CTRL_REG1, (M_RST_MASK | M_OSR_MASK | M_HMS_MASK)) != kStatus_Success)//»ìºÏÄ£Ê½£¬¼Ó¼ÆºÍµØ´Å¼ÆÍ¬Ê±Ê¹ÓÃ
+    if(FXOS_WriteReg(fxos_handle, M_CTRL_REG1, (M_RST_MASK | M_OSR_MASK | M_HMS_MASK)) != kStatus_Success)//æ··åˆæ¨¡å¼ï¼ŒåŠ è®¡å’Œåœ°ç£è®¡åŒæ—¶ä½¿ç”¨
     {
         return kStatus_Fail;
     }
 
     /* Enable hyrid mode auto increment using M_CTRL_REG2 */
-    if(FXOS_WriteReg(fxos_handle, M_CTRL_REG2, (M_HYB_AUTOINC_MASK)) != kStatus_Success)  //µ±hyb_autoinc_mode = 1ÇÒ¿ì¶ÁÄ£Ê½±»½ûÓÃ(ctrl l_reg1 [f_read] = 0)Ê±£¬ÔÚ¶ÁÍê¼Ä´æÆ÷x06 (OUT_Z_LSB)ºó£¬¼Ä´æÆ÷µØÖ·½«×Ô¶¯Ç°½øµ½¼Ä´æÆ÷x33 (M_OUT_X_MSB)¡£¶ÔÓÚhyb_autoinc_mode = 1ºÍÆôÓÃ¿ìËÙ¶ÁÈ¡Ä£Ê½(ctrl l_reg1 [f_read = 1])£¬ÔÚburstreadÄ£Ê½ÏÂ¶ÁÈ¡¼Ä´æÆ÷x05 (OUT_Z_MSB)ºó£¬¼Ä´æÆ÷µØÖ·½«×Ô¶¯Ç°½øµ½¼Ä´æÆ÷x33 (M_OUT_X_MSB)¡£
+    if(FXOS_WriteReg(fxos_handle, M_CTRL_REG2, (M_HYB_AUTOINC_MASK)) != kStatus_Success)  //å½“hyb_autoinc_mode = 1ä¸”å¿«è¯»æ¨¡å¼è¢«ç¦ç”¨(ctrl l_reg1 [f_read] = 0)æ—¶ï¼Œåœ¨è¯»å®Œå¯„å­˜å™¨x06 (OUT_Z_LSB)åï¼Œå¯„å­˜å™¨åœ°å€å°†è‡ªåŠ¨å‰è¿›åˆ°å¯„å­˜å™¨x33 (M_OUT_X_MSB)ã€‚å¯¹äºhyb_autoinc_mode = 1å’Œå¯ç”¨å¿«é€Ÿè¯»å–æ¨¡å¼(ctrl l_reg1 [f_read = 1])ï¼Œåœ¨burstreadæ¨¡å¼ä¸‹è¯»å–å¯„å­˜å™¨x05 (OUT_Z_MSB)åï¼Œå¯„å­˜å™¨åœ°å€å°†è‡ªåŠ¨å‰è¿›åˆ°å¯„å­˜å™¨x33 (M_OUT_X_MSB)ã€‚
     {
         return kStatus_Fail;
     }
 
 #ifdef EN_FFMT
     /* enable FFMT for motion detect for X and Y axes, latch enable */
-    if(FXOS_WriteReg(fxos_handle, FF_MT_CFG_REG, XEFE_MASK | YEFE_MASK | ELE_MASK | OAE_MASK) != kStatus_Success)  //×ÔÓÉÂäÌåÔË¶¯/ÅäÖÃ¼Ä´æÆ÷
+    if(FXOS_WriteReg(fxos_handle, FF_MT_CFG_REG, XEFE_MASK | YEFE_MASK | ELE_MASK | OAE_MASK) != kStatus_Success)  //è‡ªç”±è½ä½“è¿åŠ¨/é…ç½®å¯„å­˜å™¨
     {
         return kStatus_Fail;
     }
@@ -86,7 +86,7 @@ status_t FXOS_Init(fxos_handle_t *fxos_handle)
 
 #ifdef SET_THRESHOLD
     /* set threshold to about 0.25g */
-    if(FXOS_WriteReg(fxos_handle, FT_MT_THS_REG, 0x04) != kStatus_Success)//×ÔÓÉÂäÌå/ÔË¶¯¼ì²âãĞÖµ:Ä¬ÈÏÖµ:0b000_0000¡£·Ö±æÂÊ¹Ì¶¨ÔÚ63 mg/LSB¡£
+    if(FXOS_WriteReg(fxos_handle, FT_MT_THS_REG, 0x04) != kStatus_Success)//è‡ªç”±è½ä½“/è¿åŠ¨æ£€æµ‹é˜ˆå€¼:é»˜è®¤å€¼:0b000_0000ã€‚åˆ†è¾¨ç‡å›ºå®šåœ¨63 mg/LSBã€‚
     {
         return kStatus_Fail;
     }
@@ -102,17 +102,17 @@ status_t FXOS_Init(fxos_handle_t *fxos_handle)
 
 #ifdef EN_AUTO_SLEEP                
     /* set auto-sleep wait period to 5s (=5/0.64=~8) */
-    if(FXOS_WriteReg(fxos_handle, ASLP_COUNT_REG, 8) != kStatus_Success)  //×Ô¶¯Ë¯Ãß
+    if(FXOS_WriteReg(fxos_handle, ASLP_COUNT_REG, 8) != kStatus_Success)  //è‡ªåŠ¨ç¡çœ 
     {
         return kStatus_Fail;
     }
 #endif
     /* default set to 4g mode */
-    if(FXOS_WriteReg(fxos_handle, XYZ_DATA_CFG_REG, FULL_SCALE_4G) != kStatus_Success)  //¼Ó¼Æ Õı¸º4gÄ£Ê½
+    if(FXOS_WriteReg(fxos_handle, XYZ_DATA_CFG_REG, FULL_SCALE_4G) != kStatus_Success)  //åŠ è®¡ æ­£è´Ÿ4gæ¨¡å¼
     {
         return kStatus_Fail;
     }
-#ifdef EN_INTERRUPTS                        //Ê¹ÄÜÖĞ¶Ï
+#ifdef EN_INTERRUPTS                        //ä½¿èƒ½ä¸­æ–­
     /* enable data-ready, auto-sleep and motion detection interrupts */
     /* FXOS1_WriteRegister(CTRL_REG4, INT_EN_DRDY_MASK | INT_EN_ASLP_MASK | INT_EN_FF_MT_MASK); */
     if(FXOS_WriteReg(fxos_handle, CTRL_REG4, 0x0) != kStatus_Success)
@@ -136,14 +136,14 @@ status_t FXOS_Init(fxos_handle_t *fxos_handle)
     }
 #else
     /* Setup the ODR for 200 Hz and activate the accelerometer */
-    if(FXOS_WriteReg(fxos_handle, CTRL_REG1, (HYB_DATA_RATE_200HZ | ACTIVE_MASK)) != kStatus_Success)//ÉèÖÃÊı¾İÊä³öÆµÂÊ 200hz ²¢ÇÒ¼¤»îFX8700
+    if(FXOS_WriteReg(fxos_handle, CTRL_REG1, (HYB_DATA_RATE_200HZ | ACTIVE_MASK)) != kStatus_Success)//è®¾ç½®æ•°æ®è¾“å‡ºé¢‘ç‡ 200hz å¹¶ä¸”æ¿€æ´»FX8700
     {
         return kStatus_Fail;
     }
 #endif
 
     /* Read Control register again to ensure we are in active mode */
-    if(FXOS_ReadReg(fxos_handle, CTRL_REG1, tmp, 1) != kStatus_Success)  //È·±£FX8700²»ÊÇÔÚ´ı»ú×´Ì¬
+    if(FXOS_ReadReg(fxos_handle, CTRL_REG1, tmp, 1) != kStatus_Success)  //ç¡®ä¿FX8700ä¸æ˜¯åœ¨å¾…æœºçŠ¶æ€
     {
         return kStatus_Fail;
     }
@@ -156,62 +156,62 @@ status_t FXOS_Init(fxos_handle_t *fxos_handle)
     return kStatus_Success;
 }
 
-status_t FXOS_ReadSensorData(fxos_handle_t *fxos_handle, fxos_data_t *sensorData)    //¶ÁFX8700Ô­Ê¼Êı¾İº¯Êı
+status_t FXOS_ReadSensorData(fxos_handle_t *fxos_handle, fxos_data_t *sensorData)    //è¯»FX8700åŸå§‹æ•°æ®å‡½æ•°
 {
-    g_fxosHandle.xfer.slaveAddress = 0x1e;   //8700µØÖ·
+    g_fxosHandle.xfer.slaveAddress = 0x1e;   //8700åœ°å€
     status_t status = kStatus_Success;
     uint8_t tmp_buff[6] = {0};
     uint8_t i = 0;
 
-    if (!FXOS_ReadReg(fxos_handle, OUT_X_MSB_REG, tmp_buff, 6) == kStatus_Success)  //¶ÁÈ¡¼Ó¼ÆÊı¾İ
+    if (!FXOS_ReadReg(fxos_handle, OUT_X_MSB_REG, tmp_buff, 6) == kStatus_Success)  //è¯»å–åŠ è®¡æ•°æ®
     {
         status = kStatus_Fail;
     }
 
     for (i = 0; i < 6; i++)
     {
-        ((int8_t *)sensorData)[i] = tmp_buff[i];                                     //½«Êı¾İ´æÈë»º³åÇø
+        ((int8_t *)sensorData)[i] = tmp_buff[i];                                     //å°†æ•°æ®å­˜å…¥ç¼“å†²åŒº
     }
 
-    if (!FXOS_ReadReg(fxos_handle, M_OUT_X_MSB_REG, tmp_buff, 6) == kStatus_Success) //¶ÁÈ¡µØ´Å¼ÆÊı¾İ
+    if (!FXOS_ReadReg(fxos_handle, M_OUT_X_MSB_REG, tmp_buff, 6) == kStatus_Success) //è¯»å–åœ°ç£è®¡æ•°æ®
     {
         status = kStatus_Fail;
     }
 
     for (i = 0; i < 6; i++)
     {
-        ((int8_t *)sensorData)[i + 6] = tmp_buff[i];                                  //½«Êı¾İ´æÈë»º³åÇø
+        ((int8_t *)sensorData)[i + 6] = tmp_buff[i];                                  //å°†æ•°æ®å­˜å…¥ç¼“å†²åŒº
     }
 
     return status;
 }
 
-status_t FXOS2100_ReadSensorData(fxos_handle_t *fxos_handle, fxos2100_data_t *sensorData)  //¶ÁFX2100Ô­Ê¼Êı¾İ
+status_t FXOS2100_ReadSensorData(fxos_handle_t *fxos_handle, fxos2100_data_t *sensorData)  //è¯»FX2100åŸå§‹æ•°æ®
 {
-    g_fxosHandle.xfer.slaveAddress = 0x20;   //2100µØÖ·
+    g_fxosHandle.xfer.slaveAddress = 0x20;   //2100åœ°å€
     status_t status = kStatus_Success;
     uint8_t tmp_buff[6] = {0};
     uint8_t i = 0;
 
-    if (!FXOS_ReadReg(fxos_handle, OUT_X_MSB_REG, tmp_buff, 6) == kStatus_Success)      //¶ÁÈ¡½ÇËÙ¶È¼ÆÊı¾İ
+    if (!FXOS_ReadReg(fxos_handle, OUT_X_MSB_REG, tmp_buff, 6) == kStatus_Success)      //è¯»å–è§’é€Ÿåº¦è®¡æ•°æ®
     {
         status = kStatus_Fail;
     }
 
     for (i = 0; i < 6; i++)
     {
-        ((int8_t *)sensorData)[i] = tmp_buff[i];                                        //½«Êı¾İ´æÈë»º³åÇø
+        ((int8_t *)sensorData)[i] = tmp_buff[i];                                        //å°†æ•°æ®å­˜å…¥ç¼“å†²åŒº
     } 
     return status;
 }
-status_t Init2100(fxos_handle_t *fxos_handle)                                           //½ÇËÙ¶È¼Æ³õÊ¼»¯
+status_t Init2100(fxos_handle_t *fxos_handle)                                           //è§’é€Ÿåº¦è®¡åˆå§‹åŒ–
 {
-    g_fxosHandle.xfer.slaveAddress = 0x20;   //2100µØÖ·
-    if(FXOS_WriteReg(fxos_handle, 0x0d, 0x00) != kStatus_Success)  //Ğ´CTRL_REG1¼Ä´æÆ÷ ÅäÖÃ¸ßµÍÍ¨ÂË²¨ ºÍ Á¿³Ì ¡À2000dps
+    g_fxosHandle.xfer.slaveAddress = 0x20;   //2100åœ°å€
+    if(FXOS_WriteReg(fxos_handle, 0x0d, 0x00) != kStatus_Success)  //å†™CTRL_REG1å¯„å­˜å™¨ é…ç½®é«˜ä½é€šæ»¤æ³¢ å’Œ é‡ç¨‹ Â±2000dps
     {
         return kStatus_Fail;
     }
-    if(FXOS_WriteReg(fxos_handle, 0x13, 0x02) != kStatus_Success)  //Ğ´CTRL_REG1¼Ä´æÆ÷  Æô¶¯ ºÍ ÅäÖÃÊä³öËÙÂÊ 800Hz
+    if(FXOS_WriteReg(fxos_handle, 0x13, 0x02) != kStatus_Success)  //å†™CTRL_REG1å¯„å­˜å™¨  å¯åŠ¨ å’Œ é…ç½®è¾“å‡ºé€Ÿç‡ 800Hz
     {
         return kStatus_Fail;
     }
@@ -219,12 +219,12 @@ status_t Init2100(fxos_handle_t *fxos_handle)                                   
 }
 
 
-status_t FXOS_ReadReg(fxos_handle_t *handle, uint8_t reg, uint8_t *val, uint8_t bytesNumber)  //¶Á¼Ä´æÆ÷º¯Êı
+status_t FXOS_ReadReg(fxos_handle_t *handle, uint8_t reg, uint8_t *val, uint8_t bytesNumber)  //è¯»å¯„å­˜å™¨å‡½æ•°
 {
-    return IIC_ReadReg(handle, reg, val, bytesNumber);  //¶Á¼Ä´æÆ÷º¯Êı
+    return IIC_ReadReg(handle, reg, val, bytesNumber);  //è¯»å¯„å­˜å™¨å‡½æ•°
 }
 
-status_t FXOS_WriteReg(fxos_handle_t *handle, uint8_t reg, uint8_t val)    //Ğ´¼Ä´æÆ÷º¯Êı
+status_t FXOS_WriteReg(fxos_handle_t *handle, uint8_t reg, uint8_t val)    //å†™å¯„å­˜å™¨å‡½æ•°
 {
-    return IIC_WriteReg(handle, reg, val);    //Ğ´¼Ä´æÆ÷º¯Êı
+    return IIC_WriteReg(handle, reg, val);    //å†™å¯„å­˜å™¨å‡½æ•°
 }

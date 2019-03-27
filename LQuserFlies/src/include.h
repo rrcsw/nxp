@@ -1,25 +1,25 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËĞÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ğ´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #ifndef _LQ_INLUDE_FILES_H_
 #define _LQ_INLUDE_FILES_H_
     #include "stdio.h"
     #include "math.h"
-//SDKµ×²ãÇı¶¯¿â
+//SDKåº•å±‚é©±åŠ¨åº“
     #include "fsl_adc.h"
     #include "fsl_cache.h"
     #include "fsl_csi.h"
@@ -55,37 +55,37 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
     #include "fsl_edma.h"
     #include "fsl_dmamux.h"
 
-//ÓÃ»§×Ô¶¨ÒåÎÄ¼ş    
-//    #include "LQ_TFT480x272.h"//4.3²ÊÆÁ
-//    #include "LQ_GT9147TP.h"  //µçÈİ´¥Ãş°å
+//ç”¨æˆ·è‡ªå®šä¹‰æ–‡ä»¶    
+//    #include "LQ_TFT480x272.h"//4.3å½©å±
+//    #include "LQ_GT9147TP.h"  //ç”µå®¹è§¦æ‘¸æ¿
     #include "LQ_IIC.h"
-    #include "LQ_GPIOmacro.h" //GPIO¿Ú51²Ù×÷¸ñÊ½ 
-    #include "LQ_MT9V034M.h"   //ÉñÑÛÉãÏñÍ·V3   
-    #include "LQ_OV7725M.h"   //ÉñÑÛÉãÏñÍ·V3   
-    #include "LQ_SGP18T.h"    //TFT1.8…¼²ÊÆÁÄ£¿é
-    #include "LQ_SGP18Test.h" //TFT1.8´ç²ÊÆÁ²âÊÔ
-    #include "LQ_12864.h"      //OLEDÄ£¿éº¯Êı¶¨Òå£¬°üÀ¨IICºÍSPIÁ½ÖÖ½Ó¿Ú
-    #include "LQ_LED.h"       //LEDÖ¸Ê¾
-    #include "LQ_KEY.h"       //¶ÀÁ¢°´¼ü
-    #include "LQ_PWM.h"       //µç»ú£¬¶æ»úPWM¿ØÖÆ XBARA
-    #include "LQ_UART.h"       //UART´®¿Ú
-    #include "LQ_ADC.h"       //ADC×ª»»²É¼¯
-    #include "LQ_PIT.h"       //PIT¶¨Ê±
-    #include "LQ_9AX.h"       //¾ÅÖáÄ£¿é
+    #include "LQ_GPIOmacro.h" //GPIOå£51æ“ä½œæ ¼å¼ 
+    #include "LQ_MT9V034M.h"   //ç¥çœ¼æ‘„åƒå¤´V3   
+    #include "LQ_OV7725M.h"   //ç¥çœ¼æ‘„åƒå¤´V3   
+    #include "LQ_SGP18T.h"    //TFT1.8å‹å½©å±æ¨¡å—
+    #include "LQ_SGP18Test.h" //TFT1.8å¯¸å½©å±æµ‹è¯•
+    #include "LQ_12864.h"      //OLEDæ¨¡å—å‡½æ•°å®šä¹‰ï¼ŒåŒ…æ‹¬IICå’ŒSPIä¸¤ç§æ¥å£
+    #include "LQ_LED.h"       //LEDæŒ‡ç¤º
+    #include "LQ_KEY.h"       //ç‹¬ç«‹æŒ‰é”®
+    #include "LQ_PWM.h"       //ç”µæœºï¼ŒèˆµæœºPWMæ§åˆ¶ XBARA
+    #include "LQ_UART.h"       //UARTä¸²å£
+    #include "LQ_ADC.h"       //ADCè½¬æ¢é‡‡é›†
+    #include "LQ_PIT.h"       //PITå®šæ—¶
+    #include "LQ_9AX.h"       //ä¹è½´æ¨¡å—
     #include "LQ_MPU6050.h"    //MPU6050
-    #include "LQ_TRNG.h"      //Ëæ»úÊı·¢ÉúÆ÷
-    #include "LQ_Encoder.h"   //±àÂëÆ÷Õı½»½âÂëÊı¾İ²É¼¯
-//    #include "LQ_eLCDIF.h"    //480 *272Òº¾§ÆÁ
-    #include "LQ_PXP.h"       //Í¼Ïñ´¦ÀíÄ£¿é
-    #include "LQ_CSI.h"       //ÉãÏñÍ·½Ó¿Ú
-    #include "m_systime.h"    //systick ¶¨Ê±Æ÷£¬ÓÃÓÚ¼ÆÊ±
-    #include "ANO_DT.h"       //ÄäÃûÉÏÎ»»úĞ­Òé
-    #include "status.h"       //±êÖ¾Î»
-    #include "LQ_QTMR.h"      //¼ÆÊ±Æ÷¿ÉÓÃÓÚÉú³ÉPWM  ºÍ Õı½»½âÂë
-    #include "LQ_NRF2401.h"   //NRF2401Çı¶¯³ÌĞò
+    #include "LQ_TRNG.h"      //éšæœºæ•°å‘ç”Ÿå™¨
+    #include "LQ_Encoder.h"   //ç¼–ç å™¨æ­£äº¤è§£ç æ•°æ®é‡‡é›†
+//    #include "LQ_eLCDIF.h"    //480 *272æ¶²æ™¶å±
+    #include "LQ_PXP.h"       //å›¾åƒå¤„ç†æ¨¡å—
+    #include "LQ_CSI.h"       //æ‘„åƒå¤´æ¥å£
+    #include "m_systime.h"    //systick å®šæ—¶å™¨ï¼Œç”¨äºè®¡æ—¶
+    #include "ANO_DT.h"       //åŒ¿åä¸Šä½æœºåè®®
+    #include "status.h"       //æ ‡å¿—ä½
+    #include "LQ_QTMR.h"      //è®¡æ—¶å™¨å¯ç”¨äºç”ŸæˆPWM  å’Œ æ­£äº¤è§£ç 
+    #include "LQ_NRF2401.h"   //NRF2401é©±åŠ¨ç¨‹åº
     #include "LQ_SPI.h"
     #include "LQ_GPT.h"
-//ÓÃ»§×Ô¶¨Òåº¯Êı
+//ç”¨æˆ·è‡ªå®šä¹‰å‡½æ•°
 //    void delayus(uint32_t us);
 //    void delayms(uint32_t ms);   
 #endif //_LQ_INLUDE_FILES_H_

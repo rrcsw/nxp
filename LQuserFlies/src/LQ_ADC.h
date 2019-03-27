@@ -1,24 +1,24 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËÐÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ð´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #ifndef __ADC_H__
 #define __ADC_H__ 
-/* //ADC×ÊÔ´ÐòºÅÓë¶ÔÓ¦µÄ¹Ü½Å£¬      ¹Ü½ÅÃû³Æ      BGA¹Ü½Å±àºÅ
+/* //ADCèµ„æºåºå·ä¸Žå¯¹åº”çš„ç®¡è„šï¼Œ      ç®¡è„šåç§°      BGAç®¡è„šç¼–å·
 ADC1_IN0  Analog channel 1 input0   GPIO_AD_B1_11   J13
 ADC1_IN1  Analog channel 1 input1   GPIO_AD_B0_12   K14 
 ADC1_IN2  Analog channel 1 input2   GPIO_AD_B0_13   L14
@@ -55,7 +55,7 @@ ADC2_IN15 Analog channel 1 input15  GPIO_AD_B1_10   L13
 */
 typedef enum
 {
-  //²Î¿¼ÊÖ²áp484 414.1.5 Modes of Operation  
+  //å‚è€ƒæ‰‹å†Œp484 414.1.5 Modes of Operation  
   ADC1_CH0=0,//
   ADC1_CH1=1,//
   ADC1_CH2=2,//
@@ -93,7 +93,7 @@ typedef enum
 } ADCn_Ch_e;
 
 
-//¾«¶ÈÎ»Êý
+//ç²¾åº¦ä½æ•°
 typedef enum ADC_nbit
 {
   ADC_10bit = 0x02,

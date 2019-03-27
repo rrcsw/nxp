@@ -28,54 +28,54 @@
 void Sensor_ReadData(int16_t DAT[9])
 {
     fxos_data_t fxos_data;
-    if (FXOS_ReadSensorData(&g_fxosHandle, &fxos_data) != kStatus_Success)   //¶ÁÈ¡Ô­Ê¼Êı¾İ
+    if (FXOS_ReadSensorData(&g_fxosHandle, &fxos_data) != kStatus_Success)   //è¯»å–åŸå§‹æ•°æ®
     {
         printf("Failed to read acceleration data!\r\n");
     }
     /* Get the accel data from the sensor data structure in 14 bit left format data*/
-    DAT[0] = (int16_t)(((uint16_t)fxos_data.accelXMSB << 8) | fxos_data.accelXLSB)/4U;   //¼ÓËÙ¶È¼Æ14Î»µÄ£¬³ıÒÔ4
+    DAT[0] = (int16_t)(((uint16_t)fxos_data.accelXMSB << 8) | fxos_data.accelXLSB)/4U;   //åŠ é€Ÿåº¦è®¡14ä½çš„ï¼Œé™¤ä»¥4
     DAT[1] = (int16_t)(((uint16_t)fxos_data.accelYMSB << 8) | fxos_data.accelYLSB)/4U;
     DAT[2] = (int16_t)(((uint16_t)fxos_data.accelZMSB << 8) | fxos_data.accelZLSB)/4U;
-    DAT[3] = (int16_t)(((uint16_t)fxos_data.magXMSB << 8) | fxos_data.magXLSB);          //µØ´Å¼Æ16Î»µÄ
+    DAT[3] = (int16_t)(((uint16_t)fxos_data.magXMSB << 8) | fxos_data.magXLSB);          //åœ°ç£è®¡16ä½çš„
     DAT[4] = (int16_t)(((uint16_t)fxos_data.magYMSB << 8) | fxos_data.magYLSB);
     DAT[5] = (int16_t)(((uint16_t)fxos_data.magZMSB << 8) | fxos_data.magZLSB);
 
     
     fxos2100_data_t  fxos2100_data;
-    if (FXOS2100_ReadSensorData(&g_fxosHandle, &fxos2100_data) != kStatus_Success)//¶ÁÈ¡Ô­Ê¼Êı¾İ
+    if (FXOS2100_ReadSensorData(&g_fxosHandle, &fxos2100_data) != kStatus_Success)//è¯»å–åŸå§‹æ•°æ®
     {
         printf("Failed to read acceleration data!\r\n");
     }
-    DAT[6] = (int16_t)(((uint16_t)fxos2100_data.gyroXMSB << 8) | fxos2100_data.gyroXLSB);//½ÇËÙ¶È¼Æ 16Î»µÄ
+    DAT[6] = (int16_t)(((uint16_t)fxos2100_data.gyroXMSB << 8) | fxos2100_data.gyroXLSB);//è§’é€Ÿåº¦è®¡ 16ä½çš„
     DAT[7] = (int16_t)(((uint16_t)fxos2100_data.gyroYMSB << 8) | fxos2100_data.gyroYLSB);
     DAT[8] = (int16_t)(((uint16_t)fxos2100_data.gyroZMSB << 8) | fxos2100_data.gyroZLSB);
 }
 void LQ_init9AX(void)
 {
     uint8_t regResult = 0;
-    LPI2C_Init(LPI2C1, 400000);    ////Ö§³Ö400K I2C
+    LPI2C_Init(LPI2C1, 400000);    ////æ”¯æŒ400K I2C
 
-    g_fxosHandle.xfer.slaveAddress = 0x1e;   //8700µØÖ·
+    g_fxosHandle.xfer.slaveAddress = 0x1e;   //8700åœ°å€
     if (FXOS_ReadReg(&g_fxosHandle, WHO_AM_I_REG, &regResult, 1) == kStatus_Success) 
     {
-        if(regResult == kFXOS_WHO_AM_I_Device_ID)   //¶ÁÈ¡WHO_AM_I ¼Ä´æÆ÷£¬Èç¹û½á¹ûÕıÈ·£¬ÔòÖ¤Ã÷I2CµØÖ·ÕıÈ·
+        if(regResult == kFXOS_WHO_AM_I_Device_ID)   //è¯»å–WHO_AM_I å¯„å­˜å™¨ï¼Œå¦‚æœç»“æœæ­£ç¡®ï¼Œåˆ™è¯æ˜I2Cåœ°å€æ­£ç¡®
         {
              printf("\r\n FX8700 is OK!");
         }
     }
-    else /* Not found any sensor on board */       //Ã»ÓĞÕÒµ½FX8700
+    else /* Not found any sensor on board */       //æ²¡æœ‰æ‰¾åˆ°FX8700
     {
             printf("\r\n FX8700 is Fail!");
 
     }
 
     /* Init sensor */
-    if (FXOS_Init(&g_fxosHandle) != kStatus_Success)   //FX8700 ³õÊ¼»¯
+    if (FXOS_Init(&g_fxosHandle) != kStatus_Success)   //FX8700 åˆå§‹åŒ–
     {
         return;
     } 
         /* Init sensor */
-    if (Init2100(&g_fxosHandle) != kStatus_Success)   //FX2100 ³õÊ¼»¯
+    if (Init2100(&g_fxosHandle) != kStatus_Success)   //FX2100 åˆå§‹åŒ–
     {
         return;
     }
@@ -84,10 +84,10 @@ void LQ_init9AX(void)
 void Test_9AX(void)
 {
     LQ_Camera_Init();
-    int16_t u16data[9];  //´æ·Å¶ÁÈ¡´«¸ĞÆ÷ Êı¾İ
-    TFTSPI_Init();               //TFT1.8³õÊ¼»¯  
-    TFTSPI_CLS(u16BLUE);           //ÇåÆÁ
-    LQ_init9AX();                //¾ÅÖá³õÊ¼»¯
+    int16_t u16data[9];  //å­˜æ”¾è¯»å–ä¼ æ„Ÿå™¨ æ•°æ®
+    TFTSPI_Init();               //TFT1.8åˆå§‹åŒ–  
+    TFTSPI_CLS(u16BLUE);           //æ¸…å±
+    LQ_init9AX();                //ä¹è½´åˆå§‹åŒ–
     
     char txt[16];
     for (;;)
@@ -123,6 +123,6 @@ void Test_9AX(void)
       printf("\r\nGX: %d  ",(int16_t)u16data[6]);
       printf("\r\nGY: %d  ",(int16_t)u16data[7]); 
       printf("\r\nGZ: %d  ",(int16_t)u16data[8]);
-      delayms(100);//ÑÓÊ±100ºÁÃë   
+      delayms(100);//å»¶æ—¶100æ¯«ç§’   
     } /* End infinite loops */
 }
