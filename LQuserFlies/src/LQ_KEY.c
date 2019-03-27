@@ -1,151 +1,73 @@
-/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËÐÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ð´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
-------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+/**
+  *
+  * @file    key.c
+  * @author  
+  * @version 
+  * @date    2019/3/7
+  * @brief   
+  *
+  */
 
-GPIO3_IO04 ------ ¹Ü½ÅP2   ----- >  Ä¸°å°´¼üK2
-GPIO2_IO27 ------ ¹Ü½ÅC13  ----- >  Ä¸°å°´¼üK0
-GPIO2_IO30 ------ ¹Ü½ÅC14  ----- >  Ä¸°å°´¼ük1
-GPIO5_I000 ------ ¹Ü½ÅL6   ----- >  ºËÐÄ°å°´¼üWUP
-
-×Ö¶Î½âÊÍ£º 
-2.0¡¢SRE Êý¾ÝÎ»£º0 
-SRE(Slew Rate Field)£º×ª»»ËÙ¶È×Ö¶Î ÕâÊÇÒ»¸ö¿ÉÒÔµ÷Õû¸ßµÍµçÆ½ÇÐ»»ÉÏÉýºÍÏÂ½µÊ±¼äËÙ¶ÈµÄÉèÖÃÏî£¬
-ÔÚÒ»°ãµÄÓ¦ÓÃÖÐÊ¹ÓÃÐ¾Æ¬Ä¬ÈÏµÄÉèÖÃ¾Í¿ÉÒÔÁË¡£ÔÚÐèÒªÎ¢µ÷SI»òEMIÐÔÄÜÊ±¿ÉÒÔ³¢ÊÔÐÞ¸ÄÅäÖÃ 
-¿ÉÑ¡µÄÖµ£º 
-0 SRE_0_Slow_Slew_Rate ¡ª Slow Slew Rate£º×ª»»ËÙ¶ÈÂý 
-1 SRE_1_Fast_Slew_Rate ¡ª Fast Slew Rate£º ×ª»»ËÙ¶È¿ì
-
-2.1¡¢DSE Êý¾ÝÎ»5-3 
-DSE(Drive Strength Field)£ºÇý¶¯ÄÜÁ¦×Ö¶Î£¬×÷ÎªÊä³öÊ±ÓÐÐ§ 
-¿ÉÑ¡µÄÖµ£º 
-000 DSE_0_output_driver_disabled_ ¡ª output driver disabled; ½ûÖ¹Êä³ö 
-001 DSE_1_R0_260_Ohm___3_3V__150_Ohm_1_8V__240_Ohm_for_DDR_ ¡ª R0(260 Ohm 
-@ 3.3V, 150 Ohm@1.8V, 240 Ohm for DDR) -R0£º260Å·Ä·@3.3v£»150Å·Ä·@1.8v 
-010 DSE_2_R0_2 ¡ª R0/2 -R0µÄ¶þ·ÖÖ®Ò»£¬Ò»ÏÂÀàÍ¬ 
-011 DSE_3_R0_3 ¡ª R0/3 
-100 DSE_4_R0_4 ¡ª R0/4 
-101 DSE_5_R0_5 ¡ª R0/5 
-110 DSE_6_R0_6 ¡ª R0/6 
-111 DSE_7_R0_7 ¡ª R0/7
-
-2.2¡¢SPEED Êý¾ÝÎ»7-6 
-Speed Field£ºËÙ¶È×Ö¶Î 
-¿ÉÑ¡µÄÖµ 
-00 SPEED_0_low_50MHz_ ¡ª low(50MHz) ×îµÍ50MHz 
-01 SPEED_1_medium_100MHz_ ¡ª medium(100MHz)ÖÐ¼äÖµ100MHz 
-10 SPEED_2_medium_100MHz_ ¡ª medium(100MHz)ÖÐ¼äÖµ100MHz 
-11 SPEED_3_max_200MHz_ ¡ª max(200MHz) ×î´ó200MHz
-
-2.3¡¢ODE Êý¾ÝÎ»11 
-ODE(Open Drain Enable Field)£ºÂ©¼«¿ªÂ·£¿£¿£¿×÷ÎªÊä³öÊ±ÓÐÐ§£¬ÒÀ¿¿Íâ²¿µçÑ¹£¬Ìá¸ßÊä³öÄÜÁ¦ 
-¿ÉÑ¡µÄÖµ£º 
-0 ODE_0_Open_Drain_Disabled ¡ª Open Drain Disabled £º½ûÖ¹Â©¼«¿ªÂ· 
-1 ODE_1_Open_Drain_Enabled ¡ª Open Drain Enabled£º Ê¹ÄÜÂ©¼«¿ªÂ·
-
-2.4¡¢PKE Êý¾ÝÎ»12 
-PKE(Pull / Keep Enable Field)£ºÀ­/±£³ÖÊ¹ÄÜ×Ö¶Î 
-¿ÉÑ¡µÄÖµ£º 
-0 PKE_0_Pull_Keeper_Disabled ¡ª Pull/Keeper Disabled£º ½ûÖ¹À­/±£³Ö 
-1 PKE_1_Pull_Keeper_Enabled ¡ª Pull/Keeper Enabled£º Ê¹ÄÜÀ­/±£³Ö
-
-2.5¡¢PUE Êý¾ÝÎ»13 
-PUE(Pull / Keep Select Field)£ºÀ­/±£³ÖÑ¡Ôñ×Ö¶Î£¿£¿£¿Á½Õß²»ÄÜÍ¬Ê±ÉèÖÃ£¬ 
-±£³Ö£ºÊ¹ÄÜÊäÈë×´Ì¬±£´æÆ÷¿ÉÒÔÔÚIO¹©µçNVCC_xxx¹ØµôÖ®ºó£¬Ê¹ÊäÈë»º³åÆ÷µÄÊä³ö×Ô¶¯Î¬³ÖÔÚ¹ØµçÖ®Ç°µÄÂß¼­×´Ì¬¡£Æä¼ÛÖµ¿ÉÒÔÔÚµÍ¹¦ºÄµÄÓ¦ÓÃÖÐµÃµ½ÌåÏÖ¡£ 
-Ê¹ÄÜÊä³ö×´Ì¬±£´æÆ÷¿ÉÒÔÔÚÄÚºË¹©µç¹ØµôÖ®ºó£¬Ê¹IOµÄÊä³ö×Ô¶¯Î¬³ÖÔÚ¹ØµçÖ®Ç°µÄÂß¼­×´Ì¬(ÐèÒª×¢ÒâµÄÊÇÊä³ö×´Ì¬±£´æÆ÷²»ÄÜÓëÉÏÏÂÀ­Í¬Ê±¹¤×÷)¡£Æä¼ÛÖµÍ¬Ñù¿ÉÒÔÌåÏÖÔÚµÍ¹¦ºÄµÄÓ¦ÓÃÖÐ 
-¿ÉÑ¡µÄÖµ£º 
-0 PUE_0_Keeper ¡ª Keeper £º±£³Ö 
-1 PUE_1_Pull ¡ª Pull £ºÀ­
-
-2.6¡¢PUS Êý¾ÝÎ»15-14 
-PUS(Pull Up / Down Config. Field)£ºÉÏÀ­/ÏÂÀ­ÅäÖÃ£¿£¿£¿Ö÷Òª×÷ÓÃÊÇÌá¸ßÊä³öÐÅºÅµÄÇý¶¯ÄÜÁ¦¡¢È·¶¨ÊäÈëÐÅºÅµÄµçÆ½£¨·ÀÖ¹¸ÉÈÅ£© 
-¿ÉÑ¡µÄÖµ£º 
-00 PUS_0_100K_Ohm_Pull_Down ¡ª 100K Ohm Pull Down £º100KÅ·Ä·µÄÀ­µÍ 
-01 PUS_1_47K_Ohm_Pull_Up ¡ª 47K Ohm Pull Up £º47KÅ·Ä·µÄÀ­¸ß 
-10 PUS_2_100K_Ohm_Pull_Up ¡ª 100K Ohm Pull Up £º100KÅ·Ä·µÄÀ­¸ß 
-11 PUS_3_22K_Ohm_Pull_Up ¡ª 22K Ohm Pull Up £º22KÅ·Ä·µÄÀ­¸ß
-
-2.77¡¢HYS Êý¾ÝÎ»16 
-HYS(Hyst. Enable Field)£º´ÅÖÍÊ¹ÄÜ×Ö¶Î£¿£¿£¿×÷ÎªÊäÈëÊ±ÓÐÐ§ 
-0 HYS_0_Hysteresis_Disabled ¡ª Hysteresis Disabled£º½ûÖ¹´ÅÖÍ 
-1 HYS_1_Hysteresis_Enabled ¡ª Hysteresis Enabled£º Ê¹ÄÜ´ÅÖÍ
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
-
+/* Includes ------------------------------------------------------------------*/
 #include "include.h"
 
-//GPIO3_IO04 ------ ¹Ü½ÅP2   ----- >  Ä¸°å°´¼üK2
-//GPIO2_IO27 ------ ¹Ü½ÅC13  ----- >  Ä¸°å°´¼üK0
-//GPIO2_IO30 ------ ¹Ü½ÅC14  ----- >  Ä¸°å°´¼ük1
-//GPIO5_I000 ------ ¹Ü½ÅL6   ----- >  ºËÐÄ°å°´¼üWUP
 
-//Ò»°ãÊäÈë¿Ú¹Ü½Å¶¨Òå
-gpio_pin_config_t GPIO_Input_Config = {kGPIO_DigitalInput,    //GPIOÎªÊäÈë·½Ïò
-                               1,                    //¸ßµçÆ½
-                               kGPIO_NoIntmode,      //²»´¥·¢ÖÐ¶Ï
-                               };
-//Ò»°ãÊäÈëÖÐ¶Ï¿Ú¹Ü½Å¶¨Òå
-gpio_pin_config_t GPIO_ExInt_Config = {kGPIO_DigitalInput,//GPIOÎªÊäÈë·½Ïò
-                                  0,                    //µÍµçÆ½
-                                  kGPIO_IntRisingEdge,  //ÉÏÉýÑØ´¥·¢ÖÐ¶Ï
-                                  };
-/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿°´¼ü¹Ü½Å³õÊ¼»¯
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+
+
+/* Global Variable Definition ------------------------------------------------*/
+gpio_pin_config_t GPIO_Input_Config = {kGPIO_DigitalInput,      //è¾“å…¥æ–¹å‘
+                                     1,                         //é«˜ç”µå¹³
+                                     kGPIO_NoIntmode,           //ä¸è§¦å‘ä¸­æ–­
+                                     };
+//ä¸€èˆ¬è¾“å…¥ä¸­æ–­å£ç®¡è„šå®šä¹‰
+gpio_pin_config_t GPIO_ExInt_Config = {kGPIO_DigitalInput,//GPIOä¸ºè¾“å…¥æ–¹å‘
+                                      0,                    //ä½Žç”µå¹³
+                                      kGPIO_IntRisingEdge,  //ä¸Šå‡æ²¿è§¦å‘ä¸­æ–­
+                                      };
+
+
+/* Function Definition -------------------------------------------------------*/
+
+/*!
+ * @brief æŒ‰é”®åˆå§‹åŒ–
+ */
 void LQ_KEY_Init(void)
 {  
-  CLOCK_EnableClock(kCLOCK_Iomuxc);          // IO¿ÚÊ±ÖÓÊ¹ÄÜ
+  CLOCK_EnableClock(kCLOCK_Iomuxc);          // IOå£æ—¶é’Ÿä½¿èƒ½
   
-  IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_04_GPIO3_IO04,0U);//¹Ü½ÅP2
-  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_11_GPIO2_IO27,0U);   //¹Ü½ÅC13
-  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_14_GPIO2_IO30,0U);   //¹Ü½ÅC14
+  IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_04_GPIO3_IO04,0U);//ç®¡è„šP2
+  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_11_GPIO2_IO27,0U);   //ç®¡è„šC13
+  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_14_GPIO2_IO30,0U);   //ç®¡è„šC14
   
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_11_GPIO2_IO27,0xF080); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_14_GPIO2_IO30,0xF080);
   IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_04_GPIO3_IO04,0xF080);
  
-  GPIO_PinInit(GPIO2, 27, &GPIO_Input_Config);        // GPIOÊäÈë¿Ú£¬·ÇÖÐ¶Ï
-  GPIO_PinInit(GPIO2, 30, &GPIO_Input_Config);        // GPIOÊäÈë¿Ú£¬·ÇÖÐ¶Ï
-  GPIO_PinInit(GPIO3,  4, &GPIO_Input_Config);        // GPIOÊäÈë¿Ú£¬·ÇÖÐ¶Ï
+  GPIO_PinInit(GPIO2, 27, &GPIO_Input_Config);        // GPIOè¾“å…¥å£ï¼Œéžä¸­æ–­
+  GPIO_PinInit(GPIO2, 30, &GPIO_Input_Config);        // GPIOè¾“å…¥å£ï¼Œéžä¸­æ–­
+  GPIO_PinInit(GPIO3,  4, &GPIO_Input_Config);        // GPIOè¾“å…¥å£ï¼Œéžä¸­æ–­
      
 }
 
-/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿°´¼ü´¦Àíº¯Êý
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2017Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿0£ºÎÞ°´¼ü°´ÏÂ 1£º°´¼ü1°´ÏÂ  2:°´¼ü2°´ÏÂ
-¡¾²ÎÊýÖµ¡¿mode:0,²»Ö§³ÖÁ¬Ðø°´;1,Ö§³ÖÁ¬Ðø°´;
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+
+
+/*!
+ * @brief è¯»å–æŒ‰é”®
+ *
+ * @param æŒ‰é”®æ¨¡å¼
+ * @param pin GPIO port pin number.
+ * @retval GPIO port input value.
+ */
 uint8_t LQ_KEY_Read(uint8_t mode)
 {
-    static uint8_t key_up=1;     //°´¼üËÉ¿ª±êÖ¾
+    static uint8_t key_up=1;     //æŒ‰é”®æ¾å¼€æ ‡å¿—
     if(mode==1) 
     {
-      key_up=1;    //Ö§³ÖÁ¬°´
+      key_up=1;    //æ”¯æŒè¿žæŒ‰
     }
     if(key_up && (GPIO_PinRead(GPIO2, 27)==0 || GPIO_PinRead(GPIO2, 30)==0) || GPIO_PinRead(GPIO3, 4)==0)
     {
-      delayms(10);   //Ïû¶¶
+      delayms(10);   //æ¶ˆæŠ–
       key_up=0;
       if(GPIO_PinRead(GPIO2, 27)==0)      
       {
@@ -167,43 +89,43 @@ uint8_t LQ_KEY_Read(uint8_t mode)
     {
      key_up=1;   
     }
-    return 0;   //ÎÞ°´¼ü°´ÏÂ
+    return 0;   //æ— æŒ‰é”®æŒ‰ä¸‹
      
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔ°´¼ü¼°OLEDÏÔÊ¾
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2017Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æµ‹è¯•æŒ‰é”®åŠOLEDæ˜¾ç¤º
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2017å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_GPIO_KEY(void)
 { 
     LED_Init();
     LQ_KEY_Init(); 
-    TFTSPI_Init();               //TFT1.8³õÊ¼»¯  
-    TFTSPI_CLS(u16BLUE);           //ÇåÆÁ
+    TFTSPI_Init();               //TFT1.8åˆå§‹åŒ–  
+    TFTSPI_CLS(u16BLUE);           //æ¸…å±
     while (1)
     {  
-        //²âÊÔ°´¼ü      
+        //æµ‹è¯•æŒ‰é”®      
 
         switch(LQ_KEY_Read(0))  //
         {
             case 1:
-                TFTSPI_CLS(u16WHITE);           //ÇåÆÁ
+                TFTSPI_CLS(u16WHITE);           //æ¸…å±
                 TFTSPI_P8X8Str(4,3,(uint8_t*)"KEY0 Pressed!   ",u16RED,u16BLUE);
                 LED_Ctrl(LED_B, RVS);
                 break;           
             case 2:      
-                TFTSPI_CLS(u16WHITE);           //ÇåÆÁ
+                TFTSPI_CLS(u16WHITE);           //æ¸…å±
                 TFTSPI_P8X8Str(4,5,(uint8_t*)"KEY1 Pressed!   ",u16RED,u16BLUE);
                 LED_Ctrl(LED_R, RVS);
                 break;
             case 3:      
-                TFTSPI_CLS(u16WHITE);           //ÇåÆÁ
+                TFTSPI_CLS(u16WHITE);           //æ¸…å±
                 TFTSPI_P8X8Str(4,7,(uint8_t*)"KEY2 Pressed!   ",u16RED,u16BLUE);
                 LED_Ctrl(LED_G, RVS);
                 break;
@@ -211,9 +133,9 @@ void Test_GPIO_KEY(void)
                 TFTSPI_P8X8Str(4,0,(uint8_t*)"LQ Test KEY",u16RED,u16BLUE);
                 break;
         }
-        //ÑÓÊ±
+        //å»¶æ—¶
         delayms(50);
-//        LED_Color_Reverse(red);  //µÆÉÁË¸
+//        LED_Color_Reverse(red);  //ç¯é—ªçƒ
     }
 }
 
@@ -224,72 +146,72 @@ void Test_GPIO_KEY(void)
 volatile bool g_InputSignal = false;
 volatile int key_ok = true;
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿ÖÐ¶Ï·þÎñº¯Êý
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘ä¸­æ–­æœåŠ¡å‡½æ•°
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void GPIO5_Combined_0_15_IRQHandler(void)
 { 
-    delayms(10);      //Ïû¶¶
+    delayms(10);      //æ¶ˆæŠ–
     /* clear the interrupt status */
-    if(GPIO_GetPinsInterruptFlags(GPIO5)&(1<<0))    //ÅÐ¶ÏÊÇ·ñÎªGPIO5_0ÖÐ¶Ï
+    if(GPIO_GetPinsInterruptFlags(GPIO5)&(1<<0))    //åˆ¤æ–­æ˜¯å¦ä¸ºGPIO5_0ä¸­æ–­
     {
-        g_InputSignal = true;                      //±êÖ¾Î»
+        g_InputSignal = true;                      //æ ‡å¿—ä½
         key_ok = 0;
     }
-    GPIO_PortClearInterruptFlags(GPIO5, 1U << 0);   //Çå³ý±êÖ¾Î»
+    GPIO_PortClearInterruptFlags(GPIO5, 1U << 0);   //æ¸…é™¤æ ‡å¿—ä½
     /* Change state of switch. */
 
-    __DSB();				//Êý¾ÝÍ¬²½ÆÁ±ÎÖ¸Áî
+    __DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿°´¼ü»òÕßÊäÈëGPIO¿ÚÖÐ¶Ï²âÊÔ   °´ÏÂºËÐÄ°åWUP°´¼ü£¬ÏÔÊ¾1sºìµÆ
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æŒ‰é”®æˆ–è€…è¾“å…¥GPIOå£ä¸­æ–­æµ‹è¯•   æŒ‰ä¸‹æ ¸å¿ƒæ¿WUPæŒ‰é”®ï¼Œæ˜¾ç¤º1sçº¢ç¯
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_GPIO_ExInt(void)
 {
     LED_Init();
     
-    /*GPIO Íâ²¿ÖÐ¶ÏÅäÖÃ¿ªÊ¼*/
-    CLOCK_EnableClock(kCLOCK_Iomuxc);                         // IO¿ÚÊ±ÖÓÊ¹ÄÜ
-    IOMUXC_SetPinMux(IOMUXC_SNVS_WAKEUP_GPIO5_IO00,0U);       // ÉèÖÃ¹Ü½Å¸´ÓÃ¹¦ÄÜ                          
-    IOMUXC_SetPinConfig(IOMUXC_SNVS_WAKEUP_GPIO5_IO00,0xF080);// ÅäÖÃ¹Ü½Å
+    /*GPIO å¤–éƒ¨ä¸­æ–­é…ç½®å¼€å§‹*/
+    CLOCK_EnableClock(kCLOCK_Iomuxc);                         // IOå£æ—¶é’Ÿä½¿èƒ½
+    IOMUXC_SetPinMux(IOMUXC_SNVS_WAKEUP_GPIO5_IO00,0U);       // è®¾ç½®ç®¡è„šå¤ç”¨åŠŸèƒ½                          
+    IOMUXC_SetPinConfig(IOMUXC_SNVS_WAKEUP_GPIO5_IO00,0xF080);// é…ç½®ç®¡è„š
     
-    gpio_pin_config_t GPIO_Input_Config =                     // GPIO³õÊ¼»¯½á¹¹Ìå
+    gpio_pin_config_t GPIO_Input_Config =                     // GPIOåˆå§‹åŒ–ç»“æž„ä½“
     {
-        kGPIO_DigitalInput,                                   // GPIOÎªÊäÈë·½Ïò
-        1,                                                    // ¸ßµçÆ½
-        kGPIO_IntFallingEdge,                                 // ÏÂ½µÑØ´¥·¢ÖÐ¶Ï
+        kGPIO_DigitalInput,                                   // GPIOä¸ºè¾“å…¥æ–¹å‘
+        1,                                                    // é«˜ç”µå¹³
+        kGPIO_IntFallingEdge,                                 // ä¸‹é™æ²¿è§¦å‘ä¸­æ–­
     };
-    GPIO_PinInit(GPIO5, 0, &GPIO_Input_Config);               // GPIOÊäÈë¿Ú£¬ÖÐ¶Ï
+    GPIO_PinInit(GPIO5, 0, &GPIO_Input_Config);               // GPIOè¾“å…¥å£ï¼Œä¸­æ–­
     
-    GPIO_PortEnableInterrupts(GPIO5,1<<0);			          // GPIO5_00ÖÐ¶ÏÊ¹ÄÜ
-    //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ð¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ðµÄÖÐ¶Ï
+    GPIO_PortEnableInterrupts(GPIO5,1<<0);			          // GPIO5_00ä¸­æ–­ä½¿èƒ½
+    //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
     NVIC_SetPriority(GPIO5_Combined_0_15_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
     
-	EnableIRQ(GPIO5_Combined_0_15_IRQn);			          //Ê¹ÄÜGPIO5_0~15IOµÄÖÐ¶Ï  
-    /*GPIO Íâ²¿ÖÐ¶ÏÅäÖÃ½áÊø*/
-    printf("GPIO¹¦ÄÜ²âÊÔ£ºLEDÇý¶¯£¬°´¼üÊäÈë£¬Íâ²¿ÖÐ¶Ï²âÊÔ¿ªÊ¼...\r\n");
+	EnableIRQ(GPIO5_Combined_0_15_IRQn);			          //ä½¿èƒ½GPIO5_0~15IOçš„ä¸­æ–­  
+    /*GPIO å¤–éƒ¨ä¸­æ–­é…ç½®ç»“æŸ*/
+    printf("GPIOåŠŸèƒ½æµ‹è¯•ï¼šLEDé©±åŠ¨ï¼ŒæŒ‰é”®è¾“å…¥ï¼Œå¤–éƒ¨ä¸­æ–­æµ‹è¯•å¼€å§‹...\r\n");
     
     while(1)
     {
         if(g_InputSignal)
         {        
-            printf("\r\n Wake Up°´¼ü±»°´ÏÂ£¡");      
+            printf("\r\n Wake UpæŒ‰é”®è¢«æŒ‰ä¸‹ï¼");      
             /* Reset state of switch. */
             g_InputSignal = false; 
-            LED_Color(red);           //ºìµÆ 
+            LED_Color(red);           //çº¢ç¯ 
             delayms(1000);
         }   
-        LED_Color(blue);    //À¶µÆ
+        LED_Color(blue);    //è“ç¯
     }
 }
