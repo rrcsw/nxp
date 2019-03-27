@@ -41,6 +41,9 @@
 *.su
 *.idb
 *.pdb
+*.pbi
+*.xcl
+
 
 # Kernel Module Compile Results
 *.mod*
@@ -50,3 +53,17 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+
+Obj/
+Libraries/
+*.bat
+*.uvprojx
+*.uvoptx
+*.Inspiron
+stm32f10x.h
+stm32f10x_conf.h
+stm32f10x_it.c
+stm32f10x_it.h
+*.txt
