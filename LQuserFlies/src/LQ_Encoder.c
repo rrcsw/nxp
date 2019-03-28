@@ -32,7 +32,8 @@ C11   A相
 B11   B相或者方向
 //C10   Z相
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
-#include "include.h"	
+#include "include.h"
+#include "system.h"
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
 【作  者】Z
@@ -197,36 +198,35 @@ void LQ_ENC_Init(ENC_Type *base)
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_ENCoder(void)
 {   
-    TFTSPI_Init();               //TFT1.8初始化 
-    TFTSPI_CLS(u16BLUE);        //清屏
+  LCD_Init(); 
+  LCD_CLS();
     LQ_ENC_Init(ENC1);   //正交解码初始化
     LQ_ENC_Init(ENC2);
     LQ_ENC_Init(ENC3);
     LQ_ENC_Init(ENC4);
     short velocity1, velocity2, velocity3, velocity4;
     char txt[16];
-    printf("\r\n编码器正交解码测试:\r\n");    
+
     while (1)
     { 
         
         delayms(100);        //延时100毫秒
         velocity1 = (int16_t)ENC_GetPositionDifferenceValue(ENC1);  //得到编码器微分值
         sprintf(txt,"ENC1:  %5d ",velocity1); 
-        TFTSPI_P8X16Str(0,0,(uint8_t*)txt,u16RED,u16BLUE);
-        printf("ENC1:  %5d \n",velocity1);
+        LCD_P6x8Str(0,0,(uint8_t*)txt);;
+
         velocity2 = (int16_t)ENC_GetPositionDifferenceValue(ENC2);  //得到编码器微分值
         sprintf(txt,"ENC2:  %5d ",velocity2); 
-        TFTSPI_P8X16Str(0,1,(uint8_t*)txt,u16RED,u16BLUE);
-        printf("ENC2:  %5d \n",velocity2);
+        LCD_P6x8Str(0,1,(uint8_t*)txt);
+
         velocity3 = (int16_t)ENC_GetPositionDifferenceValue(ENC3);  //得到编码器微分值
         sprintf(txt,"ENC3:  %5d ",velocity3); 
-        TFTSPI_P8X16Str(0,2,(uint8_t*)txt,u16RED,u16BLUE);
-        printf("ENC3:  %5d \n",velocity3);
+        LCD_P6x8Str(0,2,(uint8_t*)txt);
+
         velocity4 = (int16_t)ENC_GetPositionDifferenceValue(ENC4);  //得到编码器微分值
         sprintf(txt,"ENC4:  %5d ",velocity4); 
-        TFTSPI_P8X16Str(0,3,(uint8_t*)txt,u16RED,u16BLUE);
-        printf("ENC4:  %5d \n",velocity4);
-        printf("\n####################################\n");
+        LCD_P6x8Str(0,3,(uint8_t*)txt);
+
         
         LED_Ctrl(LED_R, RVS); 
         delayms(100);       //延时0.1秒

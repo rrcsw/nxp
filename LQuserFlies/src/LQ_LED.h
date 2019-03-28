@@ -1,19 +1,19 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËÐÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ð´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #ifndef __LQ_LED_H__
 #define __LQ_LED_H__
@@ -26,31 +26,31 @@ extern gpio_pin_config_t GPIO_Output_Config;
 ******************************************************************************/
 extern gpio_pin_config_t GPIO_Output_Config;
 
-//¶¨ÒåÄ£¿éºÅ
+//å®šä¹‰æ¨¡å—å·
 typedef enum
 {
   LED_G=1,
   LED_R=2,   
   LED_B=3,
-  LEDALL=5,//È«²¿   
+  LEDALL=5,//å…¨éƒ¨   
 } LEDn_e;
 typedef enum
 {
-  white = 0,  //°×É«
-  black = 1,  //ºÚÉ«
-  red   = 2,  //ºì
-  green = 3,  //ÂÌ
-  blue  = 4,  //À¶É« 
-  yellow= 5,  //»ÆÉ«
-  violet= 6,  //×ÏÉ«
-  cyan  = 7,  //ÇàÉ«
+  white = 0,  //ç™½è‰²
+  black = 1,  //é»‘è‰²
+  red   = 2,  //çº¢
+  green = 3,  //ç»¿
+  blue  = 4,  //è“è‰² 
+  yellow= 5,  //é»„è‰²
+  violet= 6,  //ç´«è‰²
+  cyan  = 7,  //é’è‰²
 }LED_t;
 
 typedef enum
 {
-  ON=0,  //ÁÁ
-  OFF=1, //Ãð
-  RVS=2, //·´×ª  
+  ON=0,  //äº®
+  OFF=1, //ç­
+  RVS=2, //åè½¬  
 }LEDs_e;
 extern void LED_Color(LED_t color);
 extern void LED_Color_Reverse(LED_t color);

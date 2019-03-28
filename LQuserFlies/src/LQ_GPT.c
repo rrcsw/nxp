@@ -1,19 +1,19 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËÐÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ð´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
 
@@ -31,7 +31,7 @@ void GPT2_IRQHandler(void)
 }
 
 
-// ³õÊ¼»¯GPT¼ÆÊýÆ÷  GPT1ÓÃ¼ÆÊ±  GPT2ÓÃ×÷ÑÓÊ±
+// åˆå§‹åŒ–GPTè®¡æ•°å™¨  GPT1ç”¨è®¡æ—¶  GPT2ç”¨ä½œå»¶æ—¶
 void LQ_GPT_Init(void)
 {
     gpt_config_t gptConfig;
@@ -40,26 +40,26 @@ void LQ_GPT_Init(void)
     CLOCK_SetDiv(kCLOCK_PerclkDiv, 0);
     
     GPT_GetDefaultConfig(&gptConfig);
-    gptConfig.enableRunInDbg = true;   //¿ªÆôdebugÇé¿öÏÂ¿ÉÒÔÊ¹ÓÃ
+    gptConfig.enableRunInDbg = true;   //å¼€å¯debugæƒ…å†µä¸‹å¯ä»¥ä½¿ç”¨
     GPT_Init(GPT1, &gptConfig);
     GPT_Init(GPT2, &gptConfig);
     
-    GPT_SetClockDivider(GPT1, 150);      // GPT Ê±ÖÓ 150M / 15 = 10M
-    GPT_SetClockDivider(GPT2, 15);      // GPT Ê±ÖÓ 150M / 150 = 10M
+    GPT_SetClockDivider(GPT1, 150);      // GPT æ—¶é’Ÿ 150M / 15 = 10M
+    GPT_SetClockDivider(GPT2, 15);      // GPT æ—¶é’Ÿ 150M / 150 = 10M
     
-    GPT_SetOutputCompareValue(GPT1, kGPT_OutputCompare_Channel1, 0XFFFFFFFF);   //GPT ÊÇ32Îª¼ÆÊýÆ÷ ×î´ó 0xFFFF FFFF 
-    GPT_SetOutputCompareValue(GPT2, kGPT_OutputCompare_Channel1, 0XFFFFFFFF);   //GPT ÊÇ32Îª¼ÆÊýÆ÷ ×î´ó 0xFFFF FFFF 
+    GPT_SetOutputCompareValue(GPT1, kGPT_OutputCompare_Channel1, 0XFFFFFFFF);   //GPT æ˜¯32ä¸ºè®¡æ•°å™¨ æœ€å¤§ 0xFFFF FFFF 
+    GPT_SetOutputCompareValue(GPT2, kGPT_OutputCompare_Channel1, 0XFFFFFFFF);   //GPT æ˜¯32ä¸ºè®¡æ•°å™¨ æœ€å¤§ 0xFFFF FFFF 
 
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔGPI¶¨Ê±ÖÐ¶Ï¹¦ÄÜ
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æµ‹è¯•GPIå®šæ—¶ä¸­æ–­åŠŸèƒ½
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_GPT_Timer(void)
 {
@@ -74,22 +74,22 @@ void Test_GPT_Timer(void)
         GPIO_PinReverse (GPIO2, 22); 
         time = gpt_time_get();
         printf("delay 10 us is %u \n", time - last_time);
-        last_time = gpt_time_get(); //×¢Òâ ´òÓ¡Ò²ÐèÒªÊ±¼ä
+        last_time = gpt_time_get(); //æ³¨æ„ æ‰“å°ä¹Ÿéœ€è¦æ—¶é—´
         delayms(10);
         time = gpt_time_get();
         printf("delay 10 ms is %u \n", time - last_time);
-        last_time = gpt_time_get(); //×¢Òâ ´òÓ¡Ò²ÐèÒªÊ±¼ä
+        last_time = gpt_time_get(); //æ³¨æ„ æ‰“å°ä¹Ÿéœ€è¦æ—¶é—´
     }
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿GPT ¼ÆÊýÆ÷ÑÓÊ±
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2019Äê02ÔÂ18ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ  ×î´óÑÓÊ±4294967295 / 10 000000 = 429s
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜Žã€‘GPT è®¡æ•°å™¨å»¶æ—¶
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2019å¹´02æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ—   æœ€å¤§å»¶æ—¶4294967295 / 10 000000 = 429s
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void delayms(uint32_t ms)
 {
@@ -97,13 +97,13 @@ void delayms(uint32_t ms)
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿GPT ¼ÆÊýÆ÷ÑÓÊ±
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2019Äê02ÔÂ18ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ ×î´óÑÓÊ±4294967295 / 10 000000 = 429s
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜Žã€‘GPT è®¡æ•°å™¨å»¶æ—¶
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2019å¹´02æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ—  æœ€å¤§å»¶æ—¶4294967295 / 10 000000 = 429s
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void delayus(uint32_t us)
 {
@@ -116,33 +116,33 @@ void delayus(uint32_t us)
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿GPT ¼ÆÊýÆ÷¿ªÊ¼¼ÆÊ±
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2019Äê02ÔÂ18ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ  
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜Žã€‘GPT è®¡æ•°å™¨å¼€å§‹è®¡æ—¶
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2019å¹´02æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ—   
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void gpt_time_start(void)
 {
     GPT_StopTimer(GPT1);
-    GPT_StartTimer(GPT1);   //Ë¢ÐÂ GPT1
+    GPT_StartTimer(GPT1);   //åˆ·æ–° GPT1
     GPT_StartTimer(GPT1);
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿GPT ¼ÆÊýÆ÷µÃµ½Ê±³¤ us
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2019Äê02ÔÂ18ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ ×î´ó¼ÆÊ± 4294967295 / 1 000000 = 4290s  
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜Žã€‘GPT è®¡æ•°å™¨å¾—åˆ°æ—¶é•¿ us
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2019å¹´02æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ—  æœ€å¤§è®¡æ—¶ 4294967295 / 1 000000 = 4290s  
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 uint32_t gpt_time_get(void)
 {
-    if(GPT_GetStatusFlags(GPT1, kGPT_RollOverFlag))   //Òç³ö
+    if(GPT_GetStatusFlags(GPT1, kGPT_RollOverFlag))   //æº¢å‡º
         return 0;
     else
         return GPT_GetCurrentTimerCount(GPT1) - 1;

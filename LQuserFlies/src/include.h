@@ -61,11 +61,8 @@
     #include "LQ_GPIOmacro.h" //GPIO口51操作格式 
     #include "LQ_MT9V034M.h"   //神眼摄像头V3   
     #include "LQ_OV7725M.h"   //神眼摄像头V3   
-    #include "LQ_SGP18T.h"    //TFT1.8吋彩屏模块
-    #include "LQ_SGP18Test.h" //TFT1.8寸彩屏测试
-    #include "LQ_12864.h"      //OLED模块函数定义，包括IIC和SPI两种接口
-    #include "LQ_LED.h"       //LED指示
-    #include "LQ_KEY.h"       //独立按键
+
+
     #include "LQ_PWM.h"       //电机，舵机PWM控制 XBARA
     #include "LQ_UART.h"       //UART串口
     #include "LQ_ADC.h"       //ADC转换采集

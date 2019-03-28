@@ -3,6 +3,7 @@
 #include "m_systime.h"
 #include "AP_Math.h"
 #include "math.h"
+#include "system.h"
 ////////////////////////////////////////////////////////////////////////////////
 // Orientation
 ////////////////////////////////////////////////////////////////////////////////
@@ -296,8 +297,8 @@ void Test_ahrs9(void)    //测试姿态解算   APM上移植过来的，智能�
     uint32_t current_time;   
     uint64_t last_time;
     char txt[16];
-    TFTSPI_Init();               //TFT1.8初始化  
-    TFTSPI_CLS(u16BLUE);           //清屏
+  LCD_Init(); 
+  LCD_CLS();
     LQ_init9AX();                //九轴初始化
     while(1)
     {
@@ -308,7 +309,7 @@ void Test_ahrs9(void)    //测试姿态解算   APM上移植过来的，智能�
             ahrs_update9();
             if(count++ % 200 == 0)
             sprintf(txt, "X  %5.2f   Y  %5.2f   Z   %5.2f  \n",ahrs_angle.x, ahrs_angle.y, ahrs_angle.z);
-            TFTSPI_P8X8Str(0,0,(uint8_t*)txt,u16RED,u16BLUE);
+            LCD_P6x8Str(0,0,(uint8_t*)txt);
         }
        
     }

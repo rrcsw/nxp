@@ -1,179 +1,179 @@
 
 #include "include.h"
 /*******************************************************************************
-*  SDKÌá¹©ÁËÁ½ÖÖÔÚNoncacheableÇø¶¨Òå»º³åÇøºÍ±äÁ¿µÄ·½·¨£º
+*  SDKæä¾›äº†ä¸¤ç§åœ¨NoncacheableåŒºå®šä¹‰ç¼“å†²åŒºå’Œå˜é‡çš„æ–¹æ³•ï¼š
 *  AT_NONCACHEABLE_SECTION_ALIGN(var, alignbytes)
 *  AT_NONCACHEABLE_SECTION(var)
 ******************************************************************************/
-AT_NONCACHEABLE_SECTION_ALIGN(uint16_t lcdFrameBuf[2][LCD_HEIGHT][LCD_WIDTH], FRAME_BUFFER_ALIGN);               //LCDÊı¾İ»º´æÇø
+AT_NONCACHEABLE_SECTION_ALIGN(uint16_t lcdFrameBuf[2][LCD_HEIGHT][LCD_WIDTH], FRAME_BUFFER_ALIGN);               //LCDæ•°æ®ç¼“å­˜åŒº
 
-uint8_t counter;       //LCDÓĞÁ½¸ö»º³åÇø£¬Ò»¸öµ±Ç°ÏÔÊ¾ÓÃ£¬Ò»¸ö»º³åÓÃ
+uint8_t counter;       //LCDæœ‰ä¸¤ä¸ªç¼“å†²åŒºï¼Œä¸€ä¸ªå½“å‰æ˜¾ç¤ºç”¨ï¼Œä¸€ä¸ªç¼“å†²ç”¨
 
-int OFFSET0=0;      //×îÔ¶´¦£¬ÈüµÀÖĞĞÄÖµ×ÛºÏÆ«ÒÆÁ¿
-int OFFSET1=0;      //µÚ¶ş¸ñ
-int OFFSET2=0;      //×î½ü£¬µÚÈı¸ñ
+int OFFSET0=0;      //æœ€è¿œå¤„ï¼Œèµ›é“ä¸­å¿ƒå€¼ç»¼åˆåç§»é‡
+int OFFSET1=0;      //ç¬¬äºŒæ ¼
+int OFFSET2=0;      //æœ€è¿‘ï¼Œç¬¬ä¸‰æ ¼
 
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿oled + camera test
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ7ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ TFT1.8ÏÔÊ¾OV7725 RGBÍ¼Ïñ²âÊÔ  7725·Ö±æÂÊÉèÖÃÎª320*240
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘oled + camera test
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ7æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ TFT1.8æ˜¾ç¤ºOV7725 RGBå›¾åƒæµ‹è¯•  7725åˆ†è¾¨ç‡è®¾ç½®ä¸º320*240
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_SGP18_OV7725(void)
 {
-    TFTSPI_Init();               //TFT1.8³õÊ¼»¯     
+    TFTSPI_Init();               //TFT1.8åˆå§‹åŒ–     
     uint32_t fullCameraBufferAddr;     
     LQ_Camera_Init();
 //    if (SCB_CCR_IC_Msk == (SCB_CCR_IC_Msk & SCB->CCR)) {   
 //        SCB_DisableICache();
 //    }
-    if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR)) {//×¢Òâ£¬Ê¹ÓÃcsiFrameBufÊı×éÊ±£¬×îºÃ¹Ø±ÕCache ²»È»ÉÏ´ÎÊı¾İ¿ÉÄÜ»á´æ·ÅÔÚcacheÀïÃæ£¬Ôì³ÉÊı¾İ´íÂÒ
+    if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR)) {//æ³¨æ„ï¼Œä½¿ç”¨csiFrameBufæ•°ç»„æ—¶ï¼Œæœ€å¥½å…³é—­Cache ä¸ç„¶ä¸Šæ¬¡æ•°æ®å¯èƒ½ä¼šå­˜æ”¾åœ¨cacheé‡Œé¢ï¼Œé€ æˆæ•°æ®é”™ä¹±
         SCB_DisableDCache();
     }
-    delayms(200);        //ÑÓÊ±200ºÁÃë     
+    delayms(200);        //å»¶æ—¶200æ¯«ç§’     
     while (1)
     {     
         // Wait to get the full frame buffer to show. 
-        while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &fullCameraBufferAddr))  //ÉãÏñÍ·CSI»º´æÇøÒÑÂú
+        while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &fullCameraBufferAddr))  //æ‘„åƒå¤´CSIç¼“å­˜åŒºå·²æ»¡
         {
         }   
-        CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//½«ÕÕÏà»ú»º³åÇøÌá½»µ½»º³å¶ÓÁĞ        
+        CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//å°†ç…§ç›¸æœºç¼“å†²åŒºæäº¤åˆ°ç¼“å†²é˜Ÿåˆ—        
         TFTSPI_Set_Pos(20,0,(APP_CAMERA_WIDTH/4-1) + 20,APP_CAMERA_HEIGHT/4);
-        for(int i = 0; i < APP_CAMERA_HEIGHT; i+=4)  //¸ôÒ»ĞĞÈ¡Ò»ĞĞ
+        for(int i = 0; i < APP_CAMERA_HEIGHT; i+=4)  //éš”ä¸€è¡Œå–ä¸€è¡Œ
         {
-            for(int j = 0; j < APP_CAMERA_WIDTH ; j+=4)//¸ôÒ»ÁĞÈ¡Ò»ÁĞ
+            for(int j = 0; j < APP_CAMERA_WIDTH ; j+=4)//éš”ä¸€åˆ—å–ä¸€åˆ—
             {
-                TFTSPI_Write_Word (*((uint16_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH + j)); //ÏÔÊ¾Êı¾İ
+                TFTSPI_Write_Word (*((uint16_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH + j)); //æ˜¾ç¤ºæ•°æ®
             }
         }
         
-        LED_Color_Reverse(red); //EVK LEDÉÁË¸    
+        LED_Color_Reverse(red); //EVK LEDé—ªçƒ    
     }
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿TFT1.8 + camera test
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ7ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ TFT1.8ÏÔÊ¾ÉñÑÛ¶şÖµ»¯ Í¼Ïñ²âÊÔ  ÉñÑÛ·Ö±æÂÊÉèÖÃÎª752*480
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘TFT1.8 + camera test
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ7æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ TFT1.8æ˜¾ç¤ºç¥çœ¼äºŒå€¼åŒ– å›¾åƒæµ‹è¯•  ç¥çœ¼åˆ†è¾¨ç‡è®¾ç½®ä¸º752*480
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_SGP18_Camera(void)
 {
-    TFTSPI_Init();               //TFT1.8³õÊ¼»¯  
-    TFTSPI_CLS(u16BLUE);           //ÇåÆÁ
+    TFTSPI_Init();               //TFT1.8åˆå§‹åŒ–  
+    TFTSPI_CLS(u16BLUE);           //æ¸…å±
     uint32_t fullCameraBufferAddr;   
 #ifdef LQOV7725
     cameraConfig.pixelFormat = kVIDEO_PixelFormatYUYV;
 #endif
     LQ_Camera_Init();
-    delayms(200);        //ÑÓÊ±200ºÁÃë  
+    delayms(200);        //å»¶æ—¶200æ¯«ç§’  
     uint16_t color = 0;
 //    if (SCB_CCR_IC_Msk == (SCB_CCR_IC_Msk & SCB->CCR)) {   
 //        SCB_DisableICache();
 //    }
-    if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR)) {//×¢Òâ£¬Ê¹ÓÃcsiFrameBufÊı×éÊ±£¬×îºÃ¹Ø±ÕD-Cache ²»È»ÉÏ´ÎÊı¾İ¿ÉÄÜ»á´æ·ÅÔÚcacheÀïÃæ£¬Ôì³ÉÊı¾İ´íÂÒ
+    if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR)) {//æ³¨æ„ï¼Œä½¿ç”¨csiFrameBufæ•°ç»„æ—¶ï¼Œæœ€å¥½å…³é—­D-Cache ä¸ç„¶ä¸Šæ¬¡æ•°æ®å¯èƒ½ä¼šå­˜æ”¾åœ¨cacheé‡Œé¢ï¼Œé€ æˆæ•°æ®é”™ä¹±
         SCB_DisableDCache();
     }
     while (1)
     {     
         // Wait to get the full frame buffer to show. 
-        while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &fullCameraBufferAddr))  //ÉãÏñÍ·CSI»º´æÇøÒÑÂú
+        while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &fullCameraBufferAddr))  //æ‘„åƒå¤´CSIç¼“å­˜åŒºå·²æ»¡
         {
         }   
         
 #ifdef LQMT9V034  
 #if (IMAGEH == 480/4  && IMAGEW == 752/4)
-        TFTSPI_Set_Pos(15,0,(uint8_t)(APP_CAMERA_WIDTH/2-1)+15 ,APP_CAMERA_HEIGHT);//×¢Òâ ÉèÖÃÏÔÊ¾´óĞ¡ÒªÓëÏÂÃæµÄÊµ¼ÊÏÔÊ¾´óĞ¡ÏàµÈ£¬²»È»»áÏÔÊ¾²»³öÀ´»òÕß»¨ÆÁ
+        TFTSPI_Set_Pos(15,0,(uint8_t)(APP_CAMERA_WIDTH/2-1)+15 ,APP_CAMERA_HEIGHT);//æ³¨æ„ è®¾ç½®æ˜¾ç¤ºå¤§å°è¦ä¸ä¸‹é¢çš„å®é™…æ˜¾ç¤ºå¤§å°ç›¸ç­‰ï¼Œä¸ç„¶ä¼šæ˜¾ç¤ºä¸å‡ºæ¥æˆ–è€…èŠ±å±
         for(int i = 0; i < APP_CAMERA_HEIGHT; i+=2)  //  480/4/2/2 = 30
         {
-            for(int j = 0; j < APP_CAMERA_WIDTH*2; j+=2)//¸ô2ÁĞÈ¡Ò»ÁĞ  752*2/4/2 = 188   //Á½ĞĞÊı¾İ Ò»ĞĞ94ÏñËØ  Êµ¼ÊÏÔÊ¾·Ö±æÂÊ  94*60
+            for(int j = 0; j < APP_CAMERA_WIDTH*2; j+=2)//éš”2åˆ—å–ä¸€åˆ—  752*2/4/2 = 188   //ä¸¤è¡Œæ•°æ® ä¸€è¡Œ94åƒç´   å®é™…æ˜¾ç¤ºåˆ†è¾¨ç‡  94*60
             {
-                //»Ò¶ÈÏÔÊ¾
+                //ç°åº¦æ˜¾ç¤º
                 color = 0;
                 color=(((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>3))<<11;
                 color=color|((((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>2))<<5);
                 color=color|(((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>3));
                 TFTSPI_Write_Word(color);
-                //¶şÖµ»¯ÏÔÊ¾
-//                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //ãĞÖµ0x60 ¶şÖµ»¯ÏÔÊ¾
-//                  TFTSPI_Write_Word (0xffff); //ÏÔÊ¾Êı¾İ
+                //äºŒå€¼åŒ–æ˜¾ç¤º
+//                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //é˜ˆå€¼0x60 äºŒå€¼åŒ–æ˜¾ç¤º
+//                  TFTSPI_Write_Word (0xffff); //æ˜¾ç¤ºæ•°æ®
 //                else
-//                  TFTSPI_Write_Word (0x0000); //ÏÔÊ¾Êı¾İ
+//                  TFTSPI_Write_Word (0x0000); //æ˜¾ç¤ºæ•°æ®
             }
         }
 #elif (IMAGEH == 480/2  && IMAGEW == 752/2)
-        TFTSPI_Set_Pos(15,0,(uint8_t)(APP_CAMERA_WIDTH/4-1)+15 ,APP_CAMERA_HEIGHT/2);//×¢Òâ ÉèÖÃÏÔÊ¾´óĞ¡ÒªÓëÏÂÃæµÄÊµ¼ÊÏÔÊ¾´óĞ¡ÏàµÈ£¬²»È»»áÏÔÊ¾²»³öÀ´»òÕß»¨ÆÁ
+        TFTSPI_Set_Pos(15,0,(uint8_t)(APP_CAMERA_WIDTH/4-1)+15 ,APP_CAMERA_HEIGHT/2);//æ³¨æ„ è®¾ç½®æ˜¾ç¤ºå¤§å°è¦ä¸ä¸‹é¢çš„å®é™…æ˜¾ç¤ºå¤§å°ç›¸ç­‰ï¼Œä¸ç„¶ä¼šæ˜¾ç¤ºä¸å‡ºæ¥æˆ–è€…èŠ±å±
         for(int i = 0; i < APP_CAMERA_HEIGHT; i+=4)  //  480/2/2/4 = 30
         {
-            for(int j = 0; j < APP_CAMERA_WIDTH*2; j+=4)//¸ô2ÁĞÈ¡Ò»ÁĞ  752*2/2/4 = 188   //Á½ĞĞÊı¾İ Ò»ĞĞ94ÏñËØ  Êµ¼ÊÏÔÊ¾·Ö±æÂÊ  94*60
+            for(int j = 0; j < APP_CAMERA_WIDTH*2; j+=4)//éš”2åˆ—å–ä¸€åˆ—  752*2/2/4 = 188   //ä¸¤è¡Œæ•°æ® ä¸€è¡Œ94åƒç´   å®é™…æ˜¾ç¤ºåˆ†è¾¨ç‡  94*60
             {
-                //»Ò¶ÈÏÔÊ¾
+                //ç°åº¦æ˜¾ç¤º
                 color = 0;
                 color=(((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>3))<<11;
                 color=color|((((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>2))<<5);
                 color=color|(((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>3));
                 TFTSPI_Write_Word(color);
-                //¶şÖµ»¯ÏÔÊ¾
-//                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //ãĞÖµ0x60 ¶şÖµ»¯ÏÔÊ¾
-//                  TFTSPI_Write_Word (0xffff); //ÏÔÊ¾Êı¾İ
+                //äºŒå€¼åŒ–æ˜¾ç¤º
+//                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //é˜ˆå€¼0x60 äºŒå€¼åŒ–æ˜¾ç¤º
+//                  TFTSPI_Write_Word (0xffff); //æ˜¾ç¤ºæ•°æ®
 //                else
-//                  TFTSPI_Write_Word (0x0000); //ÏÔÊ¾Êı¾İ
+//                  TFTSPI_Write_Word (0x0000); //æ˜¾ç¤ºæ•°æ®
             }
         }
 #elif (IMAGEH == 480  && IMAGEW == 752)
-        TFTSPI_Set_Pos(15,0,(uint8_t)(APP_CAMERA_WIDTH/8-1)+15 ,APP_CAMERA_HEIGHT/4);//×¢Òâ ÉèÖÃÏÔÊ¾´óĞ¡ÒªÓëÏÂÃæµÄÊµ¼ÊÏÔÊ¾´óĞ¡ÏàµÈ£¬²»È»»áÏÔÊ¾²»³öÀ´»òÕß»¨ÆÁ
+        TFTSPI_Set_Pos(15,0,(uint8_t)(APP_CAMERA_WIDTH/8-1)+15 ,APP_CAMERA_HEIGHT/4);//æ³¨æ„ è®¾ç½®æ˜¾ç¤ºå¤§å°è¦ä¸ä¸‹é¢çš„å®é™…æ˜¾ç¤ºå¤§å°ç›¸ç­‰ï¼Œä¸ç„¶ä¼šæ˜¾ç¤ºä¸å‡ºæ¥æˆ–è€…èŠ±å±
         for(int i = 0; i < APP_CAMERA_HEIGHT; i+=8)  //  480/1/2/8 = 30
         {
-            for(int j = 0; j < APP_CAMERA_WIDTH*2; j+=8)//¸ô2ÁĞÈ¡Ò»ÁĞ  752*2/1/8 = 188   //Á½ĞĞÊı¾İ Ò»ĞĞ94ÏñËØ  Êµ¼ÊÏÔÊ¾·Ö±æÂÊ  94*60
+            for(int j = 0; j < APP_CAMERA_WIDTH*2; j+=8)//éš”2åˆ—å–ä¸€åˆ—  752*2/1/8 = 188   //ä¸¤è¡Œæ•°æ® ä¸€è¡Œ94åƒç´   å®é™…æ˜¾ç¤ºåˆ†è¾¨ç‡  94*60
             {
-                //»Ò¶ÈÏÔÊ¾
+                //ç°åº¦æ˜¾ç¤º
                 color = 0;
                 color=(((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>3))<<11;
                 color=color|((((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>2))<<5);
                 color=color|(((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>3));
                 TFTSPI_Write_Word(color);
-                //¶şÖµ»¯ÏÔÊ¾
-//                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //ãĞÖµ0x60 ¶şÖµ»¯ÏÔÊ¾
-//                  TFTSPI_Write_Word (0xffff); //ÏÔÊ¾Êı¾İ
+                //äºŒå€¼åŒ–æ˜¾ç¤º
+//                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //é˜ˆå€¼0x60 äºŒå€¼åŒ–æ˜¾ç¤º
+//                  TFTSPI_Write_Word (0xffff); //æ˜¾ç¤ºæ•°æ®
 //                else
-//                  TFTSPI_Write_Word (0x0000); //ÏÔÊ¾Êı¾İ
+//                  TFTSPI_Write_Word (0x0000); //æ˜¾ç¤ºæ•°æ®
             }
         }
 #endif
-#else  // 7725 µÄ»Ò¶ÈÍ¼Ïñ  ×¢Òâ£¬¿´»Ò¶ÈÍ¼ÏñÊ±£¬7725Ê¹ÓÃYUYV¸ñÊ½ cameraConfig = { .pixelFormat = kVIDEO_PixelFormatYUYV }
+#else  // 7725 çš„ç°åº¦å›¾åƒ  æ³¨æ„ï¼Œçœ‹ç°åº¦å›¾åƒæ—¶ï¼Œ7725ä½¿ç”¨YUYVæ ¼å¼ cameraConfig = { .pixelFormat = kVIDEO_PixelFormatYUYV }
 //        TFTSPI_Set_Pos(0,0,APP_CAMERA_WIDTH/2,APP_CAMERA_HEIGHT/2);
-//        for(int i = 0; i < APP_CAMERA_HEIGHT; i+=2)  //¸ô2ĞĞÈ¡Ò»ĞĞ 240 / 2 = 120
+//        for(int i = 0; i < APP_CAMERA_HEIGHT; i+=2)  //éš”2è¡Œå–ä¸€è¡Œ 240 / 2 = 120
 //        {
-//            for(int j = 1; j < APP_CAMERA_WIDTH *2 ; j+=4)//¸ô4ÁĞÈ¡Ò»ÁĞ ÉãÏñÍ·UYVY¸ñÊ½  YÊÇ»Ò¶È£¬320/2=160
+//            for(int j = 1; j < APP_CAMERA_WIDTH *2 ; j+=4)//éš”4åˆ—å–ä¸€åˆ— æ‘„åƒå¤´UYVYæ ¼å¼  Yæ˜¯ç°åº¦ï¼Œ320/2=160
 //            {
-//                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //ãĞÖµ0x60 ¶şÖµ»¯ÏÔÊ¾
-//                  TFTSPI_Write_Word (0xffff); //ÏÔÊ¾Êı¾İ
+//                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //é˜ˆå€¼0x60 äºŒå€¼åŒ–æ˜¾ç¤º
+//                  TFTSPI_Write_Word (0xffff); //æ˜¾ç¤ºæ•°æ®
 //                else
-//                  TFTSPI_Write_Word (0x0000); //ÏÔÊ¾Êı¾İ
+//                  TFTSPI_Write_Word (0x0000); //æ˜¾ç¤ºæ•°æ®
 //            }
 //        }
         TFTSPI_Set_Pos(20,0,(APP_CAMERA_WIDTH/4-1) + 20,APP_CAMERA_HEIGHT/4);
-        for(int i = 0; i < APP_CAMERA_HEIGHT; i+=4)  //¸ô4ĞĞÈ¡Ò»ĞĞ 240 / 4 = 60
+        for(int i = 0; i < APP_CAMERA_HEIGHT; i+=4)  //éš”4è¡Œå–ä¸€è¡Œ 240 / 4 = 60
         {
-            for(int j = 1; j < APP_CAMERA_WIDTH *2 ; j+=8)//¸ô8ÁĞÈ¡Ò»ÁĞ ÉãÏñÍ·UYVY¸ñÊ½  YÊÇ»Ò¶È£¬320/4=80
+            for(int j = 1; j < APP_CAMERA_WIDTH *2 ; j+=8)//éš”8åˆ—å–ä¸€åˆ— æ‘„åƒå¤´UYVYæ ¼å¼  Yæ˜¯ç°åº¦ï¼Œ320/4=80
             {
-                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //ãĞÖµ0x60 ¶şÖµ»¯ÏÔÊ¾
-                  TFTSPI_Write_Word (0xffff); //ÏÔÊ¾Êı¾İ
+                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //é˜ˆå€¼0x60 äºŒå€¼åŒ–æ˜¾ç¤º
+                  TFTSPI_Write_Word (0xffff); //æ˜¾ç¤ºæ•°æ®
                 else
-                  TFTSPI_Write_Word (0x0000); //ÏÔÊ¾Êı¾İ
+                  TFTSPI_Write_Word (0x0000); //æ˜¾ç¤ºæ•°æ®
             }
         }
 #endif
-        CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//½«ÕÕÏà»ú»º³åÇøÌá½»µ½»º³å¶ÓÁĞ  
-        LED_Color_Reverse(red); //EVK LEDÉÁË¸  
+        CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//å°†ç…§ç›¸æœºç¼“å†²åŒºæäº¤åˆ°ç¼“å†²é˜Ÿåˆ—  
+        LED_Color_Reverse(red); //EVK LEDé—ªçƒ  
     }
 }
 
@@ -189,13 +189,13 @@ void Test_SGP18_Camera(void)
 
 
 
-uint8_t Image_Use[Use_ROWS][Use_Line]; //Ñ¹ËõºóÖ®ºóÓÃÓÚ´æÒªÊ¹ÓÃÊı¾İ
-uint8_t Pixle[Use_ROWS][Use_Line];     //´æ·Å¶şÖµ»¯ºóµÄÊı¾İ
+uint8_t Image_Use[Use_ROWS][Use_Line]; //å‹ç¼©åä¹‹åç”¨äºå­˜è¦ä½¿ç”¨æ•°æ®
+uint8_t Pixle[Use_ROWS][Use_Line];     //å­˜æ”¾äºŒå€¼åŒ–åçš„æ•°æ®
 uint32_t fullCameraBufferAddr;
-// »ñÈ¡ĞèÒªµÄÍ¼ÏñÊı¾İ
+// è·å–éœ€è¦çš„å›¾åƒæ•°æ®
 __ramfunc void Get_Use_Image(void)
 {
-    if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR)) {//×¢Òâ£¬Ê¹ÓÃcsiFrameBufÊı×éÊ±£¬×îºÃË¢ĞÂÒ»ÏÂD-Cache ²»È»ÉÏ´ÎÊı¾İ¿ÉÄÜ»á´æ·ÅÔÚcacheÀïÃæ£¬Ôì³ÉÊı¾İ´íÂÒ
+    if (SCB_CCR_DC_Msk == (SCB_CCR_DC_Msk & SCB->CCR)) {//æ³¨æ„ï¼Œä½¿ç”¨csiFrameBufæ•°ç»„æ—¶ï¼Œæœ€å¥½åˆ·æ–°ä¸€ä¸‹D-Cache ä¸ç„¶ä¸Šæ¬¡æ•°æ®å¯èƒ½ä¼šå­˜æ”¾åœ¨cacheé‡Œé¢ï¼Œé€ æˆæ•°æ®é”™ä¹±
         SCB_DisableDCache();
     }
     SCB_EnableDCache();
@@ -203,7 +203,7 @@ __ramfunc void Get_Use_Image(void)
 #if (IMAGEH == 480  && IMAGEW == 752)
     for(int i = 0, x = 0; i < APP_CAMERA_HEIGHT; i+=8, x++)  //  480/1/2/8 = 30
         {
-            for(int j = 0, y = 0; j < APP_CAMERA_WIDTH*2; j+=8, y++)//¸ô2ÁĞÈ¡Ò»ÁĞ  752*2/1/8 = 188   //Á½ĞĞÊı¾İ Ò»ĞĞ94ÏñËØ  Êµ¼ÊÏÔÊ¾·Ö±æÂÊ  94*60
+            for(int j = 0, y = 0; j < APP_CAMERA_WIDTH*2; j+=8, y++)//éš”2åˆ—å–ä¸€åˆ—  752*2/1/8 = 188   //ä¸¤è¡Œæ•°æ® ä¸€è¡Œ94åƒç´   å®é™…æ˜¾ç¤ºåˆ†è¾¨ç‡  94*60
             {
                 if(y < Use_Line)
                     Image_Use[x*2][y] = (*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j));
@@ -215,7 +215,7 @@ __ramfunc void Get_Use_Image(void)
 #elif (IMAGEH == 480/4  && IMAGEW == 752/4)
     for(int i = 0, x = 0; i < APP_CAMERA_HEIGHT; i+=2, x++)  //  480/4/2/2 = 30
         {
-            for(int j = 0, y = 0; j < APP_CAMERA_WIDTH*2; j+=2, y++)//¸ô2ÁĞÈ¡Ò»ÁĞ  752*2/4/2 = 188   //Á½ĞĞÊı¾İ Ò»ĞĞ94ÏñËØ  Êµ¼ÊÏÔÊ¾·Ö±æÂÊ  94*60
+            for(int j = 0, y = 0; j < APP_CAMERA_WIDTH*2; j+=2, y++)//éš”2åˆ—å–ä¸€åˆ—  752*2/4/2 = 188   //ä¸¤è¡Œæ•°æ® ä¸€è¡Œ94åƒç´   å®é™…æ˜¾ç¤ºåˆ†è¾¨ç‡  94*60
             {
                 if(y < Use_Line)
                     Image_Use[x*2][y] = (*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j));
@@ -227,7 +227,7 @@ __ramfunc void Get_Use_Image(void)
 #elif (IMAGEH == 480/2  && IMAGEW == 752/2)
     for(int i = 0, x = 0; i < APP_CAMERA_HEIGHT; i+=4, x++)  //  480/2/2/4 = 30
         {
-            for(int j = 0, y = 0; j < APP_CAMERA_WIDTH*2; j+=4, y++)//¸ô2ÁĞÈ¡Ò»ÁĞ  752*2/2/4 = 188   //Á½ĞĞÊı¾İ Ò»ĞĞ94ÏñËØ  Êµ¼ÊÏÔÊ¾·Ö±æÂÊ  94*60
+            for(int j = 0, y = 0; j < APP_CAMERA_WIDTH*2; j+=4, y++)//éš”2åˆ—å–ä¸€åˆ—  752*2/2/4 = 188   //ä¸¤è¡Œæ•°æ® ä¸€è¡Œ94åƒç´   å®é™…æ˜¾ç¤ºåˆ†è¾¨ç‡  94*60
             {
                 if(y < Use_Line)
                     Image_Use[x*2][y] = (*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j));
@@ -237,9 +237,9 @@ __ramfunc void Get_Use_Image(void)
         }
 #endif  
 #elif (APP_CAMERA_WIDTH == 320 && APP_CAMERA_HEIGHT == 240)
-    for(int i = 0, x = Use_ROWS-1; i < APP_CAMERA_HEIGHT; i+=4, x--)  //¸ô4ĞĞÈ¡Ò»ĞĞ 240 / 4 = 60
+    for(int i = 0, x = Use_ROWS-1; i < APP_CAMERA_HEIGHT; i+=4, x--)  //éš”4è¡Œå–ä¸€è¡Œ 240 / 4 = 60
         {
-            for(int j = 1, y = Use_Line - 1; j < APP_CAMERA_WIDTH *2; j+=8, y--)//¸ô8ÁĞÈ¡Ò»ÁĞ ÉãÏñÍ·UYVY¸ñÊ½  YÊÇ»Ò¶È£¬320/4=80
+            for(int j = 1, y = Use_Line - 1; j < APP_CAMERA_WIDTH *2; j+=8, y--)//éš”8åˆ—å–ä¸€åˆ— æ‘„åƒå¤´UYVYæ ¼å¼  Yæ˜¯ç°åº¦ï¼Œ320/4=80
             {
                 Image_Use[x][y] = (*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j)); 
             }
@@ -251,24 +251,24 @@ __ramfunc void Get_Use_Image(void)
 
 /*************************************************************** 
 * 
-* º¯ÊıÃû³Æ£ºuint8_t GetOSTU(uint8_t tmImage[IMAGEH][IMAGEW]) 
-* ¹¦ÄÜËµÃ÷£ºÇóãĞÖµ´óĞ¡ 
-* ²ÎÊıËµÃ÷£º 
-* º¯Êı·µ»Ø£ºãĞÖµ´óĞ¡ 
-* ĞŞ¸ÄÊ±¼ä£º2018Äê3ÔÂ27ÈÕ 
-* ±¸ ×¢£º 
-²Î¿¼£ºhttps://blog.csdn.net/zyzhangyue/article/details/45841255
+* å‡½æ•°åç§°ï¼šuint8_t GetOSTU(uint8_t tmImage[IMAGEH][IMAGEW]) 
+* åŠŸèƒ½è¯´æ˜ï¼šæ±‚é˜ˆå€¼å¤§å° 
+* å‚æ•°è¯´æ˜ï¼š 
+* å‡½æ•°è¿”å›ï¼šé˜ˆå€¼å¤§å° 
+* ä¿®æ”¹æ—¶é—´ï¼š2018å¹´3æœˆ27æ—¥ 
+* å¤‡ æ³¨ï¼š 
+å‚è€ƒï¼šhttps://blog.csdn.net/zyzhangyue/article/details/45841255
       https://www.cnblogs.com/moon1992/p/5092726.html
       https://www.cnblogs.com/zhonghuasong/p/7250540.html     
-Ostu·½·¨ÓÖÃû×î´óÀà¼ä²î·½·¨£¬Í¨¹ıÍ³¼ÆÕû¸öÍ¼ÏñµÄÖ±·½Í¼ÌØĞÔÀ´ÊµÏÖÈ«¾ÖãĞÖµTµÄ×Ô¶¯Ñ¡È¡£¬ÆäËã·¨²½ÖèÎª£º
-1) ÏÈ¼ÆËãÍ¼ÏñµÄÖ±·½Í¼£¬¼´½«Í¼ÏñËùÓĞµÄÏñËØµã°´ÕÕ0~255¹²256¸öbin£¬Í³¼ÆÂäÔÚÃ¿¸öbinµÄÏñËØµãÊıÁ¿
-2) ¹éÒ»»¯Ö±·½Í¼£¬Ò²¼´½«Ã¿¸öbinÖĞÏñËØµãÊıÁ¿³ıÒÔ×ÜµÄÏñËØµã
-3) i±íÊ¾·ÖÀàµÄãĞÖµ£¬Ò²¼´Ò»¸ö»Ò¶È¼¶£¬´Ó0¿ªÊ¼µü´ú
-4) Í¨¹ı¹éÒ»»¯µÄÖ±·½Í¼£¬Í³¼Æ0~i »Ò¶È¼¶µÄÏñËØ(¼ÙÉèÏñËØÖµÔÚ´Ë·¶Î§µÄÏñËØ½Ğ×öÇ°¾°ÏñËØ) ËùÕ¼Õû·ùÍ¼ÏñµÄ±ÈÀıw0£¬²¢Í³¼ÆÇ°¾°ÏñËØµÄÆ½¾ù»Ò¶Èu0£»Í³¼Æi~255»Ò¶È¼¶µÄÏñËØ(¼ÙÉèÏñËØÖµÔÚ´Ë·¶Î§µÄÏñËØ½Ğ×ö±³¾°ÏñËØ) ËùÕ¼Õû·ùÍ¼ÏñµÄ±ÈÀıw1£¬²¢Í³¼Æ±³¾°ÏñËØµÄÆ½¾ù»Ò¶Èu1£»
-5) ¼ÆËãÇ°¾°ÏñËØºÍ±³¾°ÏñËØµÄ·½²î g = w0*w1*(u0-u1) (u0-u1)
-6) i++£»×ªµ½4)£¬Ö±µ½iÎª256Ê±½áÊøµü´ú
-7£©½«×î´ógÏàÓ¦µÄiÖµ×÷ÎªÍ¼ÏñµÄÈ«¾ÖãĞÖµ
-È±Ïİ:OSTUËã·¨ÔÚ´¦Àí¹âÕÕ²»¾ùÔÈµÄÍ¼ÏñµÄÊ±ºò£¬Ğ§¹û»áÃ÷ÏÔ²»ºÃ£¬ÒòÎªÀûÓÃµÄÊÇÈ«¾ÖÏñËØĞÅÏ¢¡£
+Ostuæ–¹æ³•åˆåæœ€å¤§ç±»é—´å·®æ–¹æ³•ï¼Œé€šè¿‡ç»Ÿè®¡æ•´ä¸ªå›¾åƒçš„ç›´æ–¹å›¾ç‰¹æ€§æ¥å®ç°å…¨å±€é˜ˆå€¼Tçš„è‡ªåŠ¨é€‰å–ï¼Œå…¶ç®—æ³•æ­¥éª¤ä¸ºï¼š
+1) å…ˆè®¡ç®—å›¾åƒçš„ç›´æ–¹å›¾ï¼Œå³å°†å›¾åƒæ‰€æœ‰çš„åƒç´ ç‚¹æŒ‰ç…§0~255å…±256ä¸ªbinï¼Œç»Ÿè®¡è½åœ¨æ¯ä¸ªbinçš„åƒç´ ç‚¹æ•°é‡
+2) å½’ä¸€åŒ–ç›´æ–¹å›¾ï¼Œä¹Ÿå³å°†æ¯ä¸ªbinä¸­åƒç´ ç‚¹æ•°é‡é™¤ä»¥æ€»çš„åƒç´ ç‚¹
+3) iè¡¨ç¤ºåˆ†ç±»çš„é˜ˆå€¼ï¼Œä¹Ÿå³ä¸€ä¸ªç°åº¦çº§ï¼Œä»0å¼€å§‹è¿­ä»£
+4) é€šè¿‡å½’ä¸€åŒ–çš„ç›´æ–¹å›¾ï¼Œç»Ÿè®¡0~i ç°åº¦çº§çš„åƒç´ (å‡è®¾åƒç´ å€¼åœ¨æ­¤èŒƒå›´çš„åƒç´ å«åšå‰æ™¯åƒç´ ) æ‰€å æ•´å¹…å›¾åƒçš„æ¯”ä¾‹w0ï¼Œå¹¶ç»Ÿè®¡å‰æ™¯åƒç´ çš„å¹³å‡ç°åº¦u0ï¼›ç»Ÿè®¡i~255ç°åº¦çº§çš„åƒç´ (å‡è®¾åƒç´ å€¼åœ¨æ­¤èŒƒå›´çš„åƒç´ å«åšèƒŒæ™¯åƒç´ ) æ‰€å æ•´å¹…å›¾åƒçš„æ¯”ä¾‹w1ï¼Œå¹¶ç»Ÿè®¡èƒŒæ™¯åƒç´ çš„å¹³å‡ç°åº¦u1ï¼›
+5) è®¡ç®—å‰æ™¯åƒç´ å’ŒèƒŒæ™¯åƒç´ çš„æ–¹å·® g = w0*w1*(u0-u1) (u0-u1)
+6) i++ï¼›è½¬åˆ°4)ï¼Œç›´åˆ°iä¸º256æ—¶ç»“æŸè¿­ä»£
+7ï¼‰å°†æœ€å¤§gç›¸åº”çš„iå€¼ä½œä¸ºå›¾åƒçš„å…¨å±€é˜ˆå€¼
+ç¼ºé™·:OSTUç®—æ³•åœ¨å¤„ç†å…‰ç…§ä¸å‡åŒ€çš„å›¾åƒçš„æ—¶å€™ï¼Œæ•ˆæœä¼šæ˜æ˜¾ä¸å¥½ï¼Œå› ä¸ºåˆ©ç”¨çš„æ˜¯å…¨å±€åƒç´ ä¿¡æ¯ã€‚
 ***************************************************************/ 
 __ramfunc uint8_t GetOSTU(uint8_t tmImage[Use_ROWS][Use_Line]) 
 { 
@@ -279,79 +279,79 @@ __ramfunc uint8_t GetOSTU(uint8_t tmImage[Use_ROWS][Use_Line])
     uint32_t PixelIntegral = 0; 
     int32_t PixelIntegralFore = 0; 
     int32_t PixelFore = 0; 
-    double OmegaBack, OmegaFore, MicroBack, MicroFore, SigmaB, Sigma; // Àà¼ä·½²î; 
+    double OmegaBack, OmegaFore, MicroBack, MicroFore, SigmaB, Sigma; // ç±»é—´æ–¹å·®; 
     int16_t MinValue, MaxValue; 
     uint8_t Threshold = 0;
     uint8_t HistoGram[256];              //  
     
-    for (j = 0; j < 256; j++)  HistoGram[j] = 0; //³õÊ¼»¯»Ò¶ÈÖ±·½Í¼ 
+    for (j = 0; j < 256; j++)  HistoGram[j] = 0; //åˆå§‹åŒ–ç°åº¦ç›´æ–¹å›¾ 
     
     for (j = 0; j < Use_ROWS; j++) 
     { 
         for (i = 0; i < Use_Line; i++) 
         { 
-            HistoGram[tmImage[j][i]]++; //Í³¼Æ»Ò¶È¼¶ÖĞÃ¿¸öÏñËØÔÚÕû·ùÍ¼ÏñÖĞµÄ¸öÊı
+            HistoGram[tmImage[j][i]]++; //ç»Ÿè®¡ç°åº¦çº§ä¸­æ¯ä¸ªåƒç´ åœ¨æ•´å¹…å›¾åƒä¸­çš„ä¸ªæ•°
         } 
     } 
     
-    for (MinValue = 0; MinValue < 256 && HistoGram[MinValue] == 0; MinValue++) ;        //»ñÈ¡×îĞ¡»Ò¶ÈµÄÖµ
-    for (MaxValue = 255; MaxValue > MinValue && HistoGram[MinValue] == 0; MaxValue--) ; //»ñÈ¡×î´ó»Ò¶ÈµÄÖµ
+    for (MinValue = 0; MinValue < 256 && HistoGram[MinValue] == 0; MinValue++) ;        //è·å–æœ€å°ç°åº¦çš„å€¼
+    for (MaxValue = 255; MaxValue > MinValue && HistoGram[MinValue] == 0; MaxValue--) ; //è·å–æœ€å¤§ç°åº¦çš„å€¼
     
-    if (MaxValue == MinValue)     return MaxValue;         // Í¼ÏñÖĞÖ»ÓĞÒ»¸öÑÕÉ«    
-    if (MinValue + 1 == MaxValue)  return MinValue;        // Í¼ÏñÖĞÖ»ÓĞ¶ş¸öÑÕÉ«
+    if (MaxValue == MinValue)     return MaxValue;         // å›¾åƒä¸­åªæœ‰ä¸€ä¸ªé¢œè‰²    
+    if (MinValue + 1 == MaxValue)  return MinValue;        // å›¾åƒä¸­åªæœ‰äºŒä¸ªé¢œè‰²
     
-    for (j = MinValue; j <= MaxValue; j++)    Amount += HistoGram[j];        //  ÏñËØ×ÜÊı
+    for (j = MinValue; j <= MaxValue; j++)    Amount += HistoGram[j];        //  åƒç´ æ€»æ•°
     
     PixelIntegral = 0;
     for (j = MinValue; j <= MaxValue; j++)
     {
-        PixelIntegral += HistoGram[j] * j;//»Ò¶ÈÖµ×ÜÊı
+        PixelIntegral += HistoGram[j] * j;//ç°åº¦å€¼æ€»æ•°
     }
     SigmaB = -1;
     for (j = MinValue; j < MaxValue; j++)
     {
-        PixelBack = PixelBack + HistoGram[j];    //Ç°¾°ÏñËØµãÊı
-        PixelFore = Amount - PixelBack;         //±³¾°ÏñËØµãÊı
-        OmegaBack = (double)PixelBack / Amount;//Ç°¾°ÏñËØ°Ù·Ö±È
-        OmegaFore = (double)PixelFore / Amount;//±³¾°ÏñËØ°Ù·Ö±È
-        PixelIntegralBack += HistoGram[j] * j;  //Ç°¾°»Ò¶ÈÖµ
-        PixelIntegralFore = PixelIntegral - PixelIntegralBack;//±³¾°»Ò¶ÈÖµ
-        MicroBack = (double)PixelIntegralBack / PixelBack;   //Ç°¾°»Ò¶È°Ù·Ö±È
-        MicroFore = (double)PixelIntegralFore / PixelFore;   //±³¾°»Ò¶È°Ù·Ö±È
-        Sigma = OmegaBack * OmegaFore * (MicroBack - MicroFore) * (MicroBack - MicroFore);//¼ÆËãÀà¼ä·½²î
-        if (Sigma > SigmaB)                    //±éÀú×î´óµÄÀà¼ä·½²îg //ÕÒ³ö×î´óÀà¼ä·½²îÒÔ¼°¶ÔÓ¦µÄãĞÖµ
+        PixelBack = PixelBack + HistoGram[j];    //å‰æ™¯åƒç´ ç‚¹æ•°
+        PixelFore = Amount - PixelBack;         //èƒŒæ™¯åƒç´ ç‚¹æ•°
+        OmegaBack = (double)PixelBack / Amount;//å‰æ™¯åƒç´ ç™¾åˆ†æ¯”
+        OmegaFore = (double)PixelFore / Amount;//èƒŒæ™¯åƒç´ ç™¾åˆ†æ¯”
+        PixelIntegralBack += HistoGram[j] * j;  //å‰æ™¯ç°åº¦å€¼
+        PixelIntegralFore = PixelIntegral - PixelIntegralBack;//èƒŒæ™¯ç°åº¦å€¼
+        MicroBack = (double)PixelIntegralBack / PixelBack;   //å‰æ™¯ç°åº¦ç™¾åˆ†æ¯”
+        MicroFore = (double)PixelIntegralFore / PixelFore;   //èƒŒæ™¯ç°åº¦ç™¾åˆ†æ¯”
+        Sigma = OmegaBack * OmegaFore * (MicroBack - MicroFore) * (MicroBack - MicroFore);//è®¡ç®—ç±»é—´æ–¹å·®
+        if (Sigma > SigmaB)                    //éå†æœ€å¤§çš„ç±»é—´æ–¹å·®g //æ‰¾å‡ºæœ€å¤§ç±»é—´æ–¹å·®ä»¥åŠå¯¹åº”çš„é˜ˆå€¼
         {
             SigmaB = Sigma;
             Threshold = j;
         }
     }
-    return Threshold;                        //·µ»Ø×î¼ÑãĞÖµ;
+    return Threshold;                        //è¿”å›æœ€ä½³é˜ˆå€¼;
 } 
 
-//¶şÖµ»¯´¦Àí
+//äºŒå€¼åŒ–å¤„ç†
 __ramfunc void Camera_0_1_Handle(void)
 {
     int i = 0,j = 0;
     uint8_t GaveValue;
     uint32_t tv=0;
     uint8_t Threshold = 0;
-    //ÀÛ¼Ó
+    //ç´¯åŠ 
     for(i = 0; i <Use_ROWS; i++)
     {    
         for(j = 0; j <Use_Line; j++)
         {                            
-            tv+=Image_Use[i][j];   //ÀÛ¼Ó  
+            tv+=Image_Use[i][j];   //ç´¯åŠ   
         } 
     }
-    GaveValue = tv/Use_ROWS/Use_Line;     //ÇóÆ½¾ùÖµ,¹âÏßÔ½°µÔ½Ğ¡£¬È«ºÚÔ¼35£¬¶Ô×ÅÆÁÄ»Ô¼160£¬Ò»°ãÇé¿öÏÂ´óÔ¼100 
-//    Threshold = GetOSTU(Image_Use);  //´ó½ò·¨ÇóãĞÖµ
-    //°´ÕÕ¾ùÖµµÄ±ÈÀı½øĞĞ¶şÖµ»¯
-    Threshold = GaveValue*7/10+10;        //´Ë´¦ãĞÖµÉèÖÃ£¬¸ù¾İ»·¾³µÄ¹âÏßÀ´Éè¶¨ 
+    GaveValue = tv/Use_ROWS/Use_Line;     //æ±‚å¹³å‡å€¼,å…‰çº¿è¶Šæš—è¶Šå°ï¼Œå…¨é»‘çº¦35ï¼Œå¯¹ç€å±å¹•çº¦160ï¼Œä¸€èˆ¬æƒ…å†µä¸‹å¤§çº¦100 
+//    Threshold = GetOSTU(Image_Use);  //å¤§æ´¥æ³•æ±‚é˜ˆå€¼
+    //æŒ‰ç…§å‡å€¼çš„æ¯”ä¾‹è¿›è¡ŒäºŒå€¼åŒ–
+    Threshold = GaveValue*7/10+10;        //æ­¤å¤„é˜ˆå€¼è®¾ç½®ï¼Œæ ¹æ®ç¯å¢ƒçš„å…‰çº¿æ¥è®¾å®š 
     for(i = 0; i < Use_ROWS; i++)
     {
         for(j = 0; j < Use_Line; j++)
         {                                
-            if(Image_Use[i][j] >Threshold) //¶şÖµ»¯    
+            if(Image_Use[i][j] >Threshold) //äºŒå€¼åŒ–    
                 Pixle[i][j] =1;        
             else                                        
                 Pixle[i][j] =0;
@@ -360,11 +360,11 @@ __ramfunc void Camera_0_1_Handle(void)
     
 }
 
-//ÈıÃæÒÔÉÏ·´ÊıÎ§ÈÆÇå³ıÔëµã
+//ä¸‰é¢ä»¥ä¸Šåæ•°å›´ç»•æ¸…é™¤å™ªç‚¹
 __ramfunc void Pixle_Filter(void)
 {  
-  int nr; //ĞĞ
-  int nc; //ÁĞ
+  int nr; //è¡Œ
+  int nc; //åˆ—
   
   for(nr=1; nr<Use_ROWS-1; nr++)
   {  	    
@@ -383,19 +383,19 @@ __ramfunc void Pixle_Filter(void)
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿oledÉÏÏÔÊ¾
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ 
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘oledä¸Šæ˜¾ç¤º
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Draw_Road(void)
 { 	 
   uint8_t i = 0, j = 0,temp=0;
-  for(i=0;i<56;i+=8)// 56ĞĞ 
+  for(i=0;i<56;i+=8)// 56è¡Œ 
   {
     LCD_Set_Pos(24,i/8+1);
     for(j=0;j<Use_Line;j++) 
@@ -415,27 +415,27 @@ void Draw_Road(void)
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿oled + camera test
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ7ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ OLEDÏÔÊ¾ÉñÑÛ OV7725¶şÖµ»¯ Í¼Ïñ²âÊÔ
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘oled + camera test
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ7æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ OLEDæ˜¾ç¤ºç¥çœ¼ OV7725äºŒå€¼åŒ– å›¾åƒæµ‹è¯•
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/   
 void Test_OLED_Camera(void)
 {
-    LCD_Init();               //LCD³õÊ¼»¯ 
-    LCD_CLS();                //LCDÇåÆÁ 
+    LCD_Init();               //LCDåˆå§‹åŒ– 
+    LCD_CLS();                //LCDæ¸…å± 
     LCD_Show_Frame94();
 #ifdef LQOV7725
-    LCD_CLS();                //LCDÇåÆÁ 
+    LCD_CLS();                //LCDæ¸…å± 
     LCD_Show_Frame80();
     cameraConfig.pixelFormat = kVIDEO_PixelFormatYUYV;
 #endif
     LQ_Camera_Init();
-    delayms(200);        //ÑÓÊ±200ºÁÃë  
+    delayms(200);        //å»¶æ—¶200æ¯«ç§’  
 //    if (SCB_CCR_IC_Msk == (SCB_CCR_IC_Msk & SCB->CCR)) {   
 //        SCB_DisableICache();
 //    }
@@ -443,14 +443,14 @@ void Test_OLED_Camera(void)
     while (1)
     {     
         // Wait to get the full frame buffer to show. 
-        while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &fullCameraBufferAddr))  //ÉãÏñÍ·CSI»º´æÇøÒÑÂú
+        while (kStatus_Success != CAMERA_RECEIVER_GetFullBuffer(&cameraReceiver, &fullCameraBufferAddr))  //æ‘„åƒå¤´CSIç¼“å­˜åŒºå·²æ»¡
         {
         }   
-        Get_Use_Image();     //»ñÈ¡Ê¹ÓÃÊı¾İ
-        Camera_0_1_Handle(); //¶şÖµ»¯
-        Pixle_Filter();      //ÂË²¨
-        Draw_Road();         //ÏÔÊ¾
-        CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//½«ÕÕÏà»ú»º³åÇøÌá½»µ½»º³å¶ÓÁĞ  
-        LED_Color_Reverse(red); //EVK LEDÉÁË¸  
+        Get_Use_Image();     //è·å–ä½¿ç”¨æ•°æ®
+        Camera_0_1_Handle(); //äºŒå€¼åŒ–
+        Pixle_Filter();      //æ»¤æ³¢
+        Draw_Road();         //æ˜¾ç¤º
+        CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//å°†ç…§ç›¸æœºç¼“å†²åŒºæäº¤åˆ°ç¼“å†²é˜Ÿåˆ—  
+        LED_Color_Reverse(red); //EVK LEDé—ªçƒ  
     }
 }
