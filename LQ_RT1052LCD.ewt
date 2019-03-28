@@ -2370,15 +2370,6 @@
         </settings>
     </configuration>
     <group>
-        <name>App_main</name>
-        <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\Appmain.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\include.h</name>
-        </file>
-    </group>
-    <group>
         <name>board</name>
         <file>
             <name>$PROJ_DIR$\LQuserFlies\src\board\board.c</name>
@@ -2406,12 +2397,21 @@
         </file>
     </group>
     <group>
+        <name>doc</name>
+        <file>
+            <name>$PROJ_DIR$\readme.txt</name>
+        </file>
+    </group>
+    <group>
         <name>driver</name>
         <file>
             <name>$PROJ_DIR$\driver\base.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\driver\oled.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\driver\uart.c</name>
         </file>
     </group>
     <group>
@@ -2678,15 +2678,6 @@
             <name>TouchSCR</name>
         </group>
         <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\LQ_9AX.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\LQ_9AX.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\LQ_9AXtest.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\LQuserFlies\src\LQ_ADC.c</name>
         </file>
         <file>
@@ -2768,12 +2759,6 @@
             <name>$PROJ_DIR$\LQuserFlies\src\LQ_TRNG.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\LQ_UART.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\LQ_UART.h</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\LQuserFlies\src\LQ_WDog.c</name>
         </file>
         <file>
@@ -2794,6 +2779,9 @@
     </group>
     <group>
         <name>system</name>
+        <file>
+            <name>$PROJ_DIR$\system\main.c</name>
+        </file>
         <file>
             <name>$PROJ_DIR$\system\system.c</name>
         </file>

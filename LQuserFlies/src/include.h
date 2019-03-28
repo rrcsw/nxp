@@ -64,10 +64,10 @@
 
 
     #include "LQ_PWM.h"       //电机，舵机PWM控制 XBARA
-    #include "LQ_UART.h"       //UART串口
+
     #include "LQ_ADC.h"       //ADC转换采集
     #include "LQ_PIT.h"       //PIT定时
-    #include "LQ_9AX.h"       //九轴模块
+
     #include "LQ_MPU6050.h"    //MPU6050
     #include "LQ_TRNG.h"      //随机数发生器
     #include "LQ_Encoder.h"   //编码器正交解码数据采集

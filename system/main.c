@@ -59,8 +59,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 int main(void)
-{        
-    
+{
     BOARD_ConfigMPU();                   /* 初始化内存保护单元 */      
     BOARD_InitSDRAMPins();               /* SDRAM初始化 */
     BOARD_BootClockRUN();                /* 初始化开发板时钟 */   
@@ -111,7 +110,7 @@ int main(void)
 //    Test_GPT_Timer();    //测试GPT定时器延时和计时功能
     Test_OLED();         //测试OLED
 //    Test_RNG();          //随机数产生      
-//    Test_9AX();          //九轴测试 
+
 //    Test_MPU6050();      //测试I2C及6轴陀螺仪功能              陀螺仪及加速度功能 
 //    Test_ahrs();         //测试六轴姿态解算   
 //    Test_ANO_DT();       //匿名上位机观察数据波形  不使用DMA模式，请将宏定义#define USE_DMA  0  
