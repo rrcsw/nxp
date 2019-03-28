@@ -56,28 +56,6 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
  *
  *      1.更新GPT定时器延时和计时功能                                              2019/02/18       
  */
-//void delayms(uint32_t ms)
-//{
-//    uint32_t i,j;
-//    
-//    for (i = 0; i < ms; i++)
-//    {
-//        for (j = 0; j < 200000; j++)//600M--1ms
-//        __NOP();//asm("NOP");   
-//    }
-//    return ;
-//}
-//void delayus(uint32_t us) //延时1us 实测为1.18us   延时10us 实测为10.02us   延时100us 实测为98.4us
-//{
-//    uint32_t i,j;
-//    
-//    for (i = 0; i < us; i++)
-//    {
-//        for (j = 0; j < 290; j++)//600M--1us
-//        __NOP();//asm("NOP");   
-//    }
-//    return ;
-//} 
 
 
 int main(void)

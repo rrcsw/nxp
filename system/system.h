@@ -7,7 +7,6 @@
 #include "core_cm7.h"
 #include "MIMXRT1052_features.h"
 
-
 #include "fsl_adc.h"
 #include "fsl_adc_etc.h"
 #include "fsl_aipstz.h"
@@ -65,9 +64,6 @@
 #include "fsl_xbara.h"
 #include "fsl_xbarb.h"
 
-
-
-
 void delayms(uint32_t ms);
 void delayus(uint32_t us);
 void gpt_time_start(void);
@@ -75,8 +71,7 @@ uint32_t gpt_time_get(void);
 void Test_GPT_Timer(void);
 void LQ_GPT_Init(void);
 
-
-
+#include "uart.h"
 #include "base.h"
 #include "oled.h"
 

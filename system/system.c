@@ -4,7 +4,7 @@
   * @author  
   * @version 
   * @date    2019/3/7
-  * @brief   GPT¶¨Ê±Æ÷ÓÃ×÷ÑÓÊ±ºÍ¶¨Ê±
+  * @brief   GPTå®šæ—¶å™¨ç”¨ä½œå»¶æ—¶å’Œå®šæ—¶
   *
   */
 #include "system.h"
@@ -25,7 +25,7 @@ void GPT2_IRQHandler(void)
 }
 
 
-// ³õÊ¼»¯GPT¼ÆÊıÆ÷  GPT1ÓÃ¼ÆÊ±  GPT2ÓÃ×÷ÑÓÊ±
+// åˆå§‹åŒ–GPTè®¡æ•°å™¨  GPT1ç”¨è®¡æ—¶  GPT2ç”¨ä½œå»¶æ—¶
 void LQ_GPT_Init(void)
 {
     gpt_config_t gptConfig;
@@ -34,20 +34,20 @@ void LQ_GPT_Init(void)
     CLOCK_SetDiv(kCLOCK_PerclkDiv, 0);
     
     GPT_GetDefaultConfig(&gptConfig);
-    gptConfig.enableRunInDbg = true;   //¿ªÆôdebugÇé¿öÏÂ¿ÉÒÔÊ¹ÓÃ
+    gptConfig.enableRunInDbg = true;   //å¼€å¯debugæƒ…å†µä¸‹å¯ä»¥ä½¿ç”¨
     GPT_Init(GPT1, &gptConfig);
     GPT_Init(GPT2, &gptConfig);
     
-    GPT_SetClockDivider(GPT1, 150);      // GPT Ê±ÖÓ 150M / 15 = 10M
-    GPT_SetClockDivider(GPT2, 15);      // GPT Ê±ÖÓ 150M / 150 = 10M
+    GPT_SetClockDivider(GPT1, 150);      // GPT æ—¶é’Ÿ 150M / 15 = 10M
+    GPT_SetClockDivider(GPT2, 15);      // GPT æ—¶é’Ÿ 150M / 150 = 10M
     
-    GPT_SetOutputCompareValue(GPT1, kGPT_OutputCompare_Channel1, 0XFFFFFFFF);   //GPT ÊÇ32Îª¼ÆÊıÆ÷ ×î´ó 0xFFFF FFFF 
-    GPT_SetOutputCompareValue(GPT2, kGPT_OutputCompare_Channel1, 0XFFFFFFFF);   //GPT ÊÇ32Îª¼ÆÊıÆ÷ ×î´ó 0xFFFF FFFF 
+    GPT_SetOutputCompareValue(GPT1, kGPT_OutputCompare_Channel1, 0XFFFFFFFF);   //GPT æ˜¯32ä¸ºè®¡æ•°å™¨ æœ€å¤§ 0xFFFF FFFF 
+    GPT_SetOutputCompareValue(GPT2, kGPT_OutputCompare_Channel1, 0XFFFFFFFF);   //GPT æ˜¯32ä¸ºè®¡æ•°å™¨ æœ€å¤§ 0xFFFF FFFF 
 
 }
 
 /*
-²âÊÔGPI¶¨Ê±ÖĞ¶Ï¹¦ÄÜ
+æµ‹è¯•GPIå®šæ—¶ä¸­æ–­åŠŸèƒ½
 */
 void Test_GPT_Timer(void)
 {
@@ -62,21 +62,21 @@ void Test_GPT_Timer(void)
         GPIO_PinReverse (GPIO2, 22); 
         time = gpt_time_get();
         printf("delay 10 us is %u \n", time - last_time);
-        last_time = gpt_time_get(); //×¢Òâ ´òÓ¡Ò²ĞèÒªÊ±¼ä
+        last_time = gpt_time_get(); //æ³¨æ„ æ‰“å°ä¹Ÿéœ€è¦æ—¶é—´
         delayms(10);
         time = gpt_time_get();
         printf("delay 10 ms is %u \n", time - last_time);
-        last_time = gpt_time_get(); //×¢Òâ ´òÓ¡Ò²ĞèÒªÊ±¼ä
+        last_time = gpt_time_get(); //æ³¨æ„ æ‰“å°ä¹Ÿéœ€è¦æ—¶é—´
     }
 }
 
-/*GPT ¼ÆÊıÆ÷ÑÓÊ±*/
+/*GPT è®¡æ•°å™¨å»¶æ—¶*/
 void delayms(uint32_t ms)
 {
     delayus(ms * 1000);
 }
 
-/*GPT ¼ÆÊıÆ÷ÑÓÊ±*/
+/*GPT è®¡æ•°å™¨å»¶æ—¶*/
 void delayus(uint32_t us)
 {
     /* Start Timer */
@@ -87,19 +87,19 @@ void delayus(uint32_t us)
     GPT_StopTimer(GPT2);
 }
 
-/*GPT ¼ÆÊıÆ÷¿ªÊ¼¼ÆÊ±*/
+/*GPT è®¡æ•°å™¨å¼€å§‹è®¡æ—¶*/
 void gpt_time_start(void)
 {
     GPT_StopTimer(GPT1);
-    GPT_StartTimer(GPT1);   //Ë¢ĞÂ GPT1
+    GPT_StartTimer(GPT1);   //åˆ·æ–° GPT1
     GPT_StartTimer(GPT1);
 }
 
-/*GPT ¼ÆÊıÆ÷µÃµ½Ê±³¤ us
+/*GPT è®¡æ•°å™¨å¾—åˆ°æ—¶é•¿ us
 */
 uint32_t gpt_time_get(void)
 {
-    if(GPT_GetStatusFlags(GPT1, kGPT_RollOverFlag))   //Òç³ö
+    if(GPT_GetStatusFlags(GPT1, kGPT_RollOverFlag))   //æº¢å‡º
         return 0;
     else
         return GPT_GetCurrentTimerCount(GPT1) - 1;

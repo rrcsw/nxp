@@ -1,19 +1,19 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËĞÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ğ´¡¿Z
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.0£¬ÁúÇñ¿ªÔ´´úÂë£¬½ö¹©²Î¿¼£¬ºó¹û×Ô¸º
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘Z
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0ï¼Œé¾™é‚±å¼€æºä»£ç ï¼Œä»…ä¾›å‚è€ƒï¼Œåæœè‡ªè´Ÿ
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 ================================================
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
@@ -45,23 +45,23 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 //LPUART8_RX     J2
 
 volatile uint8_t res = 0;
-//¼ÓÈëÒÔÏÂ´úÂë,Ö§³Öprintfº¯Êı,¶ø²»ĞèÒªÑ¡Ôñuse MicroLIB	  
-//IAR£¬ĞèÒªÔÚoptions -> C/C++compiler -> Preprocessor Ìí¼Óºê¶¨Òå _DLIB_FILE_DESCRIPTOR
+//åŠ å…¥ä»¥ä¸‹ä»£ç ,æ”¯æŒprintfå‡½æ•°,è€Œä¸éœ€è¦é€‰æ‹©use MicroLIB	  
+//IARï¼Œéœ€è¦åœ¨options -> C/C++compiler -> Preprocessor æ·»åŠ å®å®šä¹‰ _DLIB_FILE_DESCRIPTOR
 #if 1
 //#pragma import(__use_no_semihosting)             
-//±ê×¼¿âĞèÒªµÄÖ§³Öº¯Êı                 
+//æ ‡å‡†åº“éœ€è¦çš„æ”¯æŒå‡½æ•°                 
 struct __FILE 
 { 
 	int handle; 
 }; 
 
 FILE __stdout;       
-//¶¨Òå_sys_exit()ÒÔ±ÜÃâÊ¹ÓÃ°ëÖ÷»úÄ£Ê½    
+//å®šä¹‰_sys_exit()ä»¥é¿å…ä½¿ç”¨åŠä¸»æœºæ¨¡å¼    
 void _sys_exit(int x) 
 { 
 	x = x; 
 } 
-//ÖØ¶¨Òåfputcº¯Êı 
+//é‡å®šä¹‰fputcå‡½æ•° 
 int fputc(int ch, FILE *f)
 { 	
 	while((LPUART1->STAT&LPUART_STAT_TDRE_MASK)==0);
@@ -72,14 +72,14 @@ int fputc(int ch, FILE *f)
 
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿µÃµ½´®¿ÚÊ±ÖÓÆµÂÊ Ò»°ãÎª80Mhz
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ 
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘å¾—åˆ°ä¸²å£æ—¶é’Ÿé¢‘ç‡ ä¸€èˆ¬ä¸º80Mhz
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 /* Get uart console frequency. */
 uint32_t LQ_GetUartSrcFreq(void)
@@ -101,56 +101,56 @@ uint32_t LQ_GetUartSrcFreq(void)
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿³õÊ¼»¯´®¿Ú£¬ÉèÖÃ²¨ÌØÂÊ
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ LQ_UART_Init(LPUART1, 115200);
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘åˆå§‹åŒ–ä¸²å£ï¼Œè®¾ç½®æ³¢ç‰¹ç‡
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ LQ_UART_Init(LPUART1, 115200);
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LQ_UART_Init(LPUART_Type *base, uint32_t bound)
 {	
     if(base == LPUART1)
     {
-        CLOCK_EnableClock(kCLOCK_Lpuart1);	//Ê¹ÄÜLPUART1Ê±ÖÓ
-        //LPUART1ËùÊ¹ÓÃµÄIO¹¦ÄÜÅäÖÃ£¬¼´£º´ÓALT0~ALT7Ñ¡ÔñºÏÊÊµÄ¹¦ÄÜ¡£
+        CLOCK_EnableClock(kCLOCK_Lpuart1);	//ä½¿èƒ½LPUART1æ—¶é’Ÿ
+        //LPUART1æ‰€ä½¿ç”¨çš„IOåŠŸèƒ½é…ç½®ï¼Œå³ï¼šä»ALT0~ALT7é€‰æ‹©åˆé€‚çš„åŠŸèƒ½ã€‚
         IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_12_LPUART1_TX,0U);	//LPUART1_TX   K14
         IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_13_LPUART1_RX,0U);	//LPUART1_RX   L14
         
-        //ÅäÖÃIOÒı½ÅGPIO_AD_B0_12ºÍGPIO_AD_B0_13µÄ¹¦ÄÜ
-        //µÍ×ª»»ËÙ¶È,Çı¶¯ÄÜÁ¦ÎªR0/6,ËÙ¶ÈÎª100Mhz£¬¹Ø±Õ¿ªÂ·¹¦ÄÜ£¬Ê¹ÄÜpull/keepr
-        //Ñ¡Ôñkeeper¹¦ÄÜ£¬ÏÂÀ­100K Ohm£¬¹Ø±ÕHyst
+        //é…ç½®IOå¼•è„šGPIO_AD_B0_12å’ŒGPIO_AD_B0_13çš„åŠŸèƒ½
+        //ä½è½¬æ¢é€Ÿåº¦,é©±åŠ¨èƒ½åŠ›ä¸ºR0/6,é€Ÿåº¦ä¸º100Mhzï¼Œå…³é—­å¼€è·¯åŠŸèƒ½ï¼Œä½¿èƒ½pull/keepr
+        //é€‰æ‹©keeperåŠŸèƒ½ï¼Œä¸‹æ‹‰100K Ohmï¼Œå…³é—­Hyst
         IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_12_LPUART1_TX,0x10B0u); 
         IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_13_LPUART1_RX,0x10B0u); 
         
     }
     else if(base == LPUART2)
     {
-        CLOCK_EnableClock(kCLOCK_Lpuart2);	//Ê¹ÄÜLPUART1Ê±ÖÓ
-        //LPUART1ËùÊ¹ÓÃµÄIO¹¦ÄÜÅäÖÃ£¬¼´£º´ÓALT0~ALT7Ñ¡ÔñºÏÊÊµÄ¹¦ÄÜ¡£
+        CLOCK_EnableClock(kCLOCK_Lpuart2);	//ä½¿èƒ½LPUART1æ—¶é’Ÿ
+        //LPUART1æ‰€ä½¿ç”¨çš„IOåŠŸèƒ½é…ç½®ï¼Œå³ï¼šä»ALT0~ALT7é€‰æ‹©åˆé€‚çš„åŠŸèƒ½ã€‚
         IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_02_LPUART2_TX,0U);	//LPUART2_TX    L11
         IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_03_LPUART2_RX,0U);	//LPUART2_RX    M12
         
-        //ÅäÖÃIOÒı½ÅGPIO_AD_B0_12ºÍGPIO_AD_B0_13µÄ¹¦ÄÜ
-        //µÍ×ª»»ËÙ¶È,Çı¶¯ÄÜÁ¦ÎªR0/6,ËÙ¶ÈÎª100Mhz£¬¹Ø±Õ¿ªÂ·¹¦ÄÜ£¬Ê¹ÄÜpull/keepr
-        //Ñ¡Ôñkeeper¹¦ÄÜ£¬ÏÂÀ­100K Ohm£¬¹Ø±ÕHyst
+        //é…ç½®IOå¼•è„šGPIO_AD_B0_12å’ŒGPIO_AD_B0_13çš„åŠŸèƒ½
+        //ä½è½¬æ¢é€Ÿåº¦,é©±åŠ¨èƒ½åŠ›ä¸ºR0/6,é€Ÿåº¦ä¸º100Mhzï¼Œå…³é—­å¼€è·¯åŠŸèƒ½ï¼Œä½¿èƒ½pull/keepr
+        //é€‰æ‹©keeperåŠŸèƒ½ï¼Œä¸‹æ‹‰100K Ohmï¼Œå…³é—­Hyst
         IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_02_LPUART2_TX,0x10B0u); 
         IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_03_LPUART2_RX,0x10B0u); 
     }
     else if(base == LPUART3)
     {
-        CLOCK_EnableClock(kCLOCK_Lpuart3);	//Ê¹ÄÜLPUART1Ê±ÖÓ
-        //LPUART1ËùÊ¹ÓÃµÄIO¹¦ÄÜÅäÖÃ£¬¼´£º´ÓALT0~ALT7Ñ¡ÔñºÏÊÊµÄ¹¦ÄÜ¡£
+        CLOCK_EnableClock(kCLOCK_Lpuart3);	//ä½¿èƒ½LPUART1æ—¶é’Ÿ
+        //LPUART1æ‰€ä½¿ç”¨çš„IOåŠŸèƒ½é…ç½®ï¼Œå³ï¼šä»ALT0~ALT7é€‰æ‹©åˆé€‚çš„åŠŸèƒ½ã€‚
         IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_06_LPUART3_TX,0U);	//LPUART3_TX     J12
         IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_07_LPUART3_RX,0U);	//LPUART3_RX     K10
         
 //        IOMUXC_SetPinMux(IOMUXC_GPIO_B0_08_LPUART3_TX,0U);	
 //        IOMUXC_SetPinMux(IOMUXC_GPIO_B0_09_LPUART3_RX,0U);	
-        //ÅäÖÃIOÒı½ÅGPIO_AD_B0_12ºÍGPIO_AD_B0_13µÄ¹¦ÄÜ
-        //µÍ×ª»»ËÙ¶È,Çı¶¯ÄÜÁ¦ÎªR0/6,ËÙ¶ÈÎª100Mhz£¬¹Ø±Õ¿ªÂ·¹¦ÄÜ£¬Ê¹ÄÜpull/keepr
-        //Ñ¡Ôñkeeper¹¦ÄÜ£¬ÏÂÀ­100K Ohm£¬¹Ø±ÕHyst
+        //é…ç½®IOå¼•è„šGPIO_AD_B0_12å’ŒGPIO_AD_B0_13çš„åŠŸèƒ½
+        //ä½è½¬æ¢é€Ÿåº¦,é©±åŠ¨èƒ½åŠ›ä¸ºR0/6,é€Ÿåº¦ä¸º100Mhzï¼Œå…³é—­å¼€è·¯åŠŸèƒ½ï¼Œä½¿èƒ½pull/keepr
+        //é€‰æ‹©keeperåŠŸèƒ½ï¼Œä¸‹æ‹‰100K Ohmï¼Œå…³é—­Hyst
         IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_06_LPUART3_TX,0x10B0u); 
         IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B1_07_LPUART3_RX,0x10B0u); 
         
@@ -159,194 +159,194 @@ void LQ_UART_Init(LPUART_Type *base, uint32_t bound)
     }
     else if(base == LPUART4)
     {
-        CLOCK_EnableClock(kCLOCK_Lpuart4);	//Ê¹ÄÜLPUART1Ê±ÖÓ
-        //LPUART1ËùÊ¹ÓÃµÄIO¹¦ÄÜÅäÖÃ£¬¼´£º´ÓALT0~ALT7Ñ¡ÔñºÏÊÊµÄ¹¦ÄÜ¡£
+        CLOCK_EnableClock(kCLOCK_Lpuart4);	//ä½¿èƒ½LPUART1æ—¶é’Ÿ
+        //LPUART1æ‰€ä½¿ç”¨çš„IOåŠŸèƒ½é…ç½®ï¼Œå³ï¼šä»ALT0~ALT7é€‰æ‹©åˆé€‚çš„åŠŸèƒ½ã€‚
         IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_00_LPUART4_TX,0U);	//LPUART4_TX     L5
         IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_01_LPUART4_RX,0U);	//LPUART4_RX     M5
         
-        //ÅäÖÃIOÒı½ÅGPIO_AD_B0_12ºÍGPIO_AD_B0_13µÄ¹¦ÄÜ
-        //µÍ×ª»»ËÙ¶È,Çı¶¯ÄÜÁ¦ÎªR0/6,ËÙ¶ÈÎª100Mhz£¬¹Ø±Õ¿ªÂ·¹¦ÄÜ£¬Ê¹ÄÜpull/keepr
-        //Ñ¡Ôñkeeper¹¦ÄÜ£¬ÏÂÀ­100K Ohm£¬¹Ø±ÕHyst
+        //é…ç½®IOå¼•è„šGPIO_AD_B0_12å’ŒGPIO_AD_B0_13çš„åŠŸèƒ½
+        //ä½è½¬æ¢é€Ÿåº¦,é©±åŠ¨èƒ½åŠ›ä¸ºR0/6,é€Ÿåº¦ä¸º100Mhzï¼Œå…³é—­å¼€è·¯åŠŸèƒ½ï¼Œä½¿èƒ½pull/keepr
+        //é€‰æ‹©keeperåŠŸèƒ½ï¼Œä¸‹æ‹‰100K Ohmï¼Œå…³é—­Hyst
         IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_00_LPUART4_TX,0x10B0u); 
         IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_01_LPUART4_RX,0x10B0u); 
     }
     else if(base == LPUART5)
     {
-        CLOCK_EnableClock(kCLOCK_Lpuart5);	//Ê¹ÄÜLPUART1Ê±ÖÓ
-        //LPUART1ËùÊ¹ÓÃµÄIO¹¦ÄÜÅäÖÃ£¬¼´£º´ÓALT0~ALT7Ñ¡ÔñºÏÊÊµÄ¹¦ÄÜ¡£
+        CLOCK_EnableClock(kCLOCK_Lpuart5);	//ä½¿èƒ½LPUART1æ—¶é’Ÿ
+        //LPUART1æ‰€ä½¿ç”¨çš„IOåŠŸèƒ½é…ç½®ï¼Œå³ï¼šä»ALT0~ALT7é€‰æ‹©åˆé€‚çš„åŠŸèƒ½ã€‚
         IOMUXC_SetPinMux(IOMUXC_GPIO_B1_12_LPUART5_TX,0U);	//LPUART5_TX       D13
         IOMUXC_SetPinMux(IOMUXC_GPIO_B1_13_LPUART5_RX,0U);	//LPUART5_RX       D14
         
-        //ÅäÖÃIOÒı½ÅGPIO_AD_B0_12ºÍGPIO_AD_B0_13µÄ¹¦ÄÜ
-        //µÍ×ª»»ËÙ¶È,Çı¶¯ÄÜÁ¦ÎªR0/6,ËÙ¶ÈÎª100Mhz£¬¹Ø±Õ¿ªÂ·¹¦ÄÜ£¬Ê¹ÄÜpull/keepr
-        //Ñ¡Ôñkeeper¹¦ÄÜ£¬ÏÂÀ­100K Ohm£¬¹Ø±ÕHyst
+        //é…ç½®IOå¼•è„šGPIO_AD_B0_12å’ŒGPIO_AD_B0_13çš„åŠŸèƒ½
+        //ä½è½¬æ¢é€Ÿåº¦,é©±åŠ¨èƒ½åŠ›ä¸ºR0/6,é€Ÿåº¦ä¸º100Mhzï¼Œå…³é—­å¼€è·¯åŠŸèƒ½ï¼Œä½¿èƒ½pull/keepr
+        //é€‰æ‹©keeperåŠŸèƒ½ï¼Œä¸‹æ‹‰100K Ohmï¼Œå…³é—­Hyst
         IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_12_LPUART5_TX,0x10B0u); 
         IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_13_LPUART5_RX,0x10B0u); 
     }
     else if(base == LPUART6)
     {
-        CLOCK_EnableClock(kCLOCK_Lpuart6);	//Ê¹ÄÜLPUART1Ê±ÖÓ
-        //LPUART1ËùÊ¹ÓÃµÄIO¹¦ÄÜÅäÖÃ£¬¼´£º´ÓALT0~ALT7Ñ¡ÔñºÏÊÊµÄ¹¦ÄÜ¡£
+        CLOCK_EnableClock(kCLOCK_Lpuart6);	//ä½¿èƒ½LPUART1æ—¶é’Ÿ
+        //LPUART1æ‰€ä½¿ç”¨çš„IOåŠŸèƒ½é…ç½®ï¼Œå³ï¼šä»ALT0~ALT7é€‰æ‹©åˆé€‚çš„åŠŸèƒ½ã€‚
         IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_02_LPUART6_TX,0U);	//LPUART6_TX   M11
         IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_03_LPUART6_RX,0U);	//LPUART6_RX   J11
         
-        //ÅäÖÃIOÒı½ÅGPIO_AD_B0_12ºÍGPIO_AD_B0_13µÄ¹¦ÄÜ
-        //µÍ×ª»»ËÙ¶È,Çı¶¯ÄÜÁ¦ÎªR0/6,ËÙ¶ÈÎª100Mhz£¬¹Ø±Õ¿ªÂ·¹¦ÄÜ£¬Ê¹ÄÜpull/keepr
-        //Ñ¡Ôñkeeper¹¦ÄÜ£¬ÏÂÀ­100K Ohm£¬¹Ø±ÕHyst
+        //é…ç½®IOå¼•è„šGPIO_AD_B0_12å’ŒGPIO_AD_B0_13çš„åŠŸèƒ½
+        //ä½è½¬æ¢é€Ÿåº¦,é©±åŠ¨èƒ½åŠ›ä¸ºR0/6,é€Ÿåº¦ä¸º100Mhzï¼Œå…³é—­å¼€è·¯åŠŸèƒ½ï¼Œä½¿èƒ½pull/keepr
+        //é€‰æ‹©keeperåŠŸèƒ½ï¼Œä¸‹æ‹‰100K Ohmï¼Œå…³é—­Hyst
         IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_02_LPUART6_TX,0x10B0u); 
         IOMUXC_SetPinConfig(IOMUXC_GPIO_AD_B0_03_LPUART6_RX,0x10B0u); 
     }
     else if(base == LPUART7)
     {
-        CLOCK_EnableClock(kCLOCK_Lpuart7);	//Ê¹ÄÜLPUART1Ê±ÖÓ
-        //LPUART1ËùÊ¹ÓÃµÄIO¹¦ÄÜÅäÖÃ£¬¼´£º´ÓALT0~ALT7Ñ¡ÔñºÏÊÊµÄ¹¦ÄÜ¡£
+        CLOCK_EnableClock(kCLOCK_Lpuart7);	//ä½¿èƒ½LPUART1æ—¶é’Ÿ
+        //LPUART1æ‰€ä½¿ç”¨çš„IOåŠŸèƒ½é…ç½®ï¼Œå³ï¼šä»ALT0~ALT7é€‰æ‹©åˆé€‚çš„åŠŸèƒ½ã€‚
         IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_08_LPUART7_TX,0U);	//LPUART7_TX   P3
         IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_09_LPUART7_RX,0U);	//LPUART7_RX   N4
         
-        //ÅäÖÃIOÒı½ÅGPIO_AD_B0_12ºÍGPIO_AD_B0_13µÄ¹¦ÄÜ
-        //µÍ×ª»»ËÙ¶È,Çı¶¯ÄÜÁ¦ÎªR0/6,ËÙ¶ÈÎª100Mhz£¬¹Ø±Õ¿ªÂ·¹¦ÄÜ£¬Ê¹ÄÜpull/keepr
-        //Ñ¡Ôñkeeper¹¦ÄÜ£¬ÏÂÀ­100K Ohm£¬¹Ø±ÕHyst
+        //é…ç½®IOå¼•è„šGPIO_AD_B0_12å’ŒGPIO_AD_B0_13çš„åŠŸèƒ½
+        //ä½è½¬æ¢é€Ÿåº¦,é©±åŠ¨èƒ½åŠ›ä¸ºR0/6,é€Ÿåº¦ä¸º100Mhzï¼Œå…³é—­å¼€è·¯åŠŸèƒ½ï¼Œä½¿èƒ½pull/keepr
+        //é€‰æ‹©keeperåŠŸèƒ½ï¼Œä¸‹æ‹‰100K Ohmï¼Œå…³é—­Hyst
         IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_08_LPUART7_TX,0x10B0u); 
         IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_09_LPUART7_RX,0x10B0u); 
     }
     else if(base == LPUART8)
     {
-        CLOCK_EnableClock(kCLOCK_Lpuart8);	//Ê¹ÄÜLPUART1Ê±ÖÓ
-        //LPUART1ËùÊ¹ÓÃµÄIO¹¦ÄÜÅäÖÃ£¬¼´£º´ÓALT0~ALT7Ñ¡ÔñºÏÊÊµÄ¹¦ÄÜ¡£
+        CLOCK_EnableClock(kCLOCK_Lpuart8);	//ä½¿èƒ½LPUART1æ—¶é’Ÿ
+        //LPUART1æ‰€ä½¿ç”¨çš„IOåŠŸèƒ½é…ç½®ï¼Œå³ï¼šä»ALT0~ALT7é€‰æ‹©åˆé€‚çš„åŠŸèƒ½ã€‚
         IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_04_LPUART8_TX,0U);	//LPUART8_TX    H2
         IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_05_LPUART8_RX,0U);	//LPUART8_RX    J2
         
-        //ÅäÖÃIOÒı½ÅGPIO_AD_B0_12ºÍGPIO_AD_B0_13µÄ¹¦ÄÜ
-        //µÍ×ª»»ËÙ¶È,Çı¶¯ÄÜÁ¦ÎªR0/6,ËÙ¶ÈÎª100Mhz£¬¹Ø±Õ¿ªÂ·¹¦ÄÜ£¬Ê¹ÄÜpull/keepr
-        //Ñ¡Ôñkeeper¹¦ÄÜ£¬ÏÂÀ­100K Ohm£¬¹Ø±ÕHyst
+        //é…ç½®IOå¼•è„šGPIO_AD_B0_12å’ŒGPIO_AD_B0_13çš„åŠŸèƒ½
+        //ä½è½¬æ¢é€Ÿåº¦,é©±åŠ¨èƒ½åŠ›ä¸ºR0/6,é€Ÿåº¦ä¸º100Mhzï¼Œå…³é—­å¼€è·¯åŠŸèƒ½ï¼Œä½¿èƒ½pull/keepr
+        //é€‰æ‹©keeperåŠŸèƒ½ï¼Œä¸‹æ‹‰100K Ohmï¼Œå…³é—­Hyst
         IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B0_04_LPUART8_TX,0x10B0u); 
         IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B0_05_LPUART8_RX,0x10B0u); 
     }
-	CLOCK_SetMux(kCLOCK_UartMux,0); 	//ÉèÖÃUARTÊ±ÖÓÔ´ÎªPLL3 80Mhz£¬PLL3/6=480/6=80MHz
-    CLOCK_SetDiv(kCLOCK_UartDiv,0); 	//ÉèÖÃUARTÊ±ÖÓ1·ÖÆµ£¬¼´UARTÊ±ÖÓÎª80Mhz
+	CLOCK_SetMux(kCLOCK_UartMux,0); 	//è®¾ç½®UARTæ—¶é’Ÿæºä¸ºPLL3 80Mhzï¼ŒPLL3/6=480/6=80MHz
+    CLOCK_SetDiv(kCLOCK_UartDiv,0); 	//è®¾ç½®UARTæ—¶é’Ÿ1åˆ†é¢‘ï¼Œå³UARTæ—¶é’Ÿä¸º80Mhz
 	
-    lpuart_config_t lpuart_config;              //´®¿ÚÅäÖÃ½á¹¹Ìå
-	LPUART_GetDefaultConfig(&lpuart_config);    //µÃµ½Ä¬ÈÏÅäÖÃ£¬ºóÃæÔÚ¸ù¾İÊµ¼ÊÇé¿öÅäÖÃ
+    lpuart_config_t lpuart_config;              //ä¸²å£é…ç½®ç»“æ„ä½“
+	LPUART_GetDefaultConfig(&lpuart_config);    //å¾—åˆ°é»˜è®¤é…ç½®ï¼Œåé¢åœ¨æ ¹æ®å®é™…æƒ…å†µé…ç½®
 	
-	lpuart_config.baudRate_Bps=bound;						//²¨ÌØÂÊ
-	lpuart_config.dataBitsCount=kLPUART_EightDataBits;		//8Î»
-	lpuart_config.stopBitCount=kLPUART_OneStopBit;			//1Î»Í£Ö¹Î»
-	lpuart_config.parityMode=kLPUART_ParityDisabled;		//ÎŞÆæÅ¼Ğ£Ñé
-	lpuart_config.enableRx=true;							//Ê¹ÄÜ½ÓÊÕ
-	lpuart_config.enableTx=true;							//Ê¹ÄÜ·¢ËÍ
+	lpuart_config.baudRate_Bps=bound;						//æ³¢ç‰¹ç‡
+	lpuart_config.dataBitsCount=kLPUART_EightDataBits;		//8ä½
+	lpuart_config.stopBitCount=kLPUART_OneStopBit;			//1ä½åœæ­¢ä½
+	lpuart_config.parityMode=kLPUART_ParityDisabled;		//æ— å¥‡å¶æ ¡éªŒ
+	lpuart_config.enableRx=true;							//ä½¿èƒ½æ¥æ”¶
+	lpuart_config.enableTx=true;							//ä½¿èƒ½å‘é€
 	
-    uint32_t  freq=0;							//´®¿ÚµÄÊ±ÖÓÔ´ÆµÂÊ
-	freq=LQ_GetUartSrcFreq();	                //µÃµ½´®¿ÚÊ±ÖÓÆµÂÊ
+    uint32_t  freq=0;							//ä¸²å£çš„æ—¶é’Ÿæºé¢‘ç‡
+	freq=LQ_GetUartSrcFreq();	                //å¾—åˆ°ä¸²å£æ—¶é’Ÿé¢‘ç‡
     
-	LPUART_Init(base,&lpuart_config,freq);				//³õÊ¼»¯LPUART1 
+	LPUART_Init(base,&lpuart_config,freq);				//åˆå§‹åŒ–LPUART1 
 
-	//LPUARTÖĞ¶ÏÉèÖÃ
-	LPUART_EnableInterrupts(base,kLPUART_RxDataRegFullInterruptEnable); //kLPUART_RxDataRegFullInterruptEnable£ºÊ¹ÄÜ½ÓÊÕÖĞ¶Ï  Ê¹ÓÃÆäËûÖĞ¶ÏÇë×ÔĞĞĞŞ¸Ä
+	//LPUARTä¸­æ–­è®¾ç½®
+	LPUART_EnableInterrupts(base,kLPUART_RxDataRegFullInterruptEnable); //kLPUART_RxDataRegFullInterruptEnableï¼šä½¿èƒ½æ¥æ”¶ä¸­æ–­  ä½¿ç”¨å…¶ä»–ä¸­æ–­è¯·è‡ªè¡Œä¿®æ”¹
    
     if(base == LPUART1)
     {
-        //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ğ¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ğµÄÖĞ¶Ï
+        //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
        NVIC_SetPriority(LPUART1_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
-       EnableIRQ(LPUART1_IRQn);	                            //Ê¹ÄÜLPUART1ÖĞ¶Ï      
+       EnableIRQ(LPUART1_IRQn);	                            //ä½¿èƒ½LPUART1ä¸­æ–­      
     }
     else if(base == LPUART2)
     {
-        //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ğ¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ğµÄÖĞ¶Ï
+        //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
         NVIC_SetPriority(LPUART2_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
-        EnableIRQ(LPUART2_IRQn);	                            //Ê¹ÄÜLPUART1ÖĞ¶Ï      
+        EnableIRQ(LPUART2_IRQn);	                            //ä½¿èƒ½LPUART1ä¸­æ–­      
     }
     else if(base == LPUART3)
     {
-        //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ğ¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ğµÄÖĞ¶Ï
+        //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
         NVIC_SetPriority(LPUART3_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
-        EnableIRQ(LPUART3_IRQn);	                            //Ê¹ÄÜLPUART1ÖĞ¶Ï    
+        EnableIRQ(LPUART3_IRQn);	                            //ä½¿èƒ½LPUART1ä¸­æ–­    
     }
     else if(base == LPUART4)
     {
-        //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ğ¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ğµÄÖĞ¶Ï
+        //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
         NVIC_SetPriority(LPUART4_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
-        EnableIRQ(LPUART4_IRQn);	                            //Ê¹ÄÜLPUART1ÖĞ¶Ï     
+        EnableIRQ(LPUART4_IRQn);	                            //ä½¿èƒ½LPUART1ä¸­æ–­     
     }
     else if(base == LPUART5)
     {
-        //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ğ¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ğµÄÖĞ¶Ï
+        //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
         NVIC_SetPriority(LPUART5_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
-        EnableIRQ(LPUART5_IRQn);	                            //Ê¹ÄÜLPUART1ÖĞ¶Ï     
+        EnableIRQ(LPUART5_IRQn);	                            //ä½¿èƒ½LPUART1ä¸­æ–­     
     }
     else if(base == LPUART6)
     {
-        //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ğ¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ğµÄÖĞ¶Ï
+        //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
         NVIC_SetPriority(LPUART6_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
-        EnableIRQ(LPUART6_IRQn);	                            //Ê¹ÄÜLPUART1ÖĞ¶Ï    
+        EnableIRQ(LPUART6_IRQn);	                            //ä½¿èƒ½LPUART1ä¸­æ–­    
     }
     else if(base == LPUART7)
     {
-        //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ğ¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ğµÄÖĞ¶Ï
+        //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
         NVIC_SetPriority(LPUART7_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
-        EnableIRQ(LPUART7_IRQn);	                            //Ê¹ÄÜLPUART1ÖĞ¶Ï       
+        EnableIRQ(LPUART7_IRQn);	                            //ä½¿èƒ½LPUART1ä¸­æ–­       
     }
     else if(base == LPUART8)
     {
-        //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ğ¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ğµÄÖĞ¶Ï
+        //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
         NVIC_SetPriority(LPUART8_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
-        EnableIRQ(LPUART8_IRQn);	                            //Ê¹ÄÜLPUART1ÖĞ¶Ï       
+        EnableIRQ(LPUART8_IRQn);	                            //ä½¿èƒ½LPUART1ä¸­æ–­       
     }   
 
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿·¢ËÍÒ»¸ö×Ö·û
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ LQ_UART_PutChar(LPUART1, char);
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘å‘é€ä¸€ä¸ªå­—ç¬¦
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ LQ_UART_PutChar(LPUART1, char);
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LQ_UART_PutChar(LPUART_Type *base, uint8_t data)
 {
-    while (!(base->STAT & LPUART_STAT_TDRE_MASK));    //µÈ´ıbase->STATÎª¿Õ
+    while (!(base->STAT & LPUART_STAT_TDRE_MASK));    //ç­‰å¾…base->STATä¸ºç©º
     base->DATA = data;
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿·¢ËÍÒ»¸ö×Ö·û´®
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
-¡¾ÊµÀı¡¿ LQ_UART_PutBuff(LPUART1, buff, 10);
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘å‘é€ä¸€ä¸ªå­—ç¬¦ä¸²
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
+ã€å®ä¾‹ã€‘ LQ_UART_PutBuff(LPUART1, buff, 10);
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
-//    LPUART_WriteBlocking(LPUART_Type *base, const uint8_t *data, size_t length);   //¹¦ÄÜÀàËÆµÄ¿âº¯Êı
+//    LPUART_WriteBlocking(LPUART_Type *base, const uint8_t *data, size_t length);   //åŠŸèƒ½ç±»ä¼¼çš„åº“å‡½æ•°
 void LQ_UART_PutBuff(LPUART_Type *base, uint8_t * buff, uint32_t length)
 {
     while (length--)
     {
-        while (!(base->STAT & LPUART_STAT_TDRE_MASK));    //µÈ´ıbase->STATÎª¿Õ
+        while (!(base->STAT & LPUART_STAT_TDRE_MASK));    //ç­‰å¾…base->STATä¸ºç©º
         base->DATA = *(buff++);
     }
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔ´®¿ÚÄ£¿é
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê10ÔÂ18ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ  ×¢Òâ£ºÊ¹ÓÃDAPlink×Ô´øµÄ´®¿ÚÊ±£¬ÓĞ¿ÉÄÜ½ÓÊÕ²»µ½Êı¾İ
-¡¾ÊµÀı¡¿ LQ_UART_PutBuff(LPUART1, buff, 10);
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘æµ‹è¯•ä¸²å£æ¨¡å—
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´10æœˆ18æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ—   æ³¨æ„ï¼šä½¿ç”¨DAPlinkè‡ªå¸¦çš„ä¸²å£æ—¶ï¼Œæœ‰å¯èƒ½æ¥æ”¶ä¸åˆ°æ•°æ®
+ã€å®ä¾‹ã€‘ LQ_UART_PutBuff(LPUART1, buff, 10);
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_UART(void)
 {
-    LQ_UART_Init(LPUART1, 115200);  //ºÍBOARD_InitDebugConsole()×÷ÓÃÒ»Ñù
+    LQ_UART_Init(LPUART1, 115200);  //å’ŒBOARD_InitDebugConsole()ä½œç”¨ä¸€æ ·
     LQ_UART_Init(LPUART2, 115200);  
     LQ_UART_Init(LPUART3, 57600);
     LQ_UART_Init(LPUART4, 38400);
     LQ_UART_Init(LPUART5, 19200);
     LQ_UART_Init(LPUART6, 9600);
-//    LQ_UART_Init(LPUART7, 256000);  //SPIFlashÊ¹ÓÃ¸ÃÒı½Å
+//    LQ_UART_Init(LPUART7, 256000);  //SPIFlashä½¿ç”¨è¯¥å¼•è„š
     LQ_UART_Init(LPUART8, 256000);
     printf("LPUART2 init: 115200!\n");
     printf("LPUART3 init: 57600!\n");
@@ -374,13 +374,13 @@ void Test_UART(void)
     LQ_UART_PutBuff(LPUART4, buff, 10);
     LQ_UART_PutBuff(LPUART5, buff, 10);
     LQ_UART_PutBuff(LPUART6, buff, 10);
-//    LQ_UART_PutBuff(LPUART7, buff, 10);//SPIFlashÊ¹ÓÃ¸ÃÒı½Å
+//    LQ_UART_PutBuff(LPUART7, buff, 10);//SPIFlashä½¿ç”¨è¯¥å¼•è„š
     LQ_UART_PutBuff(LPUART8, buff, 10);
     delayms(100);
          if(res > 9)
         {
-            res = 0;                   //½ÓÊÜ»º³åÇøÂú£¬Ö±½Ó¸²¸Ç
-            printf("UART1 ½ÓÊÕÖĞ¶Ï OK£¡\n");
+            res = 0;                   //æ¥å—ç¼“å†²åŒºæ»¡ï¼Œç›´æ¥è¦†ç›–
+            printf("UART1 æ¥æ”¶ä¸­æ–­ OKï¼\n");
             delayms(100);
         }
     }
@@ -388,106 +388,106 @@ void Test_UART(void)
     
     
 }
-//LPUART1ÖĞ¶Ï·şÎñº¯Êı£¬ÎªÁË½ÓÊÕĞ§ÂÊÖ±½Ó²Ù×÷¼Ä´æÆ÷
-uint8_t LPUART_RX_BUF[100]; //½ÓÊÕ»º³åÇø
+//LPUART1ä¸­æ–­æœåŠ¡å‡½æ•°ï¼Œä¸ºäº†æ¥æ”¶æ•ˆç‡ç›´æ¥æ“ä½œå¯„å­˜å™¨
+uint8_t LPUART_RX_BUF[100]; //æ¥æ”¶ç¼“å†²åŒº
 void LPUART1_IRQHandler(void)
 {
-	if((LPUART1->STAT)&kLPUART_RxDataRegFullFlag) //½ÓÊÕÖĞ¶Ï
+	if((LPUART1->STAT)&kLPUART_RxDataRegFullFlag) //æ¥æ”¶ä¸­æ–­
 	{
-//		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART1);					//¶ÁÈ¡Êı¾İ
-        ANO_DT_Data_Receive_Prepare(LPUART_ReadByte(LPUART1));          //½ÓÊÕÄäÃûÉÏÎ»»úĞ­Òé
+//		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART1);					//è¯»å–æ•°æ®
+        ANO_DT_Data_Receive_Prepare(LPUART_ReadByte(LPUART1));          //æ¥æ”¶åŒ¿åä¸Šä½æœºåè®®
 		res ++;
 	}
-	__DSB();				//Êı¾İÍ¬²½ÆÁ±ÎÖ¸Áî
+	__DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 void LPUART2_IRQHandler(void)
 {
 	static uint8_t res=0;
 	
-	if((LPUART2->STAT)&kLPUART_RxDataRegFullFlag) //½ÓÊÕÖĞ¶Ï
+	if((LPUART2->STAT)&kLPUART_RxDataRegFullFlag) //æ¥æ”¶ä¸­æ–­
 	{
-		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART2);				//¶ÁÈ¡Êı¾İ
+		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART2);				//è¯»å–æ•°æ®
 		res ++;
 	}
-	__DSB();				//Êı¾İÍ¬²½ÆÁ±ÎÖ¸Áî
+	__DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 
 void LPUART3_IRQHandler(void)
 {
 	static uint8_t res=0;
 	
-	if((LPUART3->STAT)&kLPUART_RxDataRegFullFlag) //½ÓÊÕÖĞ¶Ï
+	if((LPUART3->STAT)&kLPUART_RxDataRegFullFlag) //æ¥æ”¶ä¸­æ–­
 	{
-		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART3);					//¶ÁÈ¡Êı¾İ
+		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART3);					//è¯»å–æ•°æ®
 		res ++;
-        if(res == 100) res = 0;                   //½ÓÊÜ»º³åÇøÂú£¬Ö±½Ó¸²¸Ç
+        if(res == 100) res = 0;                   //æ¥å—ç¼“å†²åŒºæ»¡ï¼Œç›´æ¥è¦†ç›–
 	}
-	__DSB();				//Êı¾İÍ¬²½ÆÁ±ÎÖ¸Áî
+	__DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 
 void LPUART4_IRQHandler(void)
 {
 	static uint8_t res=0;
 	
-	if((LPUART4->STAT)&kLPUART_RxDataRegFullFlag) //½ÓÊÕÖĞ¶Ï
+	if((LPUART4->STAT)&kLPUART_RxDataRegFullFlag) //æ¥æ”¶ä¸­æ–­
 	{
-		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART4);				//¶ÁÈ¡Êı¾İ
+		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART4);				//è¯»å–æ•°æ®
 		res ++;
-        if(res == 100) res = 0;                   //½ÓÊÜ»º³åÇøÂú£¬Ö±½Ó¸²¸Ç
+        if(res == 100) res = 0;                   //æ¥å—ç¼“å†²åŒºæ»¡ï¼Œç›´æ¥è¦†ç›–
 	}
-	__DSB();				//Êı¾İÍ¬²½ÆÁ±ÎÖ¸Áî
+	__DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 
 void LPUART5_IRQHandler(void)
 {
 	static uint8_t res=0;
 	
-	if((LPUART5->STAT)&kLPUART_RxDataRegFullFlag) //½ÓÊÕÖĞ¶Ï
+	if((LPUART5->STAT)&kLPUART_RxDataRegFullFlag) //æ¥æ”¶ä¸­æ–­
 	{
-		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART5);				//¶ÁÈ¡Êı¾İ
+		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART5);				//è¯»å–æ•°æ®
 		res ++;
-        if(res == 100) res = 0;                   //½ÓÊÜ»º³åÇøÂú£¬Ö±½Ó¸²¸Ç
+        if(res == 100) res = 0;                   //æ¥å—ç¼“å†²åŒºæ»¡ï¼Œç›´æ¥è¦†ç›–
 	}
-	__DSB();				//Êı¾İÍ¬²½ÆÁ±ÎÖ¸Áî
+	__DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 
 void LPUART6_IRQHandler(void)
 {
 	static uint8_t res=0;
 	
-	if((LPUART6->STAT)&kLPUART_RxDataRegFullFlag) //½ÓÊÕÖĞ¶Ï
+	if((LPUART6->STAT)&kLPUART_RxDataRegFullFlag) //æ¥æ”¶ä¸­æ–­
 	{
-		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART6);					//¶ÁÈ¡Êı¾İ
+		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART6);					//è¯»å–æ•°æ®
 		res ++;
-        if(res == 100) res = 0;                   //½ÓÊÜ»º³åÇøÂú£¬Ö±½Ó¸²¸Ç
+        if(res == 100) res = 0;                   //æ¥å—ç¼“å†²åŒºæ»¡ï¼Œç›´æ¥è¦†ç›–
 	}
-	__DSB();				//Êı¾İÍ¬²½ÆÁ±ÎÖ¸Áî
+	__DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 
 void LPUART7_IRQHandler(void)
 {
 	static uint8_t res=0;
 	
-	if((LPUART7->STAT)&kLPUART_RxDataRegFullFlag) //½ÓÊÕÖĞ¶Ï
+	if((LPUART7->STAT)&kLPUART_RxDataRegFullFlag) //æ¥æ”¶ä¸­æ–­
 	{
-		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART7);					//¶ÁÈ¡Êı¾İ
+		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART7);					//è¯»å–æ•°æ®
 		res ++;
-        if(res == 100) res = 0;                   //½ÓÊÜ»º³åÇøÂú£¬Ö±½Ó¸²¸Ç
+        if(res == 100) res = 0;                   //æ¥å—ç¼“å†²åŒºæ»¡ï¼Œç›´æ¥è¦†ç›–
 	}
-	__DSB();				//Êı¾İÍ¬²½ÆÁ±ÎÖ¸Áî
+	__DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 
 void LPUART8_IRQHandler(void)
 {
 	static uint8_t res=0;
 	
-	if((LPUART8->STAT)&kLPUART_RxDataRegFullFlag) //½ÓÊÕÖĞ¶Ï
+	if((LPUART8->STAT)&kLPUART_RxDataRegFullFlag) //æ¥æ”¶ä¸­æ–­
 	{
-		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART8);					//¶ÁÈ¡Êı¾İ
+		LPUART_RX_BUF[res] = LPUART_ReadByte(LPUART8);					//è¯»å–æ•°æ®
 		res ++;
-        if(res == 100) res = 0;                   //½ÓÊÜ»º³åÇøÂú£¬Ö±½Ó¸²¸Ç
+        if(res == 100) res = 0;                   //æ¥å—ç¼“å†²åŒºæ»¡ï¼Œç›´æ¥è¦†ç›–
 	}
-	__DSB();				//Êı¾İÍ¬²½ÆÁ±ÎÖ¸Áî
+	__DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 
 
@@ -495,19 +495,19 @@ void LPUART8_IRQHandler(void)
 
 
 /* LPUART user callback */
-//´®¿ÚDMAµÄ»Øµ÷º¯Êı£¬µ±DMAÖ´ĞĞ½áÊøºó£¬»á×Ô¶¯µ÷ÓÃ¸Ãº¯Êı£¬¿ÉÒÔÔÚ¸Ãº¯ÊıÄÚ¼ÓÈëÓÃ»§×Ô¼ºµÄ´úÂë£¬ÊµÏÖDMA´«ÊäÍê³ÉºóÏëÒªÖ´ĞĞµÄ²Ù×÷
+//ä¸²å£DMAçš„å›è°ƒå‡½æ•°ï¼Œå½“DMAæ‰§è¡Œç»“æŸåï¼Œä¼šè‡ªåŠ¨è°ƒç”¨è¯¥å‡½æ•°ï¼Œå¯ä»¥åœ¨è¯¥å‡½æ•°å†…åŠ å…¥ç”¨æˆ·è‡ªå·±çš„ä»£ç ï¼Œå®ç°DMAä¼ è¾“å®Œæˆåæƒ³è¦æ‰§è¡Œçš„æ“ä½œ
 void LPUART_UserCallback(LPUART_Type *base, lpuart_edma_handle_t *handle, status_t status, void *userData)
 {
     userData = userData;
 
-    if (kStatus_LPUART_TxIdle == status)     //Èç¹û·¢ËÍ¿ÕÏĞ
+    if (kStatus_LPUART_TxIdle == status)     //å¦‚æœå‘é€ç©ºé—²
     {
         _status.txBufferFull = false;
         _status.txOnGoing = false;
         return;
     }
 
-    if (kStatus_LPUART_RxIdle == status)     //½ÓÊÕ¿ÕÏĞ
+    if (kStatus_LPUART_RxIdle == status)     //æ¥æ”¶ç©ºé—²
     {
         _status.rxBufferEmpty = false;
         _status.rxOnGoing = false;
@@ -522,7 +522,7 @@ void LPUART_UserCallback(LPUART_Type *base, lpuart_edma_handle_t *handle, status
 
 
 AT_NONCACHEABLE_SECTION_INIT(uint8_t g_tipString[]) =
-    "LPUART EDMA example\r\nSend back received data\r\nEcho every 8 characters\r\n";  //DMA·¢ËÍ×Ö·û´®²âÊÔ
+    "LPUART EDMA example\r\nSend back received data\r\nEcho every 8 characters\r\n";  //DMAå‘é€å­—ç¬¦ä¸²æµ‹è¯•
 lpuart_transfer_t xfer;
 lpuart_transfer_t sendXfer;
 lpuart_edma_handle_t g_lpuartEdmaHandle;
@@ -533,8 +533,8 @@ void Test_UART_DMA(void)
     UART_DMA_Init();
 
 //    /* Start to echo. */
-//    sendXfer.data = g_txBuffer;              //DMA´«ÊäµÄ×Ö·û´®Ê×µØÖ·   ÔÚANO_DT_Send_Data()º¯ÊıÄÚ²¿¸³Öµ
-//    sendXfer.dataSize = ECHO_BUFFER_LENGTH;  //DMA´«ÊäµÄ³¤¶È
+//    sendXfer.data = g_txBuffer;              //DMAä¼ è¾“çš„å­—ç¬¦ä¸²é¦–åœ°å€   åœ¨ANO_DT_Send_Data()å‡½æ•°å†…éƒ¨èµ‹å€¼
+//    sendXfer.dataSize = ECHO_BUFFER_LENGTH;  //DMAä¼ è¾“çš„é•¿åº¦
 //    
     float data1 = 0.0f;
     float data2 = 45.0f; 
@@ -545,12 +545,12 @@ void Test_UART_DMA(void)
 
     while(1)
     {
-        uint64_t now = _systime.get_time_us();         //¼ÆÊ±¹¦ÄÜ  µÃµ½µ±Ç°Ê±¼ä
-        if(!_status.txOnGoing)           //²»ÊÇÕıÔÚ·¢ËÍ¹ı³Ì
+        uint64_t now = _systime.get_time_us();         //è®¡æ—¶åŠŸèƒ½  å¾—åˆ°å½“å‰æ—¶é—´
+        if(!_status.txOnGoing)           //ä¸æ˜¯æ­£åœ¨å‘é€è¿‡ç¨‹
         {
 
 
-                ANO_DT_send_int16((short)(sin(data1/180.0f * PI) * 100),   //ÉÏ±¨ÄäÃûÉÏÎ»»ú »­ÕıĞş²¨
+                ANO_DT_send_int16((short)(sin(data1/180.0f * PI) * 100),   //ä¸ŠæŠ¥åŒ¿åä¸Šä½æœº ç”»æ­£ç„æ³¢
                                   (short)(sin(data2/180.0f * PI) * 100), 
                                   (short)(sin(data3/180.0f * PI) * 100), 
                                   (short)(sin(data4/180.0f * PI) * 100), 
@@ -562,7 +562,7 @@ void Test_UART_DMA(void)
         
         
         delayms(10);
-        uint64_t time = _systime.get_time_us() - now;  //µÃµ½Ê±²î
+        uint64_t time = _systime.get_time_us() - now;  //å¾—åˆ°æ—¶å·®
         //        printf("time is %llu \r\n", time);
         
         
@@ -582,29 +582,29 @@ void Test_UART_DMA(void)
 }
 void UART_DMA_Init(void)
 {
-    LQ_UART_Init(LPUART1, 115200);   //´®¿Ú + DMA ÊÕ·¢
+    LQ_UART_Init(LPUART1, 115200);   //ä¸²å£ + DMA æ”¶å‘
     
     /* Init DMAMUX */
-    DMAMUX_Init(DMAMUX);              //³õÊ¼»¯DMA¶àÂ·¸´ÓÃÆ÷
+    DMAMUX_Init(DMAMUX);              //åˆå§‹åŒ–DMAå¤šè·¯å¤ç”¨å™¨
     /* Set channel for LPUART */
-    DMAMUX_SetSource(DMAMUX, 0, kDmaRequestMuxLPUART1Tx);   //ÉèÖÃDMAÍ¨µÀ0 Ó³Éäµ½ LPUART1Tx
-    DMAMUX_SetSource(DMAMUX, 1, kDmaRequestMuxLPUART1Rx);   //ÉèÖÃDMAÍ¨µÀ1 Ó³Éäµ½ LPUART1Rx
-    DMAMUX_EnableChannel(DMAMUX, 0);                        //Ê¹ÄÜÍ¨µÀ0
-    DMAMUX_EnableChannel(DMAMUX, 1);                        //Ê¹ÄÜÍ¨µÀ1
+    DMAMUX_SetSource(DMAMUX, 0, kDmaRequestMuxLPUART1Tx);   //è®¾ç½®DMAé€šé“0 æ˜ å°„åˆ° LPUART1Tx
+    DMAMUX_SetSource(DMAMUX, 1, kDmaRequestMuxLPUART1Rx);   //è®¾ç½®DMAé€šé“1 æ˜ å°„åˆ° LPUART1Rx
+    DMAMUX_EnableChannel(DMAMUX, 0);                        //ä½¿èƒ½é€šé“0
+    DMAMUX_EnableChannel(DMAMUX, 1);                        //ä½¿èƒ½é€šé“1
     
-    edma_config_t config;     //DMAÅäÖÃ½á¹¹Ìå
+    edma_config_t config;     //DMAé…ç½®ç»“æ„ä½“
     /* Init the EDMA module */
-    EDMA_GetDefaultConfig(&config); //µÃµ½Ä¬ÈÏDMAÅäÖÃ
-    EDMA_Init(DMA0, &config);       //³õÊ¼»¯ÅäÖÃDMA
+    EDMA_GetDefaultConfig(&config); //å¾—åˆ°é»˜è®¤DMAé…ç½®
+    EDMA_Init(DMA0, &config);       //åˆå§‹åŒ–é…ç½®DMA
     
 
-    EDMA_CreateHandle(&g_lpuartTxEdmaHandle, DMA0, 0);  // ´´½¨DMA¾ä±ú£¬½«DMA0£¬ Í¨µÀ0£¬ µÈĞÅÏ¢´æ·ÅÔÚg_lpuartTxEdmaHandle½á¹¹ÌåÖĞ
-    EDMA_CreateHandle(&g_lpuartRxEdmaHandle, DMA0, 1);  // ´´½¨DMA¾ä±ú£¬½«DMA0£¬ Í¨µÀ1£¬ µÈĞÅÏ¢´æ·ÅÔÚg_lpuartRxEdmaHandle½á¹¹ÌåÖĞ
+    EDMA_CreateHandle(&g_lpuartTxEdmaHandle, DMA0, 0);  // åˆ›å»ºDMAå¥æŸ„ï¼Œå°†DMA0ï¼Œ é€šé“0ï¼Œ ç­‰ä¿¡æ¯å­˜æ”¾åœ¨g_lpuartTxEdmaHandleç»“æ„ä½“ä¸­
+    EDMA_CreateHandle(&g_lpuartRxEdmaHandle, DMA0, 1);  // åˆ›å»ºDMAå¥æŸ„ï¼Œå°†DMA0ï¼Œ é€šé“1ï¼Œ ç­‰ä¿¡æ¯å­˜æ”¾åœ¨g_lpuartRxEdmaHandleç»“æ„ä½“ä¸­
 
 
     /* Create LPUART DMA handle. */
     LPUART_TransferCreateHandleEDMA(LPUART1, &g_lpuartEdmaHandle, LPUART_UserCallback, NULL, &g_lpuartTxEdmaHandle,
-                                    &g_lpuartRxEdmaHandle);    // ´´½¨´®¿ÚDMA¾ä±ú  ²¢½«LPUART1£¬LPUART_UserCallback, NULL, &g_lpuartTxEdmaHandle, &g_lpuartRxEdmaHandleĞÅÏ¢´æ·ÅÔÚg_lpuartEdmaHandleÖĞ
+                                    &g_lpuartRxEdmaHandle);    // åˆ›å»ºä¸²å£DMAå¥æŸ„  å¹¶å°†LPUART1ï¼ŒLPUART_UserCallback, NULL, &g_lpuartTxEdmaHandle, &g_lpuartRxEdmaHandleä¿¡æ¯å­˜æ”¾åœ¨g_lpuartEdmaHandleä¸­
 
 }
 
