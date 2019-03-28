@@ -1,5 +1,7 @@
 
 #include "include.h"
+#include "LQ_SGP18Test.h"
+#include "system.h"
 /*******************************************************************************
 *  SDK提供了两种在Noncacheable区定义缓冲区和变量的方法：
 *  AT_NONCACHEABLE_SECTION_ALIGN(var, alignbytes)
@@ -26,7 +28,8 @@ int OFFSET2=0;      //最近，第三格
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_SGP18_OV7725(void)
 {
-    TFTSPI_Init();               //TFT1.8初始化     
+  LCD_Init(); 
+  LCD_CLS();    
     uint32_t fullCameraBufferAddr;     
     LQ_Camera_Init();
 //    if (SCB_CCR_IC_Msk == (SCB_CCR_IC_Msk & SCB->CCR)) {   
@@ -43,12 +46,12 @@ void Test_SGP18_OV7725(void)
         {
         }   
         CAMERA_RECEIVER_SubmitEmptyBuffer(&cameraReceiver, fullCameraBufferAddr);//将照相机缓冲区提交到缓冲队列        
-        TFTSPI_Set_Pos(20,0,(APP_CAMERA_WIDTH/4-1) + 20,APP_CAMERA_HEIGHT/4);
+        //TFTSPI_Set_Pos(20,0,(APP_CAMERA_WIDTH/4-1) + 20,APP_CAMERA_HEIGHT/4);
         for(int i = 0; i < APP_CAMERA_HEIGHT; i+=4)  //隔一行取一行
         {
             for(int j = 0; j < APP_CAMERA_WIDTH ; j+=4)//隔一列取一列
             {
-                TFTSPI_Write_Word (*((uint16_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH + j)); //显示数据
+               // TFTSPI_Write_Word (*((uint16_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH + j)); //显示数据
             }
         }
         
@@ -67,8 +70,8 @@ void Test_SGP18_OV7725(void)
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_SGP18_Camera(void)
 {
-    TFTSPI_Init();               //TFT1.8初始化  
-    TFTSPI_CLS(u16BLUE);           //清屏
+  LCD_Init(); 
+  LCD_CLS();
     uint32_t fullCameraBufferAddr;   
 #ifdef LQOV7725
     cameraConfig.pixelFormat = kVIDEO_PixelFormatYUYV;
@@ -91,7 +94,7 @@ void Test_SGP18_Camera(void)
         
 #ifdef LQMT9V034  
 #if (IMAGEH == 480/4  && IMAGEW == 752/4)
-        TFTSPI_Set_Pos(15,0,(uint8_t)(APP_CAMERA_WIDTH/2-1)+15 ,APP_CAMERA_HEIGHT);//注意 设置显示大小要与下面的实际显示大小相等，不然会显示不出来或者花屏
+        //TFTSPI_Set_Pos(15,0,(uint8_t)(APP_CAMERA_WIDTH/2-1)+15 ,APP_CAMERA_HEIGHT);//注意 设置显示大小要与下面的实际显示大小相等，不然会显示不出来或者花屏
         for(int i = 0; i < APP_CAMERA_HEIGHT; i+=2)  //  480/4/2/2 = 30
         {
             for(int j = 0; j < APP_CAMERA_WIDTH*2; j+=2)//隔2列取一列  752*2/4/2 = 188   //两行数据 一行94像素  实际显示分辨率  94*60
@@ -101,7 +104,7 @@ void Test_SGP18_Camera(void)
                 color=(((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>3))<<11;
                 color=color|((((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>2))<<5);
                 color=color|(((*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j))>>3));
-                TFTSPI_Write_Word(color);
+                //TFTSPI_Write_Word(color);
                 //二值化显示
 //                if(*((uint8_t *)fullCameraBufferAddr +  i * APP_CAMERA_WIDTH * 2 + j) > 0x60)  //阈值0x60 二值化显示
 //                  TFTSPI_Write_Word (0xffff); //显示数据

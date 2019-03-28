@@ -1,4 +1,5 @@
 #include "include.h"
+#include "system.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
@@ -85,8 +86,8 @@ void Test_9AX(void)
 {
     LQ_Camera_Init();
     int16_t u16data[9];  //存放读取传感器 数据
-    TFTSPI_Init();               //TFT1.8初始化  
-    TFTSPI_CLS(u16BLUE);           //清屏
+  LCD_Init(); 
+  LCD_CLS();
     LQ_init9AX();                //九轴初始化
     
     char txt[16];
@@ -97,23 +98,23 @@ void Test_9AX(void)
       Sensor_ReadData(u16data); // Read sensor data  
 
       sprintf(txt,"AX:  %5d ",(int16_t)u16data[0]); 
-      TFTSPI_P8X8Str(0,0,(uint8_t*)txt,u16RED,u16BLUE);
+      LCD_P6x8Str(0,0,(uint8_t*)txt);
       sprintf(txt,"AY:  %5d ",(int16_t)u16data[1]); 
-      TFTSPI_P8X8Str(0,1,(uint8_t*)txt,u16RED,u16BLUE); 
+      LCD_P6x8Str(0,1,(uint8_t*)txt); 
       sprintf(txt,"AZ:  %5d ",(int16_t)u16data[2]); 
-      TFTSPI_P8X8Str(0,2,(uint8_t*)txt,u16RED,u16BLUE);
+      LCD_P6x8Str(0,2,(uint8_t*)txt);
       sprintf(txt,"MX:  %5d ",(int16_t)u16data[3]);  
-      TFTSPI_P8X8Str(0,3,(uint8_t*)txt,u16RED,u16BLUE);
+      LCD_P6x8Str(0,3,(uint8_t*)txt);
       sprintf(txt,"MY:  %5d ",(int16_t)u16data[4]); 
-      TFTSPI_P8X8Str(0,4,(uint8_t*)txt,u16RED,u16BLUE);
+      LCD_P6x8Str(0,4,(uint8_t*)txt);
       sprintf(txt,"MZ:  %5d ",(int16_t)u16data[5]);
-      TFTSPI_P8X8Str(0,5,(uint8_t*)txt,u16RED,u16BLUE);
+      LCD_P6x8Str(0,5,(uint8_t*)txt);
       sprintf(txt,"GX:  %5d ",(int16_t)u16data[6]);  
-      TFTSPI_P8X8Str(0,6,(uint8_t*)txt,u16RED,u16BLUE);
+      LCD_P6x8Str(0,6,(uint8_t*)txt);
       sprintf(txt,"GY:  %5d ",(int16_t)u16data[7]);
-      TFTSPI_P8X8Str(0,7,(uint8_t*)txt,u16RED,u16BLUE); 
+      LCD_P6x8Str(0,7,(uint8_t*)txt); 
       sprintf(txt,"GZ:  %5d ",(int16_t)u16data[8]); 
-      TFTSPI_P8X8Str(0,8,(uint8_t*)txt,u16RED,u16BLUE);
+      LCD_P6x8Str(0,8,(uint8_t*)txt);
       printf("\r\nAX: %d  ",(int16_t)u16data[0]); 
       printf("\r\nAY: %d  ",(int16_t)u16data[1]);
       printf("\r\nAZ: %d  ",(int16_t)u16data[2]); 

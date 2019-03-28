@@ -14,9 +14,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
 #include "system.h"
 
-//为了去掉报错
-#define APP_LCD_WIDTH           122
-#define APP_LCD_HEIGHT          88
+#include "LQ_SGP18Test.h"
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
 【作  者】Z
@@ -52,9 +50,9 @@ void LQ_PXP_Init(void)
         outputBufferConfig.pixelFormat = kPXP_OutputPixelFormatARGB8888;//kPXP_OutputPixelFormatRGB888,
         outputBufferConfig.interlacedMode = kPXP_OutputProgressive;
         outputBufferConfig.buffer1Addr = 0U;
-        outputBufferConfig.pitchBytes = APP_LCD_WIDTH * 4;
-        outputBufferConfig.width = APP_LCD_WIDTH;
-        outputBufferConfig.height = APP_LCD_HEIGHT;
+//        outputBufferConfig.pitchBytes = APP_LCD_WIDTH * 4;
+//        outputBufferConfig.width = APP_LCD_WIDTH;
+//        outputBufferConfig.height = APP_LCD_HEIGHT;
      
     
 #ifdef LQMT9V034 //LQMT9V034模块
@@ -64,7 +62,7 @@ void LQ_PXP_Init(void)
 #else  //LQOV7725模块
     PXP_SetCsc1Mode(PXP, kPXP_Csc1YCbCr2RGB);//设置 csc1  kPXP_Csc1YCbCr转换为rgb888
     PXP_EnableCsc1(PXP, false);               //当设置7725输出图像格式为yuyv时，使用使能csc1
-    PXP_SetProcessSurfaceScaler(PXP, APP_CAMERA_WIDTH, APP_CAMERA_HEIGHT, 376, 272);//缩放图像
+    //PXP_SetProcessSurfaceScaler(PXP, APP_CAMERA_WIDTH, APP_CAMERA_HEIGHT, 376, 272);//缩放图像
     PXP_SetProcessSurfacePosition(PXP, 52u, 0u, 428 - 1U, 272 - 1U);                //设置显示位置
 #endif
     

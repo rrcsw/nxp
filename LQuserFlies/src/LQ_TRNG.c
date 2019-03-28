@@ -1,36 +1,37 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËÐÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ð´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
+#include "system.h"
 
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define TRNG_EXAMPLE_RANDOM_NUMBER 10  //Ã¿´ÎÉú³É10¸ö32Î»Ëæ»úÊý
+#define TRNG_EXAMPLE_RANDOM_NUMBER 10  //æ¯æ¬¡ç”Ÿæˆ10ä¸ª32ä½éšæœºæ•°
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔÓ²¼þËæ»úÊý·¢Éú¹¦ÄÜ
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æµ‹è¯•ç¡¬ä»¶éšæœºæ•°å‘ç”ŸåŠŸèƒ½
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_RNG(void)
 {
@@ -72,23 +73,23 @@ void Test_RNG(void)
      * trngConfig.frequencyCountLimit.maximum = TRNG_USER_CONFIG_DEFAULT_FREQUENCY_MAXIMUM;
      * trngConfig.frequencyCountLimit.minimum = TRNG_USER_CONFIG_DEFAULT_FREQUENCY_MINIMUM;
      */
-    TRNG_GetDefaultConfig(&trngConfig);//»ñÈ¡Ä¬ÈÏÉèÖÃ
-    //²ÉÑùÄ£Ê½ÉèÖÃÎªVon Neumann,»ñµÃ½Ï¼ÑÊý¾Ý£¬Ò²¿É²»ÓÃÉèÖÃ   
+    TRNG_GetDefaultConfig(&trngConfig);//èŽ·å–é»˜è®¤è®¾ç½®
+    //é‡‡æ ·æ¨¡å¼è®¾ç½®ä¸ºVon Neumann,èŽ·å¾—è¾ƒä½³æ•°æ®ï¼Œä¹Ÿå¯ä¸ç”¨è®¾ç½®   
     trngConfig.sampleMode = kTRNG_SampleModeVonNeumann;
 
-    //³õÊ¼»¯TRNG
+    //åˆå§‹åŒ–TRNG
     status = TRNG_Init(TRNG, &trngConfig);
     if (kStatus_Success == status)
     {
         while (1)
         {
-            printf("\r\nÉú³É%d¸ö32Î»Ëæ»úÊý£¬ÈçÏÂ: \r\n", TRNG_EXAMPLE_RANDOM_NUMBER);
+            printf("\r\nç”Ÿæˆ%dä¸ª32ä½éšæœºæ•°ï¼Œå¦‚ä¸‹: \r\n", TRNG_EXAMPLE_RANDOM_NUMBER);
 
-            //»ñµÃËæ»úÊý
+            //èŽ·å¾—éšæœºæ•°
             status = TRNG_GetRandomData(TRNG, data, sizeof(data));
             if (status == kStatus_Success)
             {
-                //Êä³öËæ»úÊýµ½´®¿ÚÖúÊÖ
+                //è¾“å‡ºéšæœºæ•°åˆ°ä¸²å£åŠ©æ‰‹
                 for (i = 0; i < TRNG_EXAMPLE_RANDOM_NUMBER; i++)
                 {
                     printf("Random[%d] = 0x%X\r\n", i, data[i]);
@@ -98,8 +99,8 @@ void Test_RNG(void)
             {
                 printf("TRNG failed!\r\n");
             }            
-        LED_Ctrl(LED_B, RVS); //EVK LEDÉÁË¸  
-        delayms(1000);        //ÑÓÊ±1Ãë
+        LED_Ctrl(LED_B, RVS); //EVK LEDé—ªçƒ  
+        delayms(1000);        //å»¶æ—¶1ç§’
         }
     }
     else

@@ -12,11 +12,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "oled.h"
 
+#define LCD_DC(n)		GPIO_PinWrite(GPIO2,15,n)
+#define LCD_RST(n)	GPIO_PinWrite(GPIO2,20,n)
+#define LCD_SDA(n)	GPIO_PinWrite(GPIO2,21,n)
+#define LCD_SCL(n)  GPIO_PinWrite(GPIO2,19,n)
 
-#define LCD_DC	PT2_15   //E11
-#define LCD_RST	PT2_20   //E12
-#define LCD_SDA	PT2_21   //D12
-#define LCD_SCL	PT2_19   //D11
 
 #define X_WIDTH 132
 #define Y_WIDTH 64
@@ -285,19 +285,20 @@ void delay_1us(unsigned int Del_1ms)		//
 }
 void LCD_WrDat(unsigned char data)
 {
-  unsigned char i=8;
+  unsigned char i = 8;
   //LCD_CS=0;;
-  LCD_DC=1;;
-  LCD_SCL=0;;
+  LCD_DC(1);
+  LCD_SCL(0);
   delay_1us(1);	    
   while(i--)
   {
-    if(data&0x80){LCD_SDA=1;}
-    else{LCD_SDA=0;}
-    LCD_SCL=1; 
-    delay_1us(1);	
-    //asm("nop");            
-    LCD_SCL=0;;    
+    if(data&0x80)
+			LCD_SDA(1);
+    else
+			LCD_SDA(0);
+    LCD_SCL(1);
+    delay_1us(1);	          
+    LCD_SCL(0);    
     data<<=1;    
   }
   //LCD_CS=1;
@@ -307,16 +308,18 @@ void LCD_WrCmd(unsigned char cmd)
   unsigned char i=8;
   
   //LCD_CS=0;;
-  LCD_DC=0;;
-  LCD_SCL=0;;
+  LCD_DC(0);
+  LCD_SCL(0);
   delay_1us(1);	  
   while(i--)
   {
-    if(cmd&0x80){LCD_SDA=1;}
-    else{LCD_SDA=0;;}
-    LCD_SCL=1;;
+    if(cmd&0x80)
+			LCD_SDA(1);
+    else
+			LCD_SDA(0);
+    LCD_SCL(1);
     delay_1us(1);	            
-    LCD_SCL=0;;    
+    LCD_SCL(0);    
     cmd<<=1;;   
   } 	
   //LCD_CS=1;
@@ -355,8 +358,10 @@ void LCD_CLS(void)
 
 void LCD_Init(void)        
 { 
-  //-----端口初始化----//
-  CLOCK_EnableClock(kCLOCK_Iomuxc);           // IO口时钟使能
+	gpio_pin_config_t gpio_pin;
+
+  //-----???ú3?ê??ˉ----//
+  CLOCK_EnableClock(kCLOCK_Iomuxc);           // IO?úê±?óê1?ü
 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B0_15_GPIO2_IO15,0U);   //E11                                                      
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_03_GPIO2_IO19, 0U);  //D11
@@ -366,18 +371,22 @@ void LCD_Init(void)
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_15_GPIO2_IO15,0x10B0u);                                                   
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_03_GPIO2_IO19,0x10B0u);
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_04_GPIO2_IO20,0x10B0u);
-  IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_05_GPIO2_IO21,0x10B0u);  
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_05_GPIO2_IO21,0x10B0u); 
+
+	gpio_pin.direction = kGPIO_DigitalOutput;
+	gpio_pin.interruptMode = kGPIO_NoIntmode;
+	gpio_pin.outputLogic = 0;
+
+  GPIO_PinInit(GPIO2, 15, &gpio_pin);      
+  GPIO_PinInit(GPIO2, 19, &gpio_pin);      
+  GPIO_PinInit(GPIO2, 20, &gpio_pin);      
+  GPIO_PinInit(GPIO2, 21, &gpio_pin); 
   
-  GPIO_PinInit(GPIO2, 15, &GPIO_Output_Config);      
-  GPIO_PinInit(GPIO2, 19, &GPIO_Output_Config);      
-  GPIO_PinInit(GPIO2, 20, &GPIO_Output_Config);      
-  GPIO_PinInit(GPIO2, 21, &GPIO_Output_Config); 
- 
-  LCD_SCL=1;
-  //LCD_CS=1;	//预制SLK和SS为高电平               
-  LCD_RST=0;
+  LCD_SCL(1);
+  //LCD_CS=1;	//?¤??SLKoíSS?a??μ???               
+  LCD_RST(0);
   delayms(50);
-  LCD_RST=1;
+  LCD_RST(1);
   
   LCD_WrCmd(0xae);//--turn off oled panel
   LCD_WrCmd(0x00);//---set low column address
@@ -385,8 +394,8 @@ void LCD_Init(void)
   LCD_WrCmd(0x40);//--set start line address  Set Mapping RAM Display Start Line (0x00~0x3F)
   LCD_WrCmd(0x81);//--set contrast control register
   LCD_WrCmd(0xcf); // Set SEG Output Current Brightness
-  LCD_WrCmd(0xa1);//--Set SEG/Column Mapping     0xa0左右反置 0xa1正常
-  LCD_WrCmd(0xc8);//Set COM/Row Scan Direction   0xc0上下反置 0xc8正常
+  LCD_WrCmd(0xa1);//--Set SEG/Column Mapping     0xa0×óóò·′?? 0xa1?y3￡
+  LCD_WrCmd(0xc8);//Set COM/Row Scan Direction   0xc0é???·′?? 0xc8?y3￡
   LCD_WrCmd(0xa6);//--set normal display
   LCD_WrCmd(0xa8);//--set multiplex ratio(1 to 64)
   LCD_WrCmd(0x3f);//--1/64 duty
@@ -407,19 +416,19 @@ void LCD_Init(void)
   LCD_WrCmd(0xa4);// Disable Entire Display On (0xa4/0xa5)
   LCD_WrCmd(0xa6);// Disable Inverse Display On (0xa6/a7) 
   LCD_WrCmd(0xaf);//--turn on oled panel
-  LCD_Fill(0x00);  //初始清屏
+  LCD_Fill(0x00);  //3?ê????á
   LCD_Set_Pos(0,0);  
   
 } 
 //==============================================================
-//函数名： void LCD_PutPixel(unsigned char x,unsigned char y)
-//功能描述：绘制一个点（x,y）
-//参数：真实坐标值(x,y),x的范围0～127，y的范围0～64
-//返回：无
+//oˉêy??￡o void LCD_PutPixel(unsigned char x,unsigned char y)
+//1|?ü?èê?￡o????ò???μ?￡¨x,y￡?
+//2?êy￡o??êμ×?±ê?μ(x,y),xμ?·??§0??127￡?yμ?·??§0??64
+//·μ??￡o?T
 //==============================================================
 void LCD_PutPixel(unsigned char x,unsigned char y)
 {
-  unsigned char data1;  //data1当前点的数据 
+  unsigned char data1;  //data1μ±?°μ?μ?êy?Y 
   
   LCD_Set_Pos(x,(unsigned char)(y>>3)); 
   data1 =(unsigned char)(0x01<<(y%8)); 	
@@ -429,12 +438,12 @@ void LCD_PutPixel(unsigned char x,unsigned char y)
   LCD_WrDat(data1); 	 	
 }
 //==============================================================
-//函数名： void LCD_Rectangle(unsigned char x1,unsigned char y1,
+//oˉêy??￡o void LCD_Rectangle(unsigned char x1,unsigned char y1,
 //                   unsigned char x2,unsigned char y2,unsigned char color,unsigned char gif)
-//功能描述：绘制一个实心矩形
-//参数：左上角坐标（x1,y1）,右下角坐标（x2，y2）
-//      其中x1、x2的范围0～127，y1，y2的范围0～63，即真实坐标值
-//返回：无
+//1|?ü?èê?￡o????ò???êμD???D?
+//2?êy￡o×óé???×?±ê￡¨x1,y1￡?,óò????×?±ê￡¨x2￡?y2￡?
+//      ???Dx1?￠x2μ?·??§0??127￡?y1￡?y2μ?·??§0??63￡??′??êμ×?±ê?μ
+//·μ??￡o?T
 //==============================================================
 void LCD_Rectangle(unsigned char x1,unsigned char y1,unsigned char x2,unsigned char y2,unsigned char gif)
 {
@@ -455,10 +464,10 @@ void LCD_Rectangle(unsigned char x1,unsigned char y1,unsigned char x2,unsigned c
   
 }  
 //==============================================================
-//函数名：LCD_P6x8Str(unsigned char x,unsigned char y,unsigned char *p)
-//功能描述：写入一组标准ASCII字符串
-//参数：显示的位置（x,y），y为页范围0～7，要显示的字符串
-//返回：无
+//oˉêy??￡oLCD_P6x8Str(unsigned char x,unsigned char y,unsigned char *p)
+//1|?ü?èê?￡oD′è?ò?×é±ê×?ASCII×?·?′?
+//2?êy￡o??ê?μ?????￡¨x,y￡?￡?y?aò3·??§0??7￡?òa??ê?μ?×?·?′?
+//·μ??￡o?T
 //==============================================================  
 void LCD_P6x8Str(unsigned char x,unsigned char y,unsigned char ch[])
 {
@@ -475,10 +484,10 @@ void LCD_P6x8Str(unsigned char x,unsigned char y,unsigned char ch[])
   }
 }
 //==============================================================
-//函数名：LCD_P8x16Str(unsigned char x,unsigned char y,unsigned char *p)
-//功能描述：写入一组标准ASCII字符串
-//参数：显示的位置（x,y），y为页范围0～7，要显示的字符串
-//返回：无
+//oˉêy??￡oLCD_P8x16Str(unsigned char x,unsigned char y,unsigned char *p)
+//1|?ü?èê?￡oD′è?ò?×é±ê×?ASCII×?·?′?
+//2?êy￡o??ê?μ?????￡¨x,y￡?￡?y?aò3·??§0??7￡?òa??ê?μ?×?·?′?
+//·μ??￡o?T
 //==============================================================  
 void LCD_P8x16Str(unsigned char x,unsigned char y,unsigned char ch[])
 {
@@ -499,12 +508,12 @@ void LCD_P8x16Str(unsigned char x,unsigned char y,unsigned char ch[])
   }
 }
 
-//输出汉字字符串
+
 void LCD_P14x16Str(unsigned char x,unsigned char y,unsigned char ch[])
 {
-}
 
-//输出汉字和字符混合字符串
+}
+//ê?3?oo×?oí×?·??ìo?×?·?′?
 void LCD_Print(unsigned char x, unsigned char y, unsigned char ch[])
 {
   unsigned char ch2[3];
@@ -515,16 +524,16 @@ void LCD_Print(unsigned char x, unsigned char y, unsigned char ch[])
     {
       ch2[0] = ch[ii];
       ch2[1] = ch[ii + 1];
-      ch2[2] = '\0';			//汉字为两个字节
-      LCD_P14x16Str(x , y, ch2);	//显示汉字
+      ch2[2] = '\0';			//oo×??aá???×??ú
+      LCD_P14x16Str(x , y, ch2);	//??ê?oo×?
       x += 14;
       ii += 2;
     }
     else
     {
       ch2[0] = ch[ii];	
-      ch2[1] = '\0';			//字母占一个字节
-      LCD_P8x16Str(x , y , ch2);	//显示字母
+      ch2[1] = '\0';			//×?????ò???×??ú
+      LCD_P8x16Str(x , y , ch2);	//??ê?×???
       x += 8;
       ii+= 1;
     }
@@ -532,10 +541,10 @@ void LCD_Print(unsigned char x, unsigned char y, unsigned char ch[])
 } 
 
 //==============================================================
-//函数名： void LCD_Show_BMP(unsigned char x,unsigned char y)
-//功能描述：显示BMP图片128×64
-//参数：起始点坐标(x,y),x的范围0～127，y为页的范围0～7
-//返回：无
+//oˉêy??￡o void LCD_Show_BMP(unsigned char x,unsigned char y)
+//1|?ü?èê?￡o??ê?BMPí???128?á64
+//2?êy￡o?eê?μ?×?±ê(x,y),xμ?·??§0??127￡?y?aò3μ?·??§0??7
+//·μ??￡o?T
 //==============================================================
 void LCD_Show_BMP(unsigned char x0,unsigned char y0,unsigned char x1,unsigned char y1,unsigned char * bmp)
 { 	
@@ -636,8 +645,29 @@ void LCD_ClrDot(unsigned char x)
   LCD_WrCmd((unsigned char)((x&0x0f)|0x00));
   LCD_WrDat(0x00);
 } 
-
-
+/*
+void LCD_Show_Road(void)
+{ 	
+int i = 0, j = 0,temp=0;
+for(i=0;i<56;i+=8)
+{
+LCD_Set_Pos(13,i/8);
+for(j=0;j<100;j++) 
+{ 
+temp=0;
+if(Copy_Image[0+i][j]) temp|=0x01;
+if(Copy_Image[1+i][j]) temp|=0x02;
+if(Copy_Image[2+i][j]) temp|=0x04;
+if(Copy_Image[3+i][j]) temp|=0x08;
+if(Copy_Image[4+i][j]) temp|=0x10;
+if(Copy_Image[5+i][j]) temp|=0x20;
+if(Copy_Image[6+i][j]) temp|=0x40;
+if(Copy_Image[7+i][j]) temp|=0x80;
+LCD_WrDat(temp); 	  	  	  	  
+	  	}
+	}           
+}
+*/
 void LCD_Show_Frame80(void)
 { 	
 
@@ -673,8 +703,8 @@ void LCD_Show_Frame80(void)
 }
 void LCD_Show_Frame100(void)
 { 	
-  LCD_Set_Pos(13,0);//第0行，第13列
-  LCD_WrDat(0xFF); //画竖线
+  LCD_Set_Pos(13,0);//μú0DD￡?μú13áD
+  LCD_WrDat(0xFF); //?-êú??
   LCD_Set_Pos(13,1);
   LCD_WrDat(0xFF); 
   LCD_Set_Pos(13,2);
@@ -709,8 +739,8 @@ void LCD_Show_Frame100(void)
 }
 void LCD_Show_Frame94(void)
 { 	
-  //LCD_Set_Pos(13,0);//第0行，第13列
-  //LCD_WrDat(0xFF); //画竖线
+  //LCD_Set_Pos(13,0);//μú0DD￡?μú13áD
+  //LCD_WrDat(0xFF); //?-êú??
   //LCD_Set_Pos(13,1);
   //LCD_WrDat(0xFF); 
   LCD_Set_Pos(23,2);
@@ -745,30 +775,30 @@ void LCD_Show_Frame94(void)
 }
 void Test_OLED(void)
 { 
-    LQ_KEY_Init();               //按键及输入口初始化  
-    LCD_Init();               //LCD初始化 
-    LCD_Show_LQLogo();        //显示LOGO
+    LQ_KEY_Init();               //°′?ü?°ê?è??ú3?ê??ˉ  
+    LCD_Init();               //LCD3?ê??ˉ 
+    LCD_Show_LQLogo();        //??ê?LOGO
     delayms(1000);  
-    LCD_CLS();                //LCD清屏      
+    LCD_CLS();                //LCD???á      
     LCD_P8x16Str(20,0,(uint8_t*)"LQ Test KEY");
     while (1)
     {  
-        //测试按键      
+        //2aê?°′?ü      
 
         switch(LQ_KEY_Read(0))  //
         {
             case 1:
-                LCD_CLS();  //清屏
+                LCD_CLS();  //???á
                 LCD_P6x8Str(13,3,(uint8_t*)"KEY0 Pressed!   ");
                 LED_Ctrl(LED_R, RVS);
                 break;           
             case 2:       
-                LCD_CLS();  //清屏
+                LCD_CLS();  //???á
                 LCD_P6x8Str(13,5,(uint8_t*)"KEY1 Pressed!   ");
                 LED_Ctrl(LED_G, RVS);
                 break;
             case 3:       
-                LCD_CLS();  //清屏
+                LCD_CLS();  //???á
                 LCD_P6x8Str(13,7,(uint8_t*)"KEY2 Pressed!   ");
                 LED_Ctrl(LED_G, RVS);
                 break;
@@ -777,8 +807,9 @@ void Test_OLED(void)
                 break;
         }    
 
-        //延时
+        //?óê±
         delayms(50);
     }
 }
+
 

@@ -66,4 +66,3 @@ stm32f10x.h
 stm32f10x_conf.h
 stm32f10x_it.c
 stm32f10x_it.h
-*.txt

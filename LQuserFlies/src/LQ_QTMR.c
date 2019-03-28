@@ -1,31 +1,32 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿ÁúÇñi.MX RT1052ºËĞÄ°å-ÖÇÄÜ³µ°å
-¡¾±à    Ğ´¡¿CHIUSIR
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê2ÔÂ1ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://shop36265907.taobao.com
+ã€å¹³    å°ã€‘é¾™é‚±i.MX RT1052æ ¸å¿ƒæ¿-æ™ºèƒ½è½¦æ¿
+ã€ç¼–    å†™ã€‘CHIUSIR
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´2æœˆ1æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://shop36265907.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿IAR8.20.1¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ i.MX RT1052
-¡¾Crystal¡¿ 24.000Mhz
-¡¾ARM PLL¡¿ 1200MHz
-¡¾SYS PLL¡¿ 528MHz
-¡¾USB PLL¡¿ 480MHz
+ã€dev.env.ã€‘IAR8.20.1åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ i.MX RT1052
+ã€Crystalã€‘ 24.000Mhz
+ã€ARM PLLã€‘ 1200MHz
+ã€SYS PLLã€‘ 528MHz
+ã€USB PLLã€‘ 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
+#include "system.h"
 
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿Õı½»½âÂë¹Ü½Å¸´ÓÃ³õÊ¼»¯
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜ã€‘æ­£äº¤è§£ç ç®¡è„šå¤ç”¨åˆå§‹åŒ–
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void QTMR_QD_InitPins(void) {
   CLOCK_EnableClock(kCLOCK_Iomuxc);          /* iomuxc clock (iomuxc_clk_enable): 0x03u */
@@ -60,19 +61,19 @@ void QTMR_QD_InitPins(void) {
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔÕı½»½âÂë¹¦ÄÜ
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ19ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘æµ‹è¯•æ­£äº¤è§£ç åŠŸèƒ½
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ19æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_QTMR_QD(void)
 {
     qtmr_config_t qtmrConfig;
     
-    QTMR_QD_InitPins();      //³õÊ¼»¯¶¨Ê±Æ÷µÄÊä³öÒı½Å
+    QTMR_QD_InitPins();      //åˆå§‹åŒ–å®šæ—¶å™¨çš„è¾“å‡ºå¼•è„š
      /*
      * qtmrConfig.debugMode = kQTMR_RunNormalInDebug;
      * qtmrConfig.enableExternalForce = false;
@@ -82,19 +83,19 @@ void Test_QTMR_QD(void)
      * qtmrConfig.primarySource = kQTMR_ClockDivide_2;
      * qtmrConfig.secondarySource = kQTMR_Counter0InputPin;
      */
-    QTMR_GetDefaultConfig(&qtmrConfig);   //µÃµ½Ä¬ÈÏµÄ²ÎÊı
+    QTMR_GetDefaultConfig(&qtmrConfig);   //å¾—åˆ°é»˜è®¤çš„å‚æ•°
 
-    qtmrConfig.primarySource = kQTMR_ClockCounter0InputPin;    //Counter0InputPin×÷ÎªÖ÷ÒªµÄÊäÈëÔ´£¬ÓÃÓÚÂö³åÊäÈë£¬J11Òı½ÅÓë±àÂëÆ÷µÄAÏàÏàÁ¬
-    qtmrConfig.secondarySource = kQTMR_Counter1InputPin;       //Counter1InputPin×÷Îª´ÎÒªµÄÊäÈëÔ´£¬ÓÃÓÚ·½ÏòÊäÈë£¬K11Òı½ÅÓë±àÂëÆ÷µÄDirÏàÁ¬
+    qtmrConfig.primarySource = kQTMR_ClockCounter0InputPin;    //Counter0InputPinä½œä¸ºä¸»è¦çš„è¾“å…¥æºï¼Œç”¨äºè„‰å†²è¾“å…¥ï¼ŒJ11å¼•è„šä¸ç¼–ç å™¨çš„Aç›¸ç›¸è¿
+    qtmrConfig.secondarySource = kQTMR_Counter1InputPin;       //Counter1InputPinä½œä¸ºæ¬¡è¦çš„è¾“å…¥æºï¼Œç”¨äºæ–¹å‘è¾“å…¥ï¼ŒK11å¼•è„šä¸ç¼–ç å™¨çš„Dirç›¸è¿
     
-    QTMR_Init(TMR3, kQTMR_Channel_0, &qtmrConfig);             //³õÊ¼»¯TMR3µÄÍ¨µÀ0
+    QTMR_Init(TMR3, kQTMR_Channel_0, &qtmrConfig);             //åˆå§‹åŒ–TMR3çš„é€šé“0
 
-    QTMR_StartTimer(TMR3, kQTMR_Channel_0, kQTMR_PriSrcRiseEdgeSecDir);   //¿ªÆôTMR3Í¨µÀ0µÄ¼ÆÊıÆ÷£¬¼ÆÊıÄ£Ê½Ê¹ÓÃ´ø·½Ïò¼ÆÊıÄ£Ê½
+    QTMR_StartTimer(TMR3, kQTMR_Channel_0, kQTMR_PriSrcRiseEdgeSecDir);   //å¼€å¯TMR3é€šé“0çš„è®¡æ•°å™¨ï¼Œè®¡æ•°æ¨¡å¼ä½¿ç”¨å¸¦æ–¹å‘è®¡æ•°æ¨¡å¼
 
     while (1)
     {   
-      printf("\r\nInput Captured value=%d\n", (int16_t)TMR3->CHANNEL[kQTMR_Channel_0].CNTR);  //´òÓ¡Î»ÖÃ
-      TMR3->CHANNEL[kQTMR_Channel_0].CNTR = 0;            //Çå¿Õ¼ÆÊıÆ÷
+      printf("\r\nInput Captured value=%d\n", (int16_t)TMR3->CHANNEL[kQTMR_Channel_0].CNTR);  //æ‰“å°ä½ç½®
+      TMR3->CHANNEL[kQTMR_Channel_0].CNTR = 0;            //æ¸…ç©ºè®¡æ•°å™¨
       LED_Ctrl(LED_R, RVS); 
       delayms(100);
     }
@@ -102,35 +103,35 @@ void Test_QTMR_QD(void)
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿PWM¹¦ÄÜ¹Ü½Å³õÊ¼»¯
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜ã€‘PWMåŠŸèƒ½ç®¡è„šåˆå§‹åŒ–
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void QTMR_PWM_InitPins(void) {
   CLOCK_EnableClock(kCLOCK_Iomuxc);         
-  IOMUXC_SetPinMux(IOMUXC_GPIO_B0_03_QTIMER2_TIMER0,0U);   //BGA¹Ü½ÅD8  GPIO_B0_03                              
-  IOMUXC_SetPinMux(IOMUXC_GPIO_B0_04_QTIMER2_TIMER1,0U);   //BGA¹Ü½ÅC8  GPIO_B0_05
+  IOMUXC_SetPinMux(IOMUXC_GPIO_B0_03_QTIMER2_TIMER0,0U);   //BGAç®¡è„šD8  GPIO_B0_03                              
+  IOMUXC_SetPinMux(IOMUXC_GPIO_B0_04_QTIMER2_TIMER1,0U);   //BGAç®¡è„šC8  GPIO_B0_05
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_03_QTIMER2_TIMER0,0x10B0u); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_04_QTIMER2_TIMER1,0x10B0u); 
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿QTMR ³õÊ¼»¯ÎªPWM¹¦ÄÜ
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ19ÈÕ 
-¡¾º¯ÊıÃû¡¿Ê¹ÓÃIpgÊ±ÖÓµÄ64·ÖÆµ  150Mhz / 64 = 2.34375 Mhz   qtmrÊÇ16Î»µÄ¼ÆÊıÆ÷£¬×î´ó65535  ×îĞ¡ÆµÂÊ = 2.34375 Mhz / 65535 = 36hz
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘QTMR åˆå§‹åŒ–ä¸ºPWMåŠŸèƒ½
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ19æ—¥ 
+ã€å‡½æ•°åã€‘ä½¿ç”¨Ipgæ—¶é’Ÿçš„64åˆ†é¢‘  150Mhz / 64 = 2.34375 Mhz   qtmræ˜¯16ä½çš„è®¡æ•°å™¨ï¼Œæœ€å¤§65535  æœ€å°é¢‘ç‡ = 2.34375 Mhz / 65535 = 36hz
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LQ_QTMR2_PWM_Init(uint32_t  frequency, uint16_t duty)
 {
-    QTMR_PWM_InitPins();    //³õÊ¼»¯¶¨Ê±Æ÷µÄÊä³öÒı½Å
+    QTMR_PWM_InitPins();    //åˆå§‹åŒ–å®šæ—¶å™¨çš„è¾“å‡ºå¼•è„š
     
-    qtmr_config_t qtmrConfig;    //qtmrÅäÖÃ½á¹¹Ìå
+    qtmr_config_t qtmrConfig;    //qtmré…ç½®ç»“æ„ä½“
 
     /*
      * qtmrConfig.debugMode = kQTMR_RunNormalInDebug;
@@ -138,63 +139,63 @@ void LQ_QTMR2_PWM_Init(uint32_t  frequency, uint16_t duty)
      * qtmrConfig.enableMasterMode = false;
      * qtmrConfig.faultFilterCount = 0;
      * qtmrConfig.faultFilterPeriod = 0;
-     * qtmrConfig.primarySource = kQTMR_ClockDivide_2;   //Ê±ÖÓÖ÷ÒªÀ´Ô´
-     * qtmrConfig.secondarySource = kQTMR_Counter0InputPin;  //Ê±ÖÓµÚ¶şÀ´Ô´
+     * qtmrConfig.primarySource = kQTMR_ClockDivide_2;   //æ—¶é’Ÿä¸»è¦æ¥æº
+     * qtmrConfig.secondarySource = kQTMR_Counter0InputPin;  //æ—¶é’Ÿç¬¬äºŒæ¥æº
      */
-    QTMR_GetDefaultConfig(&qtmrConfig);        //µÃµ½Ä¬ÈÏ½á¹¹Ìå
+    QTMR_GetDefaultConfig(&qtmrConfig);        //å¾—åˆ°é»˜è®¤ç»“æ„ä½“
     /* Use IP bus clock div by 64 */
-    qtmrConfig.primarySource = kQTMR_ClockDivide_64;  //Ê¹ÓÃIpgÊ±ÖÓµÄ64·ÖÆµ  150Mhz / 64 = 2.34375 Mhz   qtmrÊÇ16Î»µÄ¼ÆÊıÆ÷£¬×î´ó65535  
+    qtmrConfig.primarySource = kQTMR_ClockDivide_64;  //ä½¿ç”¨Ipgæ—¶é’Ÿçš„64åˆ†é¢‘  150Mhz / 64 = 2.34375 Mhz   qtmræ˜¯16ä½çš„è®¡æ•°å™¨ï¼Œæœ€å¤§65535  
 
-    QTMR_Init(TMR2, kQTMR_Channel_0, &qtmrConfig);      //³õÊ¼»¯TMR2 µÄ Í¨µÀ 0
-    QTMR_Init(TMR2, kQTMR_Channel_1, &qtmrConfig);      //³õÊ¼»¯TMR2 µÄ Í¨µÀ 1
-    printf("\r\n****Ipg clock is %d.****\n",(CLOCK_GetFreq(kCLOCK_IpgClk)));   //´òÓ¡IPGÊ±ÖÓ
-    //³õÊ¼»¯PWM   TMR2   Í¨µÀ0          PWMÆµÂÊ   Õ¼¿Õ±È  ¼«ĞÔ    Ê±ÖÓÆµÂÊ
-    QTMR_SetupPwm(TMR2,kQTMR_Channel_0,frequency,duty,false,CLOCK_GetFreq(kCLOCK_IpgClk)/64); //³õÊ¼»¯PWM
+    QTMR_Init(TMR2, kQTMR_Channel_0, &qtmrConfig);      //åˆå§‹åŒ–TMR2 çš„ é€šé“ 0
+    QTMR_Init(TMR2, kQTMR_Channel_1, &qtmrConfig);      //åˆå§‹åŒ–TMR2 çš„ é€šé“ 1
+    printf("\r\n****Ipg clock is %d.****\n",(CLOCK_GetFreq(kCLOCK_IpgClk)));   //æ‰“å°IPGæ—¶é’Ÿ
+    //åˆå§‹åŒ–PWM   TMR2   é€šé“0          PWMé¢‘ç‡   å ç©ºæ¯”  ææ€§    æ—¶é’Ÿé¢‘ç‡
+    QTMR_SetupPwm(TMR2,kQTMR_Channel_0,frequency,duty,false,CLOCK_GetFreq(kCLOCK_IpgClk)/64); //åˆå§‹åŒ–PWM
     QTMR_SetupPwm(TMR2,kQTMR_Channel_1,frequency,duty,false,CLOCK_GetFreq(kCLOCK_IpgClk)/64); 
     
-    QTMR_StartTimer(TMR2,kQTMR_Channel_0,kQTMR_PriSrcRiseEdge); //Í¨µÀ0ÔÚprimaryÊ±ÖÓÔ´µÄÉÏÉıÑØ¼ÆÊı
-    QTMR_StartTimer(TMR2,kQTMR_Channel_1,kQTMR_PriSrcRiseEdge); //Í¨µÀ0ÔÚprimaryÊ±ÖÓÔ´µÄÉÏÉıÑØ¼ÆÊı
+    QTMR_StartTimer(TMR2,kQTMR_Channel_0,kQTMR_PriSrcRiseEdge); //é€šé“0åœ¨primaryæ—¶é’Ÿæºçš„ä¸Šå‡æ²¿è®¡æ•°
+    QTMR_StartTimer(TMR2,kQTMR_Channel_1,kQTMR_PriSrcRiseEdge); //é€šé“0åœ¨primaryæ—¶é’Ÿæºçš„ä¸Šå‡æ²¿è®¡æ•°
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿ÉèÖÃPWMÆµÂÊºÍÕ¼¿Õ±È  ¼ÆÊ±Æ÷Ê¹ÓÃ±äÆµPWM¼ÆÊıÄ£Ê½£¬¿ÉÒÔÊ¹ÓÃ¹Ì¶¨ÆµÂÊ£¬Ò²¿ÉÒÔÊ¹ÓÃ±äÆµ
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ19ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘è®¾ç½®PWMé¢‘ç‡å’Œå ç©ºæ¯”  è®¡æ—¶å™¨ä½¿ç”¨å˜é¢‘PWMè®¡æ•°æ¨¡å¼ï¼Œå¯ä»¥ä½¿ç”¨å›ºå®šé¢‘ç‡ï¼Œä¹Ÿå¯ä»¥ä½¿ç”¨å˜é¢‘
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ19æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LQ_QTMR_Set_Duty(uint32_t  frequency, uint16_t duty)
 {
     uint32_t srcclk,period,hightime,lowtime;
     
-    srcclk=CLOCK_GetFreq(kCLOCK_IpgClk)/64;   // Ê±ÖÓ×Ô¼ºÅäÖÃ£¬Àı³ÌÉÏÅäÖÃµÄÊÇIPGµÄ64·ÖÆµ 150Mhz / 64 = 2.34375 Mhz
+    srcclk=CLOCK_GetFreq(kCLOCK_IpgClk)/64;   // æ—¶é’Ÿè‡ªå·±é…ç½®ï¼Œä¾‹ç¨‹ä¸Šé…ç½®çš„æ˜¯IPGçš„64åˆ†é¢‘ 150Mhz / 64 = 2.34375 Mhz
     
-    period=(srcclk/frequency);          //Ò»¸öPWMÖÜÆÚĞèÒªµÄ¼ÆÊıÖµ =  ¼ÆÊıÆ÷1s¼ÆÊı´ÎÊı  /  ÆµÂÊ 
-    hightime=(period*duty)/100;         //Ò»¸öPWMÖÜÆÚÖĞ¸ßµçÆ½Ê±¼ä(¼ÆÊıÖµ)  hightime=(period*duty)/1000;  duty×î´óÖµ 1000
-    lowtime=period-hightime;            //Ò»¸öPWMÖÜÆÚÖĞµÍµçÆ½Ê±¼ä(¼ÆÊıÖµ)
+    period=(srcclk/frequency);          //ä¸€ä¸ªPWMå‘¨æœŸéœ€è¦çš„è®¡æ•°å€¼ =  è®¡æ•°å™¨1sè®¡æ•°æ¬¡æ•°  /  é¢‘ç‡ 
+    hightime=(period*duty)/100;         //ä¸€ä¸ªPWMå‘¨æœŸä¸­é«˜ç”µå¹³æ—¶é—´(è®¡æ•°å€¼)  hightime=(period*duty)/1000;  dutyæœ€å¤§å€¼ 1000
+    lowtime=period-hightime;            //ä¸€ä¸ªPWMå‘¨æœŸä¸­ä½ç”µå¹³æ—¶é—´(è®¡æ•°å€¼)
     
     TMR2->CHANNEL[kQTMR_Channel_0].CMPLD1=lowtime;
     TMR2->CHANNEL[kQTMR_Channel_0].CMPLD2=hightime;
     
-    TMR2->CHANNEL[kQTMR_Channel_1].CMPLD1=hightime;     //ºÍÍ¨µÀ0Ïà·´
+    TMR2->CHANNEL[kQTMR_Channel_1].CMPLD1=hightime;     //å’Œé€šé“0ç›¸å
     TMR2->CHANNEL[kQTMR_Channel_1].CMPLD2=lowtime;
 
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔPWM¹¦ÄÜ
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2018Äê11ÔÂ19ÈÕ 
-¡¾º¯ÊıÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎŞ
-¡¾²ÎÊıÖµ¡¿ÎŞ
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜ã€‘æµ‹è¯•PWMåŠŸèƒ½
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2018å¹´11æœˆ19æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›å€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_QTMR_PWM(void)
 {
-    LQ_QTMR2_PWM_Init(12000, 0);//BGA¹Ü½ÅD8  GPIO_B0_03 
-                                //BGA¹Ü½ÅC8  GPIO_B0_04
+    LQ_QTMR2_PWM_Init(12000, 0);//BGAç®¡è„šD8  GPIO_B0_03 
+                                //BGAç®¡è„šC8  GPIO_B0_04
     delayms(1000);
     uint8_t i = 1;
     while(1)
@@ -203,7 +204,7 @@ void Test_QTMR_PWM(void)
         i++;
         delayms(2000);
         if(i > 100) i = 1;
-        LED_Color_Reverse(red); //ºìµÆÉÁË¸
+        LED_Color_Reverse(red); //çº¢ç¯é—ªçƒ
     }
 
 }

@@ -16,59 +16,59 @@
 
 
 /* Global Variable Definition ------------------------------------------------*/
-gpio_pin_config_t GPIO_Input_Config = {kGPIO_DigitalInput,      //ÊäÈë·½Ïò
-                                     1,                         //¸ßµçÆ½
-                                     kGPIO_NoIntmode,           //²»´¥·¢ÖÐ¶Ï
+gpio_pin_config_t GPIO_Input_Config = {kGPIO_DigitalInput,      //è¾“å…¥æ–¹å‘
+                                     1,                         //é«˜ç”µå¹³
+                                     kGPIO_NoIntmode,           //ä¸è§¦å‘ä¸­æ–­
                                      };
-//Ò»°ãÊäÈëÖÐ¶Ï¿Ú¹Ü½Å¶¨Òå
-gpio_pin_config_t GPIO_ExInt_Config = {kGPIO_DigitalInput,//GPIOÎªÊäÈë·½Ïò
-                                      0,                    //µÍµçÆ½
-                                      kGPIO_IntRisingEdge,  //ÉÏÉýÑØ´¥·¢ÖÐ¶Ï
+//ä¸€èˆ¬è¾“å…¥ä¸­æ–­å£ç®¡è„šå®šä¹‰
+gpio_pin_config_t GPIO_ExInt_Config = {kGPIO_DigitalInput,//GPIOä¸ºè¾“å…¥æ–¹å‘
+                                      0,                    //ä½Žç”µå¹³
+                                      kGPIO_IntRisingEdge,  //ä¸Šå‡æ²¿è§¦å‘ä¸­æ–­
                                       };
 
 
 /* Function Definition -------------------------------------------------------*/
 
 /*!
- * @brief °´¼ü³õÊ¼»¯
+ * @brief æŒ‰é”®åˆå§‹åŒ–
  */
 void LQ_KEY_Init(void)
 {  
-  CLOCK_EnableClock(kCLOCK_Iomuxc);          // IO¿ÚÊ±ÖÓÊ¹ÄÜ
+  CLOCK_EnableClock(kCLOCK_Iomuxc);          // IOå£æ—¶é’Ÿä½¿èƒ½
   
-  IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_04_GPIO3_IO04,0U);//¹Ü½ÅP2
-  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_11_GPIO2_IO27,0U);   //¹Ü½ÅC13
-  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_14_GPIO2_IO30,0U);   //¹Ü½ÅC14
+  IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_04_GPIO3_IO04,0U);//ç®¡è„šP2
+  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_11_GPIO2_IO27,0U);   //ç®¡è„šC13
+  IOMUXC_SetPinMux(IOMUXC_GPIO_B1_14_GPIO2_IO30,0U);   //ç®¡è„šC14
   
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_11_GPIO2_IO27,0xF080); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_14_GPIO2_IO30,0xF080);
   IOMUXC_SetPinConfig(IOMUXC_GPIO_SD_B1_04_GPIO3_IO04,0xF080);
  
-  GPIO_PinInit(GPIO2, 27, &GPIO_Input_Config);        // GPIOÊäÈë¿Ú£¬·ÇÖÐ¶Ï
-  GPIO_PinInit(GPIO2, 30, &GPIO_Input_Config);        // GPIOÊäÈë¿Ú£¬·ÇÖÐ¶Ï
-  GPIO_PinInit(GPIO3,  4, &GPIO_Input_Config);        // GPIOÊäÈë¿Ú£¬·ÇÖÐ¶Ï
+  GPIO_PinInit(GPIO2, 27, &GPIO_Input_Config);        // GPIOè¾“å…¥å£ï¼Œéžä¸­æ–­
+  GPIO_PinInit(GPIO2, 30, &GPIO_Input_Config);        // GPIOè¾“å…¥å£ï¼Œéžä¸­æ–­
+  GPIO_PinInit(GPIO3,  4, &GPIO_Input_Config);        // GPIOè¾“å…¥å£ï¼Œéžä¸­æ–­
      
 }
 
 
 
 /*!
- * @brief ¶ÁÈ¡°´¼ü
+ * @brief è¯»å–æŒ‰é”®
  *
- * @param °´¼üÄ£Ê½
+ * @param æŒ‰é”®æ¨¡å¼
  * @param pin GPIO port pin number.
  * @retval GPIO port input value.
  */
 uint8_t LQ_KEY_Read(uint8_t mode)
 {
-    static uint8_t key_up=1;     //°´¼üËÉ¿ª±êÖ¾
+    static uint8_t key_up=1;     //æŒ‰é”®æ¾å¼€æ ‡å¿—
     if(mode==1) 
     {
-      key_up=1;    //Ö§³ÖÁ¬°´
+      key_up=1;    //æ”¯æŒè¿žæŒ‰
     }
     if(key_up && (GPIO_PinRead(GPIO2, 27)==0 || GPIO_PinRead(GPIO2, 30)==0) || GPIO_PinRead(GPIO3, 4)==0)
     {
-      delayms(10);   //Ïû¶¶
+      delayms(10);   //æ¶ˆæŠ–
       key_up=0;
       if(GPIO_PinRead(GPIO2, 27)==0)      
       {
@@ -90,7 +90,7 @@ uint8_t LQ_KEY_Read(uint8_t mode)
     {
      key_up=1;   
     }
-    return 0;   //ÎÞ°´¼ü°´ÏÂ
+    return 0;   //æ— æŒ‰é”®æŒ‰ä¸‹
      
 }
 
@@ -103,73 +103,73 @@ uint8_t LQ_KEY_Read(uint8_t mode)
 volatile bool g_InputSignal = false;
 volatile int key_ok = true;
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿ÖÐ¶Ï·þÎñº¯Êý
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘ä¸­æ–­æœåŠ¡å‡½æ•°
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void GPIO5_Combined_0_15_IRQHandler(void)
 { 
-    delayms(10);      //Ïû¶¶
+    delayms(10);      //æ¶ˆæŠ–
     /* clear the interrupt status */
-    if(GPIO_GetPinsInterruptFlags(GPIO5)&(1<<0))    //ÅÐ¶ÏÊÇ·ñÎªGPIO5_0ÖÐ¶Ï
+    if(GPIO_GetPinsInterruptFlags(GPIO5)&(1<<0))    //åˆ¤æ–­æ˜¯å¦ä¸ºGPIO5_0ä¸­æ–­
     {
-        g_InputSignal = true;                      //±êÖ¾Î»
+        g_InputSignal = true;                      //æ ‡å¿—ä½
         key_ok = 0;
     }
-    GPIO_PortClearInterruptFlags(GPIO5, 1U << 0);   //Çå³ý±êÖ¾Î»
+    GPIO_PortClearInterruptFlags(GPIO5, 1U << 0);   //æ¸…é™¤æ ‡å¿—ä½
     /* Change state of switch. */
 
-    __DSB();				//Êý¾ÝÍ¬²½ÆÁ±ÎÖ¸Áî
+    __DSB();				//æ•°æ®åŒæ­¥å±è”½æŒ‡ä»¤
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿°´¼ü»òÕßÊäÈëGPIO¿ÚÖÐ¶Ï²âÊÔ   °´ÏÂºËÐÄ°åWUP°´¼ü£¬ÏÔÊ¾1sºìµÆ
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æŒ‰é”®æˆ–è€…è¾“å…¥GPIOå£ä¸­æ–­æµ‹è¯•   æŒ‰ä¸‹æ ¸å¿ƒæ¿WUPæŒ‰é”®ï¼Œæ˜¾ç¤º1sçº¢ç¯
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_GPIO_ExInt(void)
 {
     LED_Init();
     
-    /*GPIO Íâ²¿ÖÐ¶ÏÅäÖÃ¿ªÊ¼*/
-    CLOCK_EnableClock(kCLOCK_Iomuxc);                         // IO¿ÚÊ±ÖÓÊ¹ÄÜ
-    IOMUXC_SetPinMux(IOMUXC_SNVS_WAKEUP_GPIO5_IO00,0U);       // ÉèÖÃ¹Ü½Å¸´ÓÃ¹¦ÄÜ                          
-    IOMUXC_SetPinConfig(IOMUXC_SNVS_WAKEUP_GPIO5_IO00,0xF080);// ÅäÖÃ¹Ü½Å
+    /*GPIO å¤–éƒ¨ä¸­æ–­é…ç½®å¼€å§‹*/
+    CLOCK_EnableClock(kCLOCK_Iomuxc);                         // IOå£æ—¶é’Ÿä½¿èƒ½
+    IOMUXC_SetPinMux(IOMUXC_SNVS_WAKEUP_GPIO5_IO00,0U);       // è®¾ç½®ç®¡è„šå¤ç”¨åŠŸèƒ½                          
+    IOMUXC_SetPinConfig(IOMUXC_SNVS_WAKEUP_GPIO5_IO00,0xF080);// é…ç½®ç®¡è„š
     
-    gpio_pin_config_t GPIO_Input_Config =                     // GPIO³õÊ¼»¯½á¹¹Ìå
+    gpio_pin_config_t GPIO_Input_Config =                     // GPIOåˆå§‹åŒ–ç»“æž„ä½“
     {
-        kGPIO_DigitalInput,                                   // GPIOÎªÊäÈë·½Ïò
-        1,                                                    // ¸ßµçÆ½
-        kGPIO_IntFallingEdge,                                 // ÏÂ½µÑØ´¥·¢ÖÐ¶Ï
+        kGPIO_DigitalInput,                                   // GPIOä¸ºè¾“å…¥æ–¹å‘
+        1,                                                    // é«˜ç”µå¹³
+        kGPIO_IntFallingEdge,                                 // ä¸‹é™æ²¿è§¦å‘ä¸­æ–­
     };
-    GPIO_PinInit(GPIO5, 0, &GPIO_Input_Config);               // GPIOÊäÈë¿Ú£¬ÖÐ¶Ï
+    GPIO_PinInit(GPIO5, 0, &GPIO_Input_Config);               // GPIOè¾“å…¥å£ï¼Œä¸­æ–­
     
-    GPIO_PortEnableInterrupts(GPIO5,1<<0);			          // GPIO5_00ÖÐ¶ÏÊ¹ÄÜ
-    //ÓÅÏÈ¼¶ÅäÖÃ ÇÀÕ¼ÓÅÏÈ¼¶1  ×ÓÓÅÏÈ¼¶2   Ô½Ð¡ÓÅÏÈ¼¶Ô½¸ß  ÇÀÕ¼ÓÅÏÈ¼¶¿É´ò¶Ï±ðµÄÖÐ¶Ï
+    GPIO_PortEnableInterrupts(GPIO5,1<<0);			          // GPIO5_00ä¸­æ–­ä½¿èƒ½
+    //ä¼˜å…ˆçº§é…ç½® æŠ¢å ä¼˜å…ˆçº§1  å­ä¼˜å…ˆçº§2   è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜  æŠ¢å ä¼˜å…ˆçº§å¯æ‰“æ–­åˆ«çš„ä¸­æ–­
     NVIC_SetPriority(GPIO5_Combined_0_15_IRQn,NVIC_EncodePriority(NVIC_GetPriorityGrouping(),1,2));
     
-	EnableIRQ(GPIO5_Combined_0_15_IRQn);			          //Ê¹ÄÜGPIO5_0~15IOµÄÖÐ¶Ï  
-    /*GPIO Íâ²¿ÖÐ¶ÏÅäÖÃ½áÊø*/
-    printf("GPIO¹¦ÄÜ²âÊÔ£ºLEDÇý¶¯£¬°´¼üÊäÈë£¬Íâ²¿ÖÐ¶Ï²âÊÔ¿ªÊ¼...\r\n");
+	EnableIRQ(GPIO5_Combined_0_15_IRQn);			          //ä½¿èƒ½GPIO5_0~15IOçš„ä¸­æ–­  
+    /*GPIO å¤–éƒ¨ä¸­æ–­é…ç½®ç»“æŸ*/
+    printf("GPIOåŠŸèƒ½æµ‹è¯•ï¼šLEDé©±åŠ¨ï¼ŒæŒ‰é”®è¾“å…¥ï¼Œå¤–éƒ¨ä¸­æ–­æµ‹è¯•å¼€å§‹...\r\n");
     
     while(1)
     {
         if(g_InputSignal)
         {        
-            printf("\r\n Wake Up°´¼ü±»°´ÏÂ£¡");      
+            printf("\r\n Wake UpæŒ‰é”®è¢«æŒ‰ä¸‹ï¼");      
             /* Reset state of switch. */
             g_InputSignal = false; 
-            LED_Color(red);           //ºìµÆ 
+            LED_Color(red);           //çº¢ç¯ 
             delayms(1000);
         }   
-        LED_Color(blue);    //À¶µÆ
+        LED_Color(blue);    //è“ç¯
     }
 }
 
@@ -180,30 +180,30 @@ void Test_GPIO_ExInt(void)
 
 
 
-//GPIO2_IO23  -------->  ¹Ü½ÅB12   ----- >  ºËÐÄ°åGµÆ
-//GPIO3_IO26  -------->  ¹Ü½ÅA7    ----- >  ºËÐÄ°åRµÆ
-//GPIO3_IO27  -------->  ¹Ü½ÅC7    ----- >  ºËÐÄ°åBµÆ
+//GPIO2_IO23  -------->  ç®¡è„šB12   ----- >  æ ¸å¿ƒæ¿Gç¯
+//GPIO3_IO26  -------->  ç®¡è„šA7    ----- >  æ ¸å¿ƒæ¿Rç¯
+//GPIO3_IO27  -------->  ç®¡è„šC7    ----- >  æ ¸å¿ƒæ¿Bç¯
 
-//GPIO2_IO22  -------->  ¹Ü½ÅC12   ----- >  Ä¸°åD1
-//GPIO2_IO25  -------->  ¹Ü½ÅA13   ----- >  Ä¸°åD0
-//Ò»°ãÊä³ö¿Ú¹Ü½Å¶¨Òå
-gpio_pin_config_t GPIO_Output_Config = {kGPIO_DigitalOutput, //GPIOÎªÊä³ö·½Ïò
-                                        0,                   //µÍµçÆ½
-                                        kGPIO_NoIntmode      //·ÇÖÐ¶ÏÄ£Ê½
+//GPIO2_IO22  -------->  ç®¡è„šC12   ----- >  æ¯æ¿D1
+//GPIO2_IO25  -------->  ç®¡è„šA13   ----- >  æ¯æ¿D0
+//ä¸€èˆ¬è¾“å‡ºå£ç®¡è„šå®šä¹‰
+gpio_pin_config_t GPIO_Output_Config = {kGPIO_DigitalOutput, //GPIOä¸ºè¾“å‡ºæ–¹å‘
+                                        0,                   //ä½Žç”µå¹³
+                                        kGPIO_NoIntmode      //éžä¸­æ–­æ¨¡å¼
                                         };   
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿³õÊ¼»¯LEDËùÓÃIO¿Ú
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2017Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘åˆå§‹åŒ–LEDæ‰€ç”¨IOå£
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2017å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LED_Init(void)
 {    
-  CLOCK_EnableClock(kCLOCK_Iomuxc);           // IO¿ÚÊ±ÖÓÊ¹ÄÜ
-/*       ºËÐÄ°åÉÏµÄLED       */
+  CLOCK_EnableClock(kCLOCK_Iomuxc);           // IOå£æ—¶é’Ÿä½¿èƒ½
+/*       æ ¸å¿ƒæ¿ä¸Šçš„LED       */
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_07_GPIO2_IO23, 0U);
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_40_GPIO3_IO26, 0U);
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_41_GPIO3_IO27, 0U);
@@ -218,7 +218,7 @@ void LED_Init(void)
   GPIO_PinInit(GPIO3,26, &GPIO_Output_Config);      //  
   GPIO_PinInit(GPIO3,27, &GPIO_Output_Config);      //   
   
-  /*             Ä¸°åÉÏµÄlEDÒý½Å             */
+  /*             æ¯æ¿ä¸Šçš„lEDå¼•è„š             */
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_06_GPIO2_IO22, 0U);
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_09_GPIO2_IO25, 0U);
   IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_06_GPIO2_IO22,0x10B0u);
@@ -228,127 +228,127 @@ void LED_Init(void)
   
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿Ö¸¶¨µÆÑÕÉ«
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ14ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æŒ‡å®šç¯é¢œè‰²
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ14æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LED_Color(LED_t color)
 {
     switch(color)
     {
         case white:
-            GPIO_PinWrite(GPIO2,23, 0U);//LEDÁÁ; 
-            GPIO_PinWrite(GPIO3,26, 0U);//LEDÁÁ; 
-            GPIO_PinWrite(GPIO3,27, 0U);//LEDÁÁ; 
+            GPIO_PinWrite(GPIO2,23, 0U);//LEDäº®; 
+            GPIO_PinWrite(GPIO3,26, 0U);//LEDäº®; 
+            GPIO_PinWrite(GPIO3,27, 0U);//LEDäº®; 
             break;
         case black:
-            GPIO_PinWrite(GPIO2,23, 1U);//LEDÃð; 
-            GPIO_PinWrite(GPIO3,26, 1U);//LEDÃð; 
-            GPIO_PinWrite(GPIO3,27, 1U);//LEDÃð; 
+            GPIO_PinWrite(GPIO2,23, 1U);//LEDç­; 
+            GPIO_PinWrite(GPIO3,26, 1U);//LEDç­; 
+            GPIO_PinWrite(GPIO3,27, 1U);//LEDç­; 
             break;
         case red:
-            GPIO_PinWrite(GPIO2,23, 1U);//LEDÃð; 
-            GPIO_PinWrite(GPIO3,26, 0U);//LEDÁÁ; 
-            GPIO_PinWrite(GPIO3,27, 1U);//LEDÃð; 
+            GPIO_PinWrite(GPIO2,23, 1U);//LEDç­; 
+            GPIO_PinWrite(GPIO3,26, 0U);//LEDäº®; 
+            GPIO_PinWrite(GPIO3,27, 1U);//LEDç­; 
             break;
         case green:
-            GPIO_PinWrite(GPIO2,23, 0U);//LEDÃð; 
-            GPIO_PinWrite(GPIO3,26, 1U);//LEDÁÁ; 
-            GPIO_PinWrite(GPIO3,27, 1U);//LEDÃð; 
+            GPIO_PinWrite(GPIO2,23, 0U);//LEDç­; 
+            GPIO_PinWrite(GPIO3,26, 1U);//LEDäº®; 
+            GPIO_PinWrite(GPIO3,27, 1U);//LEDç­; 
             break;
         case blue:
-            GPIO_PinWrite(GPIO2,23, 1U);//LEDÃð; 
-            GPIO_PinWrite(GPIO3,26, 1U);//LEDÁÁ; 
-            GPIO_PinWrite(GPIO3,27, 0U);//LEDÃð; 
+            GPIO_PinWrite(GPIO2,23, 1U);//LEDç­; 
+            GPIO_PinWrite(GPIO3,26, 1U);//LEDäº®; 
+            GPIO_PinWrite(GPIO3,27, 0U);//LEDç­; 
             break;
         case yellow:
-            GPIO_PinWrite(GPIO2,23, 0U);//LEDÃð; 
-            GPIO_PinWrite(GPIO3,26, 0U);//LEDÁÁ; 
-            GPIO_PinWrite(GPIO3,27, 1U);//LEDÃð; 
+            GPIO_PinWrite(GPIO2,23, 0U);//LEDç­; 
+            GPIO_PinWrite(GPIO3,26, 0U);//LEDäº®; 
+            GPIO_PinWrite(GPIO3,27, 1U);//LEDç­; 
             break;
         case violet:
-            GPIO_PinWrite(GPIO2,23, 1U);//LEDÃð; 
-            GPIO_PinWrite(GPIO3,26, 0U);//LEDÁÁ; 
-            GPIO_PinWrite(GPIO3,27, 0U);//LEDÃð; 
+            GPIO_PinWrite(GPIO2,23, 1U);//LEDç­; 
+            GPIO_PinWrite(GPIO3,26, 0U);//LEDäº®; 
+            GPIO_PinWrite(GPIO3,27, 0U);//LEDç­; 
             break;
         case cyan:
-            GPIO_PinWrite(GPIO2,23, 0U);//LEDÃð; 
-            GPIO_PinWrite(GPIO3,26, 1U);//LEDÁÁ; 
-            GPIO_PinWrite(GPIO3,27, 0U);//LEDÃð; 
+            GPIO_PinWrite(GPIO2,23, 0U);//LEDç­; 
+            GPIO_PinWrite(GPIO3,26, 1U);//LEDäº®; 
+            GPIO_PinWrite(GPIO3,27, 0U);//LEDç­; 
             break;
     }
 }
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿Ö¸¶¨ÑÕÉ«ÉÁË¸
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ14ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æŒ‡å®šé¢œè‰²é—ªçƒ
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ14æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LED_Color_Reverse(LED_t color)
 {
     static uint8_t count = 0;
     if(count++ % 2)
     {
-        LED_Color(color);   //ÁÁÖ¸¶¨ÑÕÉ«µÄµÆ
+        LED_Color(color);   //äº®æŒ‡å®šé¢œè‰²çš„ç¯
     }
     else
     {
-        LED_Color(black);   //Ãð
+        LED_Color(black);   //ç­
     }
     
 }
 
 
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿CHIUSIR
-¡¾¹¦ÄÜËµÃ÷¡¿¿ØÖÆIOÊä³ö¸ßµÍµçÆ½
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2017Äê11ÔÂ24ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿
-LEDn_e ledno, ±àºÅ
-LEDs_e sta ×´Ì¬£¬ÁÁÃð
+ã€ä½œ  è€…ã€‘CHIUSIR
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æŽ§åˆ¶IOè¾“å‡ºé«˜ä½Žç”µå¹³
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2017å¹´11æœˆ24æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘
+LEDn_e ledno, ç¼–å·
+LEDs_e sta çŠ¶æ€ï¼Œäº®ç­
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void LED_Ctrl(LEDn_e ledno, LEDs_e sta)
 {
   switch(ledno) 
   {
   case LED_G:
-    if(sta==ON)        GPIO_PinWrite(GPIO2,23, 0U);//LEDÁÁ; 
-    else if(sta==OFF) GPIO_PinWrite(GPIO2,23, 1U);//LEDÃð 
-    else if(sta==RVS) GPIO_PinReverse (GPIO2, 23); //LED·´×ª
+    if(sta==ON)        GPIO_PinWrite(GPIO2,23, 0U);//LEDäº®; 
+    else if(sta==OFF) GPIO_PinWrite(GPIO2,23, 1U);//LEDç­ 
+    else if(sta==RVS) GPIO_PinReverse (GPIO2, 23); //LEDåè½¬
     break;  
   case LED_R:
-    if(sta==ON)        GPIO_PinWrite(GPIO3,26, 0U);//LEDÁÁ; 
-    else if(sta==OFF) GPIO_PinWrite(GPIO3,26, 1U);//LEDÃð 
-    else if(sta==RVS) GPIO_PinReverse (GPIO3, 26); //LED·´×ª
+    if(sta==ON)        GPIO_PinWrite(GPIO3,26, 0U);//LEDäº®; 
+    else if(sta==OFF) GPIO_PinWrite(GPIO3,26, 1U);//LEDç­ 
+    else if(sta==RVS) GPIO_PinReverse (GPIO3, 26); //LEDåè½¬
     break;    
   case LED_B:
-    if(sta==ON)        GPIO_PinWrite(GPIO3, 27, 0U);//LEDÁÁ; 
-    else if(sta==OFF) GPIO_PinWrite(GPIO3, 27, 1U);//LEDÃð 
-    else if(sta==RVS) GPIO_PinReverse (GPIO3, 27); //LED·´×ª
+    if(sta==ON)        GPIO_PinWrite(GPIO3, 27, 0U);//LEDäº®; 
+    else if(sta==OFF) GPIO_PinWrite(GPIO3, 27, 1U);//LEDç­ 
+    else if(sta==RVS) GPIO_PinReverse (GPIO3, 27); //LEDåè½¬
     break; 
   case LEDALL:
     if(sta==ON) 
     {        
-      GPIO_PinWrite(GPIO2,23, 0U);//LEDÁÁ; 
-      GPIO_PinWrite(GPIO3,26, 0U);//LEDÁÁ; 
-      GPIO_PinWrite(GPIO3,27, 0U);//LEDÁÁ; 
+      GPIO_PinWrite(GPIO2,23, 0U);//LEDäº®; 
+      GPIO_PinWrite(GPIO3,26, 0U);//LEDäº®; 
+      GPIO_PinWrite(GPIO3,27, 0U);//LEDäº®; 
     }
     else if(sta==OFF)
     {  
-      GPIO_PinWrite(GPIO2,23, 1U);//LEDÁÁ; 
-      GPIO_PinWrite(GPIO3,26, 1U);//LEDÁÁ; 
-      GPIO_PinWrite(GPIO3,27, 1U);//LEDÁÁ; 
+      GPIO_PinWrite(GPIO2,23, 1U);//LEDäº®; 
+      GPIO_PinWrite(GPIO3,26, 1U);//LEDäº®; 
+      GPIO_PinWrite(GPIO3,27, 1U);//LEDäº®; 
     }
     else if(sta==RVS)
     {       
@@ -362,13 +362,13 @@ void LED_Ctrl(LEDn_e ledno, LEDs_e sta)
   }   
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾×÷  Õß¡¿Z
-¡¾¹¦ÄÜËµÃ÷¡¿²âÊÔLEDÁÁÃð£¬Á÷Ë®µÆ
-¡¾Èí¼þ°æ±¾¡¿V1.0
-¡¾×îºó¸üÐÂ¡¿2018Äê11ÔÂ14ÈÕ 
-¡¾º¯ÊýÃû¡¿
-¡¾·µ»ØÖµ¡¿ÎÞ
-¡¾²ÎÊýÖµ¡¿ÎÞ
+ã€ä½œ  è€…ã€‘Z
+ã€åŠŸèƒ½è¯´æ˜Žã€‘æµ‹è¯•LEDäº®ç­ï¼Œæµæ°´ç¯
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åŽæ›´æ–°ã€‘2018å¹´11æœˆ14æ—¥ 
+ã€å‡½æ•°åã€‘
+ã€è¿”å›žå€¼ã€‘æ— 
+ã€å‚æ•°å€¼ã€‘æ— 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 void Test_LED(void)
 {
@@ -376,21 +376,21 @@ void Test_LED(void)
   LED_Ctrl(LEDALL, OFF);    
   while (1)
   {          
-        LED_Color(red);     //ºìµÆ
+        LED_Color(red);     //çº¢ç¯
         delayms(500);
-        LED_Color(green);   //ÂÌµÆ
+        LED_Color(green);   //ç»¿ç¯
         delayms(500);
-        LED_Color(blue);    //À¶µÆ
+        LED_Color(blue);    //è“ç¯
         delayms(500);
-        LED_Color(violet);  //×ÏµÆ
+        LED_Color(violet);  //ç´«ç¯
         delayms(500);
-        LED_Color(yellow);  //»ÆµÆ
+        LED_Color(yellow);  //é»„ç¯
         delayms(500);
-        LED_Color(cyan);    //ÇàµÆ
+        LED_Color(cyan);    //é’ç¯
         delayms(500);
-        LED_Color(white);   //°×µÆ
+        LED_Color(white);   //ç™½ç¯
         delayms(500);
-        LED_Color(black);   //¹ØµÆ
+        LED_Color(black);   //å…³ç¯
         delayms(500);
   }
 }

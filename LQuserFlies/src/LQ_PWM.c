@@ -37,6 +37,8 @@ PWM2, kPWM_Module_3, kPWM_PwmA   M3     舵机接口
 PWM2, kPWM_Module_3, kPWM_PwmB   M4     舵机接口
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h" 
+#include "system.h"
+
 
 #define DUTY_MAX  10000     //duty最大值
 void PWM_UpdateDuty(PWM_Type *base,
@@ -691,7 +693,7 @@ void Control_Servo_K(float bat,float angle)
     LQ_SetMotorDty(1, PWM);                //输出PWM
     
     sprintf(txt,"bat: %4.2f V",(float)batv0/1000.0f);
-    TFTSPI_P8X16Str(1,3,(uint8_t*)txt,u16RED,u16BLUE);
+    LCD_P6x8Str(0,3,(uint8_t*)txt);
 
 }
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
@@ -712,8 +714,8 @@ void Test_Servo(void)
     char txt[16];
     int servopwm = 0; 
     
-    TFTSPI_Init();               //TFT1.8初始化  
-    TFTSPI_CLS(u16BLUE);           //清屏
+  LCD_Init(); 
+  LCD_CLS();
     LQ_KEY_Init();          //按键及输入口初始化   
     
     /*初始化舵机PWM接口  kPWM_PwmA  M3  M4*/
@@ -721,9 +723,8 @@ void Test_Servo(void)
     LQ_PWM_Init(PWM2, kPWM_Module_3, kPWM_PwmA_B,  200);//PWM的最低频率 = 6250 000 / VAL1  = 96Hz //M3 M4
     
     LQ_SetServoDty(3440);  //中值
-    
-    TFTSPI_P8X16Str(1,0,(uint8_t*)"LQ Servo PWM",u16RED,u16BLUE);
-    
+
+    LCD_P6x8Str(0,0,(uint8_t*)"LQ Servo PWM");
     while (1)
     {    
         
@@ -745,7 +746,7 @@ void Test_Servo(void)
                 break;
         }
         sprintf(txt,"PWM: %4.2f %",(float)servopwm/100.0f);
-        TFTSPI_P8X16Str(3,2,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(0,2,(uint8_t*)txt);
         printf(txt); //P0_30口输出 
         
         //LED闪烁
@@ -773,14 +774,14 @@ void Test_Servo_K(void)
     static float bat_servo = 2000;  //获取舵机反馈电压值 L12 电压 * 1000
     
     float angle = 0;             //期望角度
-    TFTSPI_Init();                //TFT1.8初始化  
-    TFTSPI_CLS(u16BLUE);          //清屏
+  LCD_Init(); 
+  LCD_CLS();
     LQ_KEY_Init();                //按键及输入口初始化   
     LQADC_Init(ADC2);             //ADC初始化
     /*初始化舵机PWM接口 */
     LQ_PWM_Init(PWM1, kPWM_Module_3, kPWM_PwmA_B, 2000);//PWM的最低频率 = 6250 000 / VAL1  = 96Hz     L5 M5
     Servo_K_pidInit(12000, 300);                        //初始化PID控制器
-    TFTSPI_P8X16Str(1,0,(uint8_t*)"LQ Servo_K PWM",u16RED,u16BLUE);
+    LCD_P6x8Str(0,0,(uint8_t*)txt);
     
     while (1)
     {    
@@ -804,9 +805,9 @@ void Test_Servo_K(void)
         }
         Control_Servo_K(bat_servo, angle);//刷新
         sprintf(txt,"angle: %4.2f ",(float)angle);
-        TFTSPI_P8X16Str(1,1,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(0,1,(uint8_t*)txt);
         sprintf(txt,"bat: %4.2f V",(float)bat_servo/1000.0f);
-        TFTSPI_P8X16Str(1,2,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(0,2,(uint8_t*)txt);
         
         //LED闪烁
 //        LED_Color(red);     //红灯   

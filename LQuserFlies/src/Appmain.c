@@ -131,7 +131,7 @@ int main(void)
 //    Test_GPIO_ExInt();   //测试GPIO输入及外部中断              按键、中断检测功能    
 //    Test_PIT();          //测试PIT定时中断功能  
 //    Test_GPT_Timer();    //测试GPT定时器延时和计时功能
-//    Test_OLED();         //测试OLED
+    Test_OLED();         //测试OLED
 //    Test_RNG();          //随机数产生      
 //    Test_9AX();          //九轴测试 
 //    Test_MPU6050();      //测试I2C及6轴陀螺仪功能              陀螺仪及加速度功能 
@@ -143,7 +143,7 @@ int main(void)
 //    Test_QTMR_QD();      //测试QTMR正交解码功能
 //    Test_Servo();        //数字舵机测试      注意 初次使用此函数时，舵机不要装舵盘，防止舵机卡死，设置中值后再装车，可以自行设置中值
 //    Test_Servo_K();        //K车舵机测试
-    Test_Motor();        //直流电机驱动测试，                  用龙邱全桥驱动板  注意： 电机1： 使用 L5  M5   电机2：使用A8  A9  电机3：使用 C9 B9  电机4：A10 J1
+//    Test_Motor();        //直流电机驱动测试，                  用龙邱全桥驱动板  注意： 电机1： 使用 L5  M5   电机2：使用A8  A9  电机3：使用 C9 B9  电机4：A10 J1
 //    Test_ENCoder();      //编码器采集
 //    Test_Camera_Reprot();  //上位机看图  7725RGB565 / 7725 灰度 / 神眼灰度
 //    Test_SGP18_OV7725();   //测试OV7725RGB 和TFT1.8
