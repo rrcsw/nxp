@@ -1,9 +1,10 @@
 #include "ANO_DT.h"
+#include "system.h"
 
-#define USE_DMA  1    //ÊÇ·ñÊ¹ÓÃDMAÄ£Ê½£¬×¢ÒâÊ¹ÓÃDMAÄ£Ê½£¬´®¿Ú³õÊ¼»¯Ê±ÒªÅäÖÃDMAÄ£Ê½
-//Ê¹ÓÃÄäÃû4.3ÉÏÎ»»úĞ­Òé
+#define USE_DMA  1    //æ˜¯å¦ä½¿ç”¨DMAæ¨¡å¼ï¼Œæ³¨æ„ä½¿ç”¨DMAæ¨¡å¼ï¼Œä¸²å£åˆå§‹åŒ–æ—¶è¦é…ç½®DMAæ¨¡å¼
+//ä½¿ç”¨åŒ¿å4.3ä¸Šä½æœºåè®®
 /////////////////////////////////////////////////////////////////////////////////////
-//Êı¾İ²ğ·Öºê¶¨Òå£¬ÔÚ·¢ËÍ´óÓÚ1×Ö½ÚµÄÊı¾İÀàĞÍÊ±£¬±ÈÈçint16¡¢floatµÈ£¬ĞèÒª°ÑÊı¾İ²ğ·Ö³Éµ¥¶À×Ö½Ú½øĞĞ·¢ËÍ
+//æ•°æ®æ‹†åˆ†å®å®šä¹‰ï¼Œåœ¨å‘é€å¤§äº1å­—èŠ‚çš„æ•°æ®ç±»å‹æ—¶ï¼Œæ¯”å¦‚int16ã€floatç­‰ï¼Œéœ€è¦æŠŠæ•°æ®æ‹†åˆ†æˆå•ç‹¬å­—èŠ‚è¿›è¡Œå‘é€
 #define BYTE0(dwTemp)       ( *( (char *)(&dwTemp)		) )
 #define BYTE1(dwTemp)       ( *( (char *)(&dwTemp) + 1) )
 #define BYTE2(dwTemp)       ( *( (char *)(&dwTemp) + 2) )
@@ -11,8 +12,8 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-//Send_Dataº¯ÊıÊÇĞ­ÒéÖĞËùÓĞ·¢ËÍÊı¾İ¹¦ÄÜÊ¹ÓÃµ½µÄ·¢ËÍº¯Êı
-//ÒÆÖ²Ê±£¬ÓÃ»§Ó¦¸ù¾İ×ÔÉíÓ¦ÓÃµÄÇé¿ö£¬¸ù¾İÊ¹ÓÃµÄÍ¨ĞÅ·½Ê½£¬ÊµÏÖ´Ëº¯Êı
+//Send_Dataå‡½æ•°æ˜¯åè®®ä¸­æ‰€æœ‰å‘é€æ•°æ®åŠŸèƒ½ä½¿ç”¨åˆ°çš„å‘é€å‡½æ•°
+//ç§»æ¤æ—¶ï¼Œç”¨æˆ·åº”æ ¹æ®è‡ªèº«åº”ç”¨çš„æƒ…å†µï¼Œæ ¹æ®ä½¿ç”¨çš„é€šä¿¡æ–¹å¼ï¼Œå®ç°æ­¤å‡½æ•°
 #if USE_DMA
 extern lpuart_transfer_t sendXfer;
 extern lpuart_edma_handle_t g_lpuartEdmaHandle;
@@ -21,7 +22,7 @@ void ANO_DT_Send_Data(uint8_t *dataToSend , uint8_t length)
 {
 #if USE_DMA
      /* If TX is idle and g_txBuffer is full, start to send data. */
-    /*Ê¹ÓÃDMA + ´®¿Ú£¬ÎŞĞèÕ¼ÓÃCPUÊ±¼ä */
+    /*ä½¿ç”¨DMA + ä¸²å£ï¼Œæ— éœ€å ç”¨CPUæ—¶é—´ */
     sendXfer.data = dataToSend;   
     sendXfer.dataSize = length;
     if ((!_status.txOnGoing) )
@@ -30,12 +31,12 @@ void ANO_DT_Send_Data(uint8_t *dataToSend , uint8_t length)
         LPUART_SendEDMA(LPUART8, &g_lpuartEdmaHandle, &sendXfer);
     }
 #else
-    /**Ê¹ÓÃ´®¿ÚÕı³£·¢ËÍÊı¾İ£¬´ó¸ÅĞèÒª1.5ms*/
-	LQ_UART_PutBuff(LPUART8, dataToSend, length);     //¿ÉÒÔĞŞ¸Ä²»Í¬µÄ´®¿Ú·¢ËÍÊı¾İ
+    /**ä½¿ç”¨ä¸²å£æ­£å¸¸å‘é€æ•°æ®ï¼Œå¤§æ¦‚éœ€è¦1.5ms*/
+	LQ_UART_PutBuff(LPUART8, dataToSend, length);     //å¯ä»¥ä¿®æ”¹ä¸åŒçš„ä¸²å£å‘é€æ•°æ®
 #endif  
    
 }
-uint8_t data_to_send[50];	//·¢ËÍÊı¾İ»º´æ
+uint8_t data_to_send[50];	//å‘é€æ•°æ®ç¼“å­˜
 static void ANO_DT_Send_Check(uint8_t head, uint8_t check_sum)
 {
     
@@ -55,14 +56,14 @@ static void ANO_DT_Send_Check(uint8_t head, uint8_t check_sum)
 	ANO_DT_Send_Data(data_to_send, 7);
 }
 
-/*·¢ËÍ¸øÉÏÎ»»úµÄÊı¾İĞ­Òé*/
-void ANO_DT_send_int16(short data1, short data2, short data3, short data4, short data5, short data6, short data7, short data8 /*,short data7, short data8, short .....¿É¸ù¾İĞèÒª×ÔĞĞÌí¼Ó */)
+/*å‘é€ç»™ä¸Šä½æœºçš„æ•°æ®åè®®*/
+void ANO_DT_send_int16(short data1, short data2, short data3, short data4, short data5, short data6, short data7, short data8 /*,short data7, short data8, short .....å¯æ ¹æ®éœ€è¦è‡ªè¡Œæ·»åŠ  */)
 {
     uint8_t _cnt=0;
-    data_to_send[_cnt++] = 0xAA;      //ÄäÃûĞ­ÒéÖ¡Í·  0xAAAA
+    data_to_send[_cnt++] = 0xAA;      //åŒ¿ååè®®å¸§å¤´  0xAAAA
 	data_to_send[_cnt++] = 0xAA;
-	data_to_send[_cnt++] = 0xF1;      //Ê¹ÓÃÓÃ»§Ğ­ÒéÖ¡0xF1  
-    data_to_send[_cnt++] = 16;        //8¸öshort ³¤¶È 16¸ö×Ö½Ú
+	data_to_send[_cnt++] = 0xF1;      //ä½¿ç”¨ç”¨æˆ·åè®®å¸§0xF1  
+    data_to_send[_cnt++] = 16;        //8ä¸ªshort é•¿åº¦ 16ä¸ªå­—èŠ‚
     
 	data_to_send[_cnt++]=BYTE1(data1);
 	data_to_send[_cnt++]=BYTE0(data1);
@@ -97,9 +98,9 @@ void ANO_DT_send_int16(short data1, short data2, short data3, short data4, short
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-////Data_Receive_Prepareº¯ÊıÊÇĞ­ÒéÔ¤½âÎö£¬¸ù¾İĞ­ÒéµÄ¸ñÊ½£¬½«ÊÕµ½µÄÊı¾İ½øĞĞÒ»´Î¸ñÊ½ĞÔ½âÎö£¬¸ñÊ½ÕıÈ·µÄ»°ÔÙ½øĞĞÊı¾İ½âÎö
-////ÒÆÖ²Ê±£¬´Ëº¯ÊıÓ¦ÓÉÓÃ»§¸ù¾İ×ÔÉíÊ¹ÓÃµÄÍ¨ĞÅ·½Ê½×ÔĞĞµ÷ÓÃ£¬±ÈÈç´®¿ÚÃ¿ÊÕµ½Ò»×Ö½ÚÊı¾İ£¬Ôòµ÷ÓÃ´Ëº¯ÊıÒ»´Î
-////´Ëº¯Êı½âÎö³ö·ûºÏ¸ñÊ½µÄÊı¾İÖ¡ºó£¬»á×ÔĞĞµ÷ÓÃÊı¾İ½âÎöº¯Êı
+////Data_Receive_Prepareå‡½æ•°æ˜¯åè®®é¢„è§£æï¼Œæ ¹æ®åè®®çš„æ ¼å¼ï¼Œå°†æ”¶åˆ°çš„æ•°æ®è¿›è¡Œä¸€æ¬¡æ ¼å¼æ€§è§£æï¼Œæ ¼å¼æ­£ç¡®çš„è¯å†è¿›è¡Œæ•°æ®è§£æ
+////ç§»æ¤æ—¶ï¼Œæ­¤å‡½æ•°åº”ç”±ç”¨æˆ·æ ¹æ®è‡ªèº«ä½¿ç”¨çš„é€šä¿¡æ–¹å¼è‡ªè¡Œè°ƒç”¨ï¼Œæ¯”å¦‚ä¸²å£æ¯æ”¶åˆ°ä¸€å­—èŠ‚æ•°æ®ï¼Œåˆ™è°ƒç”¨æ­¤å‡½æ•°ä¸€æ¬¡
+////æ­¤å‡½æ•°è§£æå‡ºç¬¦åˆæ ¼å¼çš„æ•°æ®å¸§åï¼Œä¼šè‡ªè¡Œè°ƒç”¨æ•°æ®è§£æå‡½æ•°
 
 void ANO_DT_Data_Receive_Anl(uint8_t *data_buf,uint8_t num);
 void ANO_DT_Data_Receive_Prepare(uint8_t data)
@@ -198,22 +199,22 @@ void ANO_DT_Send_PID(uint8_t group,float p1_p,float p1_i,float p1_d,float p2_p,f
 	ANO_DT_Send_Data(data_to_send, _cnt);
 }
 /////////////////////////////////////////////////////////////////////////////////////
-//Data_Receive_Anlº¯ÊıÊÇĞ­ÒéÊı¾İ½âÎöº¯Êı£¬º¯Êı²ÎÊıÊÇ·ûºÏĞ­Òé¸ñÊ½µÄÒ»¸öÊı¾İÖ¡£¬¸Ãº¯Êı»áÊ×ÏÈ¶ÔĞ­ÒéÊı¾İ½øĞĞĞ£Ñé
-//Ğ£ÑéÍ¨¹ıºó¶ÔÊı¾İ½øĞĞ½âÎö£¬ÊµÏÖÏàÓ¦¹¦ÄÜ
-//´Ëº¯Êı¿ÉÒÔ²»ÓÃÓÃ»§×ÔĞĞµ÷ÓÃ£¬ÓÉº¯ÊıData_Receive_Prepare×Ô¶¯µ÷ÓÃ
+//Data_Receive_Anlå‡½æ•°æ˜¯åè®®æ•°æ®è§£æå‡½æ•°ï¼Œå‡½æ•°å‚æ•°æ˜¯ç¬¦åˆåè®®æ ¼å¼çš„ä¸€ä¸ªæ•°æ®å¸§ï¼Œè¯¥å‡½æ•°ä¼šé¦–å…ˆå¯¹åè®®æ•°æ®è¿›è¡Œæ ¡éªŒ
+//æ ¡éªŒé€šè¿‡åå¯¹æ•°æ®è¿›è¡Œè§£æï¼Œå®ç°ç›¸åº”åŠŸèƒ½
+//æ­¤å‡½æ•°å¯ä»¥ä¸ç”¨ç”¨æˆ·è‡ªè¡Œè°ƒç”¨ï¼Œç”±å‡½æ•°Data_Receive_Prepareè‡ªåŠ¨è°ƒç”¨
 void ANO_DT_Data_Receive_Anl(uint8_t *data_buf,uint8_t num)
 {
 	uint8_t sum = 0;
 	for(uint8_t i=0;i<(num-1);i++)
 		sum += *(data_buf+i);
-	if(!(sum==*(data_buf+num-1)))		return;		//ÅĞ¶Ïsum
-	if(!(*(data_buf)==0xAA && *(data_buf+1)==0xAF))		return;		//ÅĞ¶ÏÖ¡Í·
+	if(!(sum==*(data_buf+num-1)))		return;		//åˆ¤æ–­sum
+	if(!(*(data_buf)==0xAA && *(data_buf+1)==0xAF))		return;		//åˆ¤æ–­å¸§å¤´
 	
-	if(*(data_buf+2)==0X01) //Ğ£×¼
+	if(*(data_buf+2)==0X01) //æ ¡å‡†
 	{
-        LED_Color(red);     //ºìµÆ
+        LED_Color(red);     //çº¢ç¯
 		if(*(data_buf+4)==0X01)
-			_status.ins_calibration = 1;    //ÍÓÂİÒÇĞ£×¼
+			_status.ins_calibration = 1;    //é™€èºä»ªæ ¡å‡†
 		if(*(data_buf+4)==0X02)
 			_status.ins_calibration = 1;
 		if(*(data_buf+4)==0X03)
@@ -222,39 +223,39 @@ void ANO_DT_Data_Receive_Anl(uint8_t *data_buf,uint8_t num)
 		}
 	}
 	
-	if(*(data_buf+2)==0X02)    //¶ÁÈ¡²ÎÊı
+	if(*(data_buf+2)==0X02)    //è¯»å–å‚æ•°
 	{
-		if(*(data_buf+4)==0X01)    //¶ÁÈ¡pid
+		if(*(data_buf+4)==0X01)    //è¯»å–pid
 		{
             _status.get_pid_group1 = 1;
             //ANO_DT_Send_PID(1, Motor_pid._kp, Motor_pid._ki, Motor_pid._kd, Servo_pid._kp, Servo_pid._ki, Servo_pid._kd, 0,0,0);
 		}
-		if(*(data_buf+4)==0X02)//¶ÁÈ¡·ÉĞĞÄ£Ê½
+		if(*(data_buf+4)==0X02)//è¯»å–é£è¡Œæ¨¡å¼
 		{
 			
 		}
-		if(*(data_buf+4)==0XA0)//¶ÁÈ¡°æ±¾ĞÅÏ¢
+		if(*(data_buf+4)==0XA0)//è¯»å–ç‰ˆæœ¬ä¿¡æ¯
 		{
 //			f.send_version = 1;
 		}
-		if(*(data_buf+4)==0XA1)	//»Ö¸´Ä¬ÈÏ²ÎÊı
+		if(*(data_buf+4)==0XA1)	//æ¢å¤é»˜è®¤å‚æ•°
 		{
 //			Para_ResetToFactorySetup();
 		}
 	}
 
-	if(*(data_buf+2)==0X10)								//PID1      Ğ´Èë²ÎÊı
+	if(*(data_buf+2)==0X10)								//PID1      å†™å…¥å‚æ•°
     {
-//        Motor_pid._kp  = 0.001*( (short)(*(data_buf+4)<<8)|*(data_buf+5) );   //ÉÏÎ»»úµÄROW PID
+//        Motor_pid._kp  = 0.001*( (short)(*(data_buf+4)<<8)|*(data_buf+5) );   //ä¸Šä½æœºçš„ROW PID
 //        Motor_pid._ki  = 0.001*( (short)(*(data_buf+6)<<8)|*(data_buf+7) );
 //        Motor_pid._kd  = 0.001*( (short)(*(data_buf+8)<<8)|*(data_buf+9) );
-//        Speed_pid._kp  = 0.001*( (short)(*(data_buf+10)<<8)|*(data_buf+11) ); //ÉÏÎ»»úµÄPITCH PID
+//        Speed_pid._kp  = 0.001*( (short)(*(data_buf+10)<<8)|*(data_buf+11) ); //ä¸Šä½æœºçš„PITCH PID
 //        Speed_pid._ki  = 0.001*( (short)(*(data_buf+12)<<8)|*(data_buf+13) );
 //        Speed_pid._kd  = 0.001*( (short)(*(data_buf+14)<<8)|*(data_buf+15) );
 //        Dir_pid._kp 	= 0.001*( (short)(*(data_buf+16)<<8)|*(data_buf+17) );
 //        Dir_pid._ki 	= 0.001*( (short)(*(data_buf+18)<<8)|*(data_buf+19) );
 //        Dir_pid._kd 	= 0.001*( (short)(*(data_buf+20)<<8)|*(data_buf+21) );
-        ANO_DT_Send_Check(*(data_buf+2),sum);    //Ğ£Ñé
+        ANO_DT_Send_Check(*(data_buf+2),sum);    //æ ¡éªŒ
     }
     if(*(data_buf+2)==0X11)								//PID2
     {
@@ -306,7 +307,7 @@ void Test_ANO_DT(void)
     float data4 = 135.0f;   
     float data5 = 60.0f;
     const float PI = 3.1415926;
-    LQ_UART_Init(LPUART1, 115200);       //´®¿Ú1³õÊ¼»¯ ¿ÉÒÔÊ¹ÓÃ printfº¯Êı    ²»Ê¹ÓÃDMAÄ£Ê½£¬Çë½«ºê¶¨Òå#define USE_DMA  0
+    LQ_UART_Init(LPUART1, 115200);       //ä¸²å£1åˆå§‹åŒ– å¯ä»¥ä½¿ç”¨ printfå‡½æ•°    ä¸ä½¿ç”¨DMAæ¨¡å¼ï¼Œè¯·å°†å®å®šä¹‰#define USE_DMA  0
     while(1)
     {
         ANO_DT_send_int16((short)(sin(data1/180.0f * PI) * 100),

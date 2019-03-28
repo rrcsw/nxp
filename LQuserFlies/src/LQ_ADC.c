@@ -16,6 +16,7 @@
 【USB PLL】 480MHz
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
+#include "system.h"
 
 /* //ADC资源序号与对应的管脚，      管脚名称      BGA管脚编号
 ADC1_IN0  Analog channel 1 input0   GPIO_AD_B1_11   J13
@@ -126,9 +127,10 @@ void Test_ADC(void)
 {
     char txt[16];
       
-    TFTSPI_Init();                  //LCD初始化 
-    TFTSPI_CLS(u16BLUE);           //清屏
-    TFTSPI_P8X16Str(2,0,(uint8_t*)"LQ ADC Test Bat",u16RED,u16BLUE);
+  LCD_Init(); 
+  LCD_CLS();
+  LCD_P6x8Str(2,0,(uint8_t*)"LQ ADC Test Bat");
+
     printf("\r\nLQ ADC Test Bat");
 
     LQADC_Init(ADC1);             //电源低压报警ADC初始化
@@ -153,7 +155,8 @@ void Test_ADC(void)
         
         printf("\r\n/***********************%3.2fV\r\n ",batv0/100.0f);
         sprintf(txt,"BAT:%3.2fV ",batv0/100.0f);
-        TFTSPI_P8X16Str(5,1,(uint8_t*)txt,u16RED,u16BLUE);
+         LCD_P6x8Str(2,1,(uint8_t*)txt);
+
                            
 //        printf("\r\nADC2_IN10  :%d.%dV ",batv/100,batv%100);     //浮点数计算量比较大，可以采用这种方法输出小数点
 //        sprintf(txt,"BAT:%d.%dV ",batv/100,batv%100);
@@ -162,27 +165,27 @@ void Test_ADC(void)
         
         printf("\r\n/***********************%3.2fV\r\n ",batv1/1000.0f);
         sprintf(txt,"L10:%3.2fV ",batv1/1000.0f);
-        TFTSPI_P8X16Str(5,2,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(2,2,(uint8_t*)txt);
         
         printf("\r\n/***********************%3.2fV\r\n ",batv2/1000.0f);
         sprintf(txt,"L11:%3.2fV ",batv2/1000.0f);
-        TFTSPI_P8X16Str(5,3,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(2,3,(uint8_t*)txt);
         
         printf("\r\n/***********************%3.2fV\r\n ",batv3/1000.0f);
         sprintf(txt,"M12:%3.2fV ",batv3/1000.0f);
-        TFTSPI_P8X16Str(5,4,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(2,4,(uint8_t*)txt);
         
         printf("\r\n/***********************%3.2fV\r\n ",batv4/1000.0f);
         sprintf(txt,"H14:%3.2fV ",batv4/1000.0f);
-        TFTSPI_P8X16Str(5,5,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(2,5,(uint8_t*)txt);
         
         printf("\r\n/***********************%3.2fV\r\n ",batv5/1000.0f);
         sprintf(txt,"K14:%3.2fV ",batv5/1000.0f);
-        TFTSPI_P8X16Str(5,6,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(2,6,(uint8_t*)txt);
         
         printf("\r\n/***********************%3.2fV\r\n ",batv6/1000.0f);
         sprintf(txt,"L14:%3.2fV ",batv6/1000.0f);
-        TFTSPI_P8X16Str(5,7,(uint8_t*)txt,u16RED,u16BLUE);
+        LCD_P6x8Str(2,7,(uint8_t*)txt);
         
         LED_Color_Reverse(blue);    //蓝灯   
         delayms(100);

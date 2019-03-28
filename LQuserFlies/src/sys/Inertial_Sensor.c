@@ -1,6 +1,8 @@
 #include "Inertial_Sensor.h"
 #include "status.h"
 #include "AP_Math.h"
+#include "system.h"
+
 #define G					  9.80665f		      // m/s^2	
 #define RadtoDeg    57.324841f				//弧度到角度 (弧度 * 180/3.1415)
 #define DegtoRad    0.0174533f				//角度到弧度 (角度 * 3.1415/180)

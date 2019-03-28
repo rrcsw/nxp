@@ -830,8 +830,8 @@ void Test_Motor(void)
 {    
     char txt[16];
     short motorpwm=0;   
-    TFTSPI_Init();               //TFT1.8初始化  
-    TFTSPI_CLS(u16BLUE);           //清屏
+  LCD_Init();    
+  LCD_CLS(); 
     LQ_KEY_Init();          //按键及输入口初始化   
     /*初始化电机PWM接口   */
     LQ_PWM_Init(PWM2, kPWM_Module_0, kPWM_PwmA_B, 12000);//PWM的最低频率 = 6250 000 / VAL1  = 96Hz     A8 A9
@@ -839,7 +839,6 @@ void Test_Motor(void)
     LQ_PWM_Init(PWM2, kPWM_Module_2, kPWM_PwmB,   12000);//PWM的最低频率 = 6250 000 / VAL1  = 96Hz     A10
     LQ_PWM_Init(PWM1, kPWM_Module_1, kPWM_PwmA,   12000);//PWM的最低频率 = 6250 000 / VAL1  = 96Hz     J1
     LQ_PWM_Init(PWM1, kPWM_Module_3, kPWM_PwmA_B, 12000);//PWM的最低频率 = 6250 000 / VAL1  = 96Hz     L5 M5
-    TFTSPI_P8X16Str(3,0,(uint8_t*)"LQ Motor PWM",u16RED,u16BLUE);
     
     while (1)
     {        
@@ -873,8 +872,7 @@ void Test_Motor(void)
         }
         
         sprintf(txt,"PWM: %4.2f %",motorpwm/100.0f);
-        TFTSPI_P8X16Str(3,3,(uint8_t*)txt,u16RED,u16BLUE);
-        PRINTF(txt); //P0_30口输出 
+	LCD_P6x8Str(0,0,(uint8_t*)txt);
         
         //LED闪烁
         LED_Color(red);     //红灯   

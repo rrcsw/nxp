@@ -12,6 +12,7 @@
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #include "include.h"
+#include "system.h"
 
 /*******************************************************************************
 *  SDK提供了两种在Noncacheable区定义缓冲区和变量的方法：
@@ -19,7 +20,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 *  AT_NONCACHEABLE_SECTION(var)
 ******************************************************************************/
 AT_NONCACHEABLE_SECTION_ALIGN(uint16_t csiFrameBuf[APP_CAMERA_FRAME_BUFFER_COUNT][APP_CAMERA_HEIGHT][APP_CAMERA_WIDTH], FRAME_BUFFER_ALIGN); //定义摄像头数据缓存区
-static void BOARD_PullCameraPowerDownPin(bool pullUp)  //闪光灯
+void BOARD_PullCameraPowerDownPin(bool pullUp)  //闪光灯
 {
 //    if (pullUp)
 //    {
@@ -30,7 +31,7 @@ static void BOARD_PullCameraPowerDownPin(bool pullUp)  //闪光灯
 //        GPIO_PinWrite(GPIO1, 4, 0);
 //    }
 }
-static void BOARD_PullCameraResetPin(bool pullUp)  //摄像头复位引脚
+void BOARD_PullCameraResetPin(bool pullUp)  //摄像头复位引脚
 {
     /* Reset pin is connected to DCDC_3V3. */
     return;

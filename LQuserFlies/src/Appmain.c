@@ -26,6 +26,7 @@
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "include.h"
 #include "AHRS.h"    //使用姿态解算时需要添加该头文件 
+#include "system.h"
 //========================================================================================== 
 /*      更新说明                                                                    时间
  *      1.优化 Test_OLED_Camera() 
@@ -142,12 +143,12 @@ int main(void)
 //    Test_QTMR_QD();      //测试QTMR正交解码功能
 //    Test_Servo();        //数字舵机测试      注意 初次使用此函数时，舵机不要装舵盘，防止舵机卡死，设置中值后再装车，可以自行设置中值
 //    Test_Servo_K();        //K车舵机测试
-//    Test_Motor();        //直流电机驱动测试，                  用龙邱全桥驱动板  注意： 电机1： 使用 L5  M5   电机2：使用A8  A9  电机3：使用 C9 B9  电机4：A10 J1
+    Test_Motor();        //直流电机驱动测试，                  用龙邱全桥驱动板  注意： 电机1： 使用 L5  M5   电机2：使用A8  A9  电机3：使用 C9 B9  电机4：A10 J1
 //    Test_ENCoder();      //编码器采集
 //    Test_Camera_Reprot();  //上位机看图  7725RGB565 / 7725 灰度 / 神眼灰度
 //    Test_SGP18_OV7725();   //测试OV7725RGB 和TFT1.8
 //    Test_SGP18_Camera();   //测试神眼 Or 7725 二值化 + TFT1.8  
-    Test_OLED_Camera();      //测试神眼 Or 7725 二值化 + OLED 
+//    Test_OLED_Camera();      //测试神眼 Or 7725 二值化 + OLED 
 //----------------------------------------------------------------------------------------- 
      
 }
