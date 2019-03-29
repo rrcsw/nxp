@@ -108,7 +108,7 @@ int main(void)
 //    Test_GPIO_ExInt();   //测试GPIO输入及外部中断              按键、中断检测功能    
 //    Test_PIT();          //测试PIT定时中断功能  
 //    Test_GPT_Timer();    //测试GPT定时器延时和计时功能
-    Test_OLED();         //测试OLED
+//    Test_OLED();         //测试OLED
 //    Test_RNG();          //随机数产生      
 
 //    Test_MPU6050();      //测试I2C及6轴陀螺仪功能              陀螺仪及加速度功能 
@@ -125,7 +125,7 @@ int main(void)
 //    Test_Camera_Reprot();  //上位机看图  7725RGB565 / 7725 灰度 / 神眼灰度
 //    Test_SGP18_OV7725();   //测试OV7725RGB 和TFT1.8
 //    Test_SGP18_Camera();   //测试神眼 Or 7725 二值化 + TFT1.8  
-//    Test_OLED_Camera();      //测试神眼 Or 7725 二值化 + OLED 
+    Test_OLED_Camera();      //测试神眼 Or 7725 二值化 + OLED 
 //----------------------------------------------------------------------------------------- 
      
 }

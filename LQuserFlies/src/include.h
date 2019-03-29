@@ -58,9 +58,9 @@
 //    #include "LQ_TFT480x272.h"//4.3彩屏
 //    #include "LQ_GT9147TP.h"  //电容触摸板
     #include "LQ_IIC.h"
-    #include "LQ_GPIOmacro.h" //GPIO口51操作格式 
-    #include "LQ_MT9V034M.h"   //神眼摄像头V3   
-    #include "LQ_OV7725M.h"   //神眼摄像头V3   
+//   #include "LQ_GPIOmacro.h" //GPIO口51操作格式 
+
+
 
 
     #include "LQ_PWM.h"       //电机，舵机PWM控制 XBARA
@@ -73,7 +73,8 @@
     #include "LQ_Encoder.h"   //编码器正交解码数据采集
 //    #include "LQ_eLCDIF.h"    //480 *272液晶屏
     #include "LQ_PXP.h"       //图像处理模块
-    #include "LQ_CSI.h"       //摄像头接口
+
+
     #include "m_systime.h"    //systick 定时器，用于计时
     #include "ANO_DT.h"       //匿名上位机协议
     #include "status.h"       //标志位

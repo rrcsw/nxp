@@ -1419,6 +1419,7 @@
                     <state>$PROJ_DIR$\LQuserFlies\src\ANO_DT</state>
                     <state>D:\nxp\driver</state>
                     <state>D:\nxp\system</state>
+                    <state>D:\nxp\driver\camera</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2135,8 +2136,56 @@
     </group>
     <group>
         <name>driver</name>
+        <group>
+            <name>camera</name>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\fsl_camera.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\fsl_camera_device.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\fsl_camera_receiver.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\fsl_csi_camera_adapter.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\fsl_csi_camera_adapter.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\fsl_sccb.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\fsl_sccb.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\fsl_video_common.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\LQ_MT9V034.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\LQ_MT9V034.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\LQ_MT9V034M.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\LQ_MT9V034M.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\LQ_OV7725M.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\driver\camera\LQ_OV7725M.h</name>
+            </file>
+        </group>
         <file>
             <name>$PROJ_DIR$\driver\base.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\driver\iic.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\driver\oled.c</name>
@@ -2313,72 +2362,12 @@
     <group>
         <name>LQDriver</name>
         <group>
-            <name>AHRS</name>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\sys\AHRS.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\sys\AHRS.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\sys\AP_Math.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\sys\AP_Math.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\sys\Inertial_Sensor.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\sys\Inertial_Sensor.h</name>
-            </file>
-        </group>
-        <group>
             <name>ANO_TC</name>
             <file>
                 <name>$PROJ_DIR$\LQuserFlies\src\ANO_DT\ANO_DT.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\LQuserFlies\src\ANO_DT\ANO_DT.h</name>
-            </file>
-        </group>
-        <group>
-            <name>Camera</name>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\fsl_camera.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\fsl_camera_device.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\fsl_camera_receiver.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\fsl_csi_camera_adapter.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\fsl_csi_camera_adapter.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\fsl_sccb.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\fsl_sccb.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\fsl_video_common.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\LQ_MT9V034M.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\LQ_MT9V034M.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\LQ_OV7725M.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\LQuserFlies\src\camera\LQ_OV7725M.h</name>
             </file>
         </group>
         <group>
@@ -2425,15 +2414,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\LQuserFlies\src\LQ_Encoder.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\LQ_GPIOmacro.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\LQ_IIC.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\LQuserFlies\src\LQ_IIC.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\LQuserFlies\src\LQ_MPU6050.c</name>
